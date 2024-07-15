@@ -1,0 +1,43 @@
+@use "../mixins";
+@use "../variables";
+
+.site-participations {
+  &-header {
+    padding: 120px 0 40px;
+    @include mixins.mobile {
+      padding: 100px 0 0;
+    }
+    &-title {
+      @include mixins.mobile {
+        font-size: 46px;
+      }
+      @include mixins.mobile-xs {
+        font-size: min(40px, 12vw);
+      }
+    }
+  }
+
+  &-kinds {
+    @include mixins.desktop {
+      .btn-group {
+        display: block;
+      }
+      .btn-group .btn {
+        display: block;
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+
+  &-items {
+    margin-bottom: 50px;
+    .card-title {
+      font-size: 20px;
+    }
+    .card {
+      margin-top: 40px;
+      max-width: 350px;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+- name: Medo e delírio em Brasília
+  url: https://medoedelirioembrasilia.com.br/
+  weight: 10
+  kind:
+    - politics
+- name: Revolushow
+  url: https://revolushow.com/
+  weight: 10
+  kind:
+    - politics
+- name: Foro de Teresina
+  url: https://piaui.folha.uol.com.br/radio-piaui/foro-de-teresina/
+  weight: 10
+  kind:
+    - politics
+- name: Mamilos
+  url: https://www.b9.com.br/shows/mamilos
+  weight: 10
+  kind:
+    - variety
+- name: Quebradev
+  url: https://quebra.dev/
+  weight: 10
+  kind:
+    - dev
+- name: Escriba Café
+  url: https://www.escribacafe.com/
+  weight: 10
+  kind:
+    - storytelling
+- name: Braincast
+  url: https://www.b9.com.br/shows/braincast/
+  weight: 20
+  kind:
+    - variety
+- name: Nerdcast
+  url: https://jovemnerd.com.br/podcasts/nerdcast
+  weight: 20
+  kind:
+    - variety
+- name: Hipsters.tech
+  url: https://www.hipsters.tech/
+  weight: 20
+  kind:
+    - dev
+- name: Oxide and friends
+  url: https://oxide.computer/podcasts/oxide-and-friends/
+  weight: 20
+  kind:
+    - tech
+- name: Estação Brasil
+  url: https://bsky.app/profile/estacaobrasilfm.bsky.social
+  weight: 20
+  kind:
+    - history
+- name: Boa Noite Internet
+  url: https://boanoiteinternet.com.br/
+  weight: 20
+  kind:
+    - storytelling
+- name: Data over dogma
+  url: https://podcasts.apple.com/podcast/data-over-dogma/id1681418502
+  weight: 20
+  kind:
+    - religion

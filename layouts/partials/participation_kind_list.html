@@ -1,0 +1,39 @@
+<section class="site-participations-items">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {{- range $i, $page := .Pages }}
+          <!-- prettier-ignore -->
+          {{- if eq 0 (mod $i 3) }}
+              <div class="card-deck">
+            {{- end }}
+          <div class="card">
+            <div class="card-header">
+              {{- range .GetTerms "participation_kinds" }}
+                <span class="site-participations-items-kind">{{ .LinkTitle }}</span>
+              {{- end }}
+            </div>
+            <div class="card-body site-participations-item d-flex flex-column">
+              <h2 class="card-title">{{ .Title }}</h2>
+              <p class="card-text">{{ .Description | markdownify }}</p>
+              <a
+                href="{{ .Params.link }}"
+                class="btn btn-sm btn-primary site-participations-item-link align-self-end mt-auto"
+                >{{ i18n "learn_more" }}</a
+              >
+            </div>
+            <div class="card-footer text-muted">
+              {{ .Date | time.Format ":date_long" }}
+            </div>
+          </div>
+          <!-- prettier-ignore -->
+          {{- if or (eq 2 (mod $i 3)) (eq $i (sub (len $.Pages) 1)) }}
+              </div>
+            {{- end }}
+        {{- else }}
+          <h2 class="site-participations-items-empty text-center">{{ i18n "no_participations" }}</h2>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</section>

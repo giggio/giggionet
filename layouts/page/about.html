@@ -1,0 +1,123 @@
+{{ define "main" }}
+  <div class="site-about">
+    <section class="site-about-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="h-100 d-flex flex-column">
+              <div>
+                <h1 class="site-about-header-quote">
+                  <i class="fa-solid fa-quote-left"></i>
+                  {{ .Params.quote -}}
+                </h1>
+                <h1 class="site-about-header-quote2">
+                  {{- .Params.quote2 }}
+                  <i class="fa-solid fa-quote-right"></i>
+                </h1>
+                <p class="site-about-header-name text-right">Giovanni Bassi</p>
+              </div>
+              <div class="mt-auto site-about-header-participations justify-content-around">
+                {{- with site.GetPage "/participation_kinds/videos/" }}
+                  {{- if .Pages -}}
+                    <p class="site-about-header-participations-item">
+                      <a href="{{ .RelPermalink }}" target="_blank" aria-label="{{ .LinkTitle }}">
+                        <i class="fa-brands fa-youtube"></i>
+                        <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
+                      </a>
+                    </p>
+                  {{- end }}
+                {{- end }}
+                {{- with site.GetPage "/blog/" }}
+                  <p class="site-about-header-participations-item">
+                    <a href="{{ .RelPermalink }}" target="_blank" aria-label="{{ i18n "publications" }}">
+                      <i class="fa-regular fa-pen-to-square"></i>
+                      <span class="site-about-header-participations-item-text">{{ i18n "publications" }}</span>
+                    </a>
+                  </p>
+                {{- end }}
+                <p class="site-about-header-participations-item">
+                  <a href="#ways-to-contact" aria-label="{{ i18n "social_networks" }}">
+                    <i class="fa-solid fa-hexagon-nodes"></i>
+                    <span class="site-about-header-participations-item-text">{{ i18n "social_networks" }}</span>
+                  </a>
+                </p>
+                {{- with site.GetPage "/participation_kinds/talks/" }}
+                  {{- if .Pages -}}
+                    <p class="site-about-header-participations-item">
+                      <a href="{{ .RelPermalink }}" target="_blank" aria-label="{{ .LinkTitle }}">
+                        <i class="fa-solid fa-person-chalkboard"></i>
+                        <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
+                      </a>
+                    </p>
+                  {{- end }}
+                {{- end }}
+                {{- with site.GetPage "/participation_kinds/podcasts/" }}
+                  {{- if .Pages -}}
+                    <p class="site-about-header-participations-item">
+                      <a href="{{ .RelPermalink }}" target="_blank" aria-label="{{ .LinkTitle }}">
+                        <i class="fa-solid fa-podcast"></i>
+                        <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
+                      </a>
+                    </p>
+                  {{- end }}
+                {{- end }}
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6 site-about-header-image-wrapper">
+            {{- $image := resources.Get site.Params.contact_feature_image -}}
+            {{- $alt := .Params.feature_image_alt -}}
+            {{- if not $alt -}}
+              {{- warnidf "missing-feature_image-alt" "About does not have feature_image alt." -}}
+            {{- end -}}
+            {{- $image = $image.Resize (printf "%dx webp" 400) -}}
+            <img
+              class="site-about-header-image"
+              src="{{ $image.RelPermalink }}"
+              alt="{{ $alt }}"
+              width="{{ $image.Width }}"
+              height="{{ $image.Height }}"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 site-about-name">
+            <h1>
+              {{ .Params.heading }}
+            </h1>
+          </div>
+          <div class="col-12 site-about-description">
+            <p>
+              {{ .Description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-about-expertise">
+      <div class="container site-about-expertise-container">
+        <div class="row site-about-expertise-container-margin"></div>
+        <div class="row site-about-expertise-container-wrapper">
+          {{ with .Params.expertise_title }}
+            <div class="col-12 col-md-5 align-items-center d-flex">
+              <div class="section-title">
+                <h2>{{ . }}</h2>
+              </div>
+            </div>
+          {{ end }}
+          <div class="col-12 col-md-7">
+            <ul class="site-about-expertise-container-list">
+              {{ range .Params.expertise_sectors }}
+                <li>{{ . }}</li>
+              {{ end }}
+            </ul>
+          </div>
+        </div>
+        <div class="row site-about-expertise-container-margin"></div>
+      </div>
+    </section>
+
+    {{ partial "ways-to-contact.html" . }}
+  </div>
+{{ end }}

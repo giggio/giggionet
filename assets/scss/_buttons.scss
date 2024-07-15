@@ -1,0 +1,81 @@
+@use "sass:color";
+@use "mixins";
+@use "variables";
+
+.btn {
+  font-family: variables.$secondary-font;
+  border: none;
+  color: variables.$white !important;
+  padding: 20px 45px;
+  border-radius: 0;
+  &:focus {
+    box-shadow: none;
+  }
+  @include mixins.desktop {
+    padding: 17px 40px;
+  }
+  .btn-area {
+    display: block;
+    overflow: hidden;
+    span {
+      position: relative;
+      display: inline-block;
+      padding: 2px 0;
+      transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+      transform-origin: left center;
+      &::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 150%;
+        left: 0;
+        transform: skewY(30deg);
+        transform-origin: left center;
+        transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+    }
+  }
+  &:hover {
+    .btn-area {
+      span {
+        transform: translateY(-150%) skewY(7deg);
+        &::after {
+          transform: skewY(-7deg);
+        }
+      }
+    }
+  }
+  &:visited {
+    .btn-area {
+      span {
+        transform: translateY(-150%) skewY(7deg);
+        &::after {
+          transform: skewY(-7deg);
+        }
+      }
+    }
+  }
+}
+
+.btn-sm {
+  padding: 15px 40px !important;
+}
+
+.btn-sm-rounded {
+  border-radius: 40px;
+}
+
+.btn-primary {
+  background: variables.$primary-color;
+  color: variables.$white;
+  &:hover {
+    background: color.adjust($color: variables.$primary-color, $lightness: -10%);
+  }
+}
+
+.btn-secondary {
+  background: variables.$secondary-color;
+  color: variables.$white;
+  &:hover {
+    background: color.adjust($color: variables.$secondary-color, $lightness: -10%);
+  }
+}

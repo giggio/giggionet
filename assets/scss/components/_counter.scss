@@ -1,0 +1,28 @@
+@use "../mixins";
+@use "../variables";
+
+.site-counter {
+  color: variables.$white;
+  background: variables.$secondary-color;
+  padding: 85px 0;
+  scroll-margin-top: 85px;
+  .section-title {
+    margin-bottom: 40px;
+  }
+  &-item {
+    @include mixins.desktop {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    &-title {
+      font-size: 20px;
+      font-weight: 300;
+    }
+    &-number {
+      color: variables.$white;
+      font-size: 60px;
+      margin-bottom: 0;
+      font-weight: 700;
+    }
+  }
+}

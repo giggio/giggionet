@@ -1,0 +1,52 @@
+share_on: Share on
+share: Share
+latest_blog_posts: Latest blog posts
+gitinfo: Git commit {{ .AbbreviatedHash }} ({{ .Subject }}) authored on {{ .AuthorDate.Format "02/01/2006" }}, commited on {{ .CommitDate.Format "02/01/2006" }}, by {{ .AuthorName }}.
+menu_about: About me
+menu_contact: Contact
+menu_participations: Participations
+ways_to_contact_title: Get in touch with me
+site_map: Site map
+languages: Languages
+read_time:
+  one: "{{ . }} min"
+  other: "{{ . }} mins"
+words:
+  one: "{{ . }} word"
+  other: "{{ . }} words"
+copyright: © Copyright {{ . }} - Rights reserved Giovanni Bassi
+counter:
+  title: Numbers on the way
+  projects_delivered: Projects delivered
+  cups_of_coffee: Cups of coffee
+  posts: Social media posts
+  distance: Kilometers traveled
+archives: Archives
+categories: Categories
+tags: Tags
+read_more_aria: read more about '{{ .Title }}'
+menu: Menu
+logo: Giovanni Bassi's site
+blog_feature_image_alt: PC chip
+search: Search
+change_language_to: Trocar o idioma para
+social_share:
+  bluesky: Share on Bluesky
+  facebook: Share on Facebook
+  linkedin: Share on LinkedIn
+  twitter: Share on Twitter
+  whatsapp: Share on WhatsApp
+  email: Share by e-mail
+back_to_top: Back to top
+go_to_next_section: Move to the next section
+logo_alt: Giovanni Bassi's logo
+learn_more: Learn more
+filter_by: Filter by
+no_participations: No participations found.
+social_networks: Social networks
+publications: Publications
+footer:
+  reading: Reading
+  podcasts: Listening
+close: Close
+blog_no_posts_yet: No posts yet

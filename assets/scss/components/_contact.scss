@@ -1,0 +1,32 @@
+@use "../mixins";
+@use "../variables";
+
+.site-contact {
+  padding: 150px 0 100px;
+  background: variables.$gray;
+  @include mixins.mobile {
+    padding: 120px 0 100px;
+  }
+  &-title {
+    font-weight: 700;
+    @include mixins.tablet {
+      font-size: 40px;
+    }
+    span {
+      color: variables.$primary-color;
+    }
+  }
+  &-description {
+    width: 60%;
+    padding-left: 50px;
+    @include mixins.desktop {
+      width: 100%;
+      padding: 0 38px;
+    }
+    p {
+      font-size: 25px;
+      font-weight: 300;
+      margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{{- $image := or (.page.Resources.Get .page.Params.feature_image) (.page.Parent.Resources.Get .page.Params.feature_image) -}}
+{{- $alt := .page.Params.feature_image_alt -}}
+{{- if not $image -}}
+  {{- if or (and (eq .page.Params.use_default_feature_image nil) site.Params.use_default_feature_image) .page.Params.use_default_feature_image }}
+    {{- $image = (site.GetPage "/blog/").Resources.Get site.Params.blog_feature_image -}}
+    {{- $alt = i18n "blog_feature_image_alt" -}}
+  {{- end -}}
+{{- end -}}
+<!--alt is null on purpose, so screen readers don't pick up the feature image -->
+{{ partial "img.html" (dict "image" $image "class" .class "alt" "" "ignoreAlt" true "forceAspectRatio" true) }}

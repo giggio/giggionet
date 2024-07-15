@@ -1,0 +1,41 @@
+{{- if hugo.IsProduction -}}
+  {{- $css := 0 -}}
+  {{ if eq (printf "%T" .href) "string" }}
+    {{- if (urls.Parse .href).IsAbs -}}
+      {{- with try (resources.GetRemote .href) -}}
+        {{- with .Err -}}
+          {{- errorf "%s" . -}}
+        {{- else with .Value -}}
+          {{- $css = . -}}
+        {{- else -}}
+          {{- warnidf "style" "Unable to get css for '%s'." .href -}}
+        {{- end -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $css = resources.Get .href -}}
+    {{- end -}}
+  {{ else }}
+    {{- $css = .href -}}
+  {{ end }}
+  {{- with $css | postCSS | minify | fingerprint | resources.PostProcess -}}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
+    {{/* todo: add crossorigin="anonymous" when https://github.com/bezoerb/inline-critical/issues/322 is fixed */}}
+  {{- end -}}
+{{- else -}}
+  {{- $css := 0 -}}
+  {{ if eq (printf "%T" .href) "string" }}
+    {{- $css = .href -}}
+    {{- if not (urls.Parse $css).IsAbs -}}
+      {{- $css = (resources.Get $css).RelPermalink -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $css = .href.RelPermalink -}}
+  {{- end -}}
+  <link
+    rel="stylesheet"
+    href="{{ $css }}"
+    {{ with .integrity }}integrity="{{ . }}"{{ end }}
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+{{- end }}

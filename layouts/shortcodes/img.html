@@ -1,0 +1,12 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" -}}
+{{- if not $alt -}}
+  {{- warnidf "missing-img-alt" "Unable to get img alt for '%s'." (.Get "alt") -}}
+{{- end -}}
+{{- $image := or (.Page.Resources.Get $src) (resources.Get $src) -}}
+{{ if ne $image.MediaType.SubType "svg" }}
+  {{- $image = $image.Resize (printf "%.fx webp" (math.Min $image.Width .Site.Params.max_image_width)) -}}
+  <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}" width="{{ $image.Width }}" height="{{ $image.Height }}" />
+{{- else -}}
+  <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}" />
+{{- end -}}

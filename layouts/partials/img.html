@@ -1,0 +1,18 @@
+{{- if and (not .alt) (not .ignoreAlt) -}}
+  {{- warnidf "missing-img-alt" "Unable to get img alt for '%s'." .alt -}}
+{{- end -}}
+{{- $image := partial "img_towebp.html" . -}}
+{{- $dimensions := partial "img_dimensions.html" $image -}}
+{{- $aspectRatio := float 0 }}
+{{- if and $dimensions.width $dimensions.height .forceAspectRatio }}
+  {{- $aspectRatio = div (float $dimensions.width) (float $dimensions.height) }}
+  {{- $dimensions = dict }}
+{{- end }}
+<img
+  src="{{ $image.RelPermalink }}"
+  alt="{{ .alt }}"
+  {{ with $dimensions.width }}width="{{ . }}"{{ end }}
+  {{ with $dimensions.height }}height="{{ . }}"{{ end }}
+  {{ with .class }}class="{{ . }}"{{ end -}}
+  {{ with $aspectRatio }}style="aspect-ratio: {{ $aspectRatio }};"{{ end }}
+/>

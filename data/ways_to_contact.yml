@@ -1,0 +1,18 @@
+- name: Bluesky
+  url: "https://bsky.app/profile/giggio.net"
+  icon: fa-brands fa-bluesky
+- name: Twitter
+  url: "https://twitter.com/giovannibassi"
+  icon: fa-brands fa-twitter
+- name: Mastodon
+  url: "https://mastodon.social/@giggio"
+  icon: fa-brands fa-mastodon
+- name: Github
+  url: "https://github.com/giggio"
+  icon: fa-brands fa-github
+- name: Instagram
+  url: "https://instagram.com/giggiobassi/"
+  icon: fa-brands fa-instagram
+- name: E-mail
+  url: "mailto:giggio@giggio.net"
+  icon: fa-solid fa-envelope

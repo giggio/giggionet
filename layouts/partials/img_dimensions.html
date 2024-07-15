@@ -1,0 +1,21 @@
+{{/* try  to get width and height from svg (xml) */}}
+{{- $image := . }}
+{{- $width := "" }}
+{{- $height := "" }}
+{{- if eq $image.MediaType.SubType "svg" }}
+  {{- $imageObj := unmarshal $image.Content }}
+  {{- with index $imageObj "-width" }}
+    {{- with replaceRE `(\d+)px` "$1" . }}
+      {{- $width = . }}
+    {{- end }}
+  {{- end }}
+  {{- with index $imageObj "-height" }}
+    {{- with replaceRE `(\d+)px` "$1" . }}
+      {{- $height = . }}
+    {{- end }}
+  {{- end }}
+{{- else -}}
+  {{- $width = $image.Width }}
+  {{- $height = $image.Height }}
+{{- end }}
+{{ return (dict "width" $width "height" $height) }}

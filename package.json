@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "cspell": "cspell",
+    "eslint": "eslint",
+    "markdownlint": "markdownlint-cli2",
+    "prettier": "prettier",
+    "unused-css": "purgecss --css ./public/css/site.css --content './public/**/*.html' --rejected --safelist nav-bg badge-secondary missing-alt entry-hint | jq .[].rejected",
+    "slugify": "slugify"
+  },
+  "devDependencies": {
+    "@azure/static-web-apps-cli": "^2.0.4",
+    "@cspell/dict-pt-br": "^2.3.3",
+    "@eslint/js": "^9.22.0",
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "@types/bootstrap": "4.3.1",
+    "@types/jquery": "^3.5.32",
+    "@types/node": "^22.13.10",
+    "autoprefixer": "^10.4.21",
+    "critical": "^7.2.1",
+    "cspell": "^8.17.5",
+    "eslint": "^9.22.0",
+    "globals": "^16.0.0",
+    "globby": "^14.1.0",
+    "lightbox2": "^2.11.5",
+    "markdownlint-cli2": "^0.17.2",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.5.3",
+    "prettier-plugin-go-template": "^0.0.15",
+    "slugify-cli": "^3.0.0"
+  }
+}

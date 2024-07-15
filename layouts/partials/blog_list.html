@@ -1,0 +1,69 @@
+{{- $paginate := false }}
+{{- $pages := slice }}
+{{- with .pager }}
+  {{- $pages = .Pages }}
+  {{- $paginate = true }}
+{{- else }}
+  {{- if isset . "pages" }}
+    {{- $pages = .pages }}
+  {{- else }}
+    {{- warnidf "blog_list" "Missing pager or pages." -}}
+  {{- end }}
+{{- end }}
+{{- $h := .firstH }}
+{{- .page.Store.Set "popover" true -}}
+<section class="site-blog">
+  <div class="container">
+    <div class="row">
+      {{ range $pages }}
+        <div class="col-lg-6">
+          <article class="site-blog-post">
+            <div class="site-blog-post-thumb" aria-disabled="true">
+              <a href="{{ .RelPermalink }}" tabindex="-1" title="{{ .Title }}">
+                {{- partial "blog_list_image.html" (dict "page" . "class" "") -}}
+              </a>
+            </div>
+            <div class="site-blog-post-content">
+              {{ printf `<%s class="site-blog-post-content-title">` $h | safeHTML }}<a href="{{ .RelPermalink }}"
+                >{{ .Title }}</a
+              >{{ printf "</%s>" $h | safeHTML }}
+              <span class="site-blog-post-content-date">{{ .PublishDate | time.Format ":date_long" }}</span>
+              {{- if (.Param "ShowReadingTime") -}}
+                &nbsp;|
+                <span class="site-blog-post-content-readingtime">
+                  {{ (i18n "read_time_long" .ReadingTime) }}
+                </span>
+                <span
+                  data-toggle="popover"
+                  data-content="<a data-toggle='modal' href='#shareModal' class='site-blog-post-share-modal-link'
+                    data-title='{{ .Title }}'
+                    data-summary='{{ chomp (.Summary | plainify) }}'
+                    data-url='{{ .Permalink | absLangURL }}'>
+                    <i class='fa-solid fa-share-from-square'></i>
+                    {{ i18n `share` }}</a>"
+                  data-html="true"
+                  data-trigger="focus"
+                  class="site-blog-post-share"
+                  tabindex="-1"
+                >
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </span>
+              {{- end -}}
+              <p class="site-blog-post-content-summary">{{ .Summary | truncate 150 | plainify }}</p>
+            </div>
+          </article>
+        </div>
+      {{ end }}
+
+      {{- if $paginate }}
+        <div class="col-12">
+          <div class="site-blog-pagination">
+            {{ template "_internal/pagination.html" . }}
+          </div>
+        </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+{{ partial "social_share_list.html" . }}

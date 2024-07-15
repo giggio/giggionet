@@ -1,0 +1,155 @@
+baseURL: http://local.giggio.net:1313/
+title: Giovanni Bassi
+summarylength: 20
+enableRobotsTXT: true
+copyright: © 2025 Giovanni Bassi
+titleCaseStyle: firstupper
+languageCode: pt-BR
+defaultContentLanguage: pt-BR
+defaultContentLanguageInSubdir: false
+removePathAccents: true
+outputs:
+  home:
+    - html
+  section:
+    - html
+    - rss
+  taxonomy:
+    - html
+  term:
+    - html
+    - rss
+languages:
+  pt-BR:
+    disabled: false
+    languageCode: pt-BR
+    languageName: Português
+    weight: 1
+    params:
+      flag_emoji: "&#x1F1E7;&#x1F1F7;"
+      short_lang_code: pt
+  en:
+    disabled: false
+    languageCode: en
+    languageName: English
+    weight: 2
+    params:
+      flag_emoji: "&#x1F1EC;&#x1F1E7;"
+      short_lang_code: en
+taxonomies:
+  category: categories
+  tag: tags
+  participation_kind: participation_kinds
+markup:
+  tableOfContents:
+    endLevel: 4
+    ordered: false
+    startLevel: 3
+  highlight:
+    codeFences: true
+    guessSyntax: false
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: true
+    style: vs
+    tabWidth: 2
+menu:
+  nav:
+    - name: Home
+      identifier: menu_home
+      pageRef: ""
+      weight: 10
+      params:
+        aria_disabled: true
+    - identifier: menu_about
+      pageRef: about
+      weight: 20
+    - name: Blog
+      identifier: menu_blog
+      pageRef: blog
+      weight: 30
+    - name: Participations
+      identifier: menu_participations
+      pageRef: participations
+      weight: 40
+    - identifier: menu_contact
+      pageRef: contact
+      weight: 50
+      params:
+        featured: true
+services:
+  googleAnalytics:
+    id: G-D0LJ3QG4Z3
+privacy:
+  disqus:
+    disable: true
+  googleAnalytics:
+    disable: true
+    respectDoNotTrack: true
+  x:
+    enableDNT: true
+  youTube:
+    privacyEnhanced: true
+params:
+  logo: images/base/logo-small.svg
+  logo_footer: images/base/logo-invertido-small.svg
+  favicon_icon: images/base/logo-icon.svg
+  dateFormat: ":date_long"
+  description: Página pessoal do Giovanni Bassi
+  comments: true
+  ShowWordCount: true
+  hideAuthor: true
+  ShowReadingTime: true
+  mainSections: blog
+  images: # using for og:image
+    - images/base/logo.svg
+  max_image_width: 730
+  use_default_feature_image: true
+  blog_feature_image: images/blog-placeholder-post-feature.jpg # used as fallback for og:image, coming from custom _funcs/get-page-images.html
+  # spellchecker:disable-next-line
+  contact_feature_image: images/giovanni-bassi.jpg
+  author:
+    email: giggio@giggio.net
+    name: Giovanni Bassi
+  social_share:
+    bluesky: true
+    whatsapp: true
+    twitter: true
+    facebook: true
+    linkedin: true
+    mail: true
+  footer:
+    sitemap:
+      link:
+        - name: Home
+          identifier: menu_home
+          url: /
+        - identifier: menu_about
+          url: about
+        - name: Blog
+          identifier: menu_blog
+          url: blog
+        - identifier: menu_participations
+          url: participations
+        - identifier: menu_contact
+          url: contact
+permalinks:
+  taxonomy:
+    tags: /blog/:section/
+    categories: /blog/:section/
+    participation_kinds: /participations/:section/
+  term:
+    tags: /blog/tags/:slug/
+    categories: /blog/categories/:slug/
+    participation_kinds: /participations/kinds/:slug/
+
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: node_modules/@fortawesome/fontawesome-free
+      target: assets/css/fontawesome
+      disableWatch: true
+    - source: node_modules/lightbox2/dist
+      target: assets/js/lightbox2
+      disableWatch: true

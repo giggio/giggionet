@@ -1,0 +1,96 @@
+@use "mixins";
+@use "variables";
+@use "hugo:vars" as vars;
+
+.site-hero {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(vars.$heroImage_xl);
+  @include mixins.desktop-lg {
+    background-image: url(vars.$heroImage_lg);
+  }
+  @include mixins.desktop {
+    height: 70vh;
+    padding: 200px 0;
+    background-image: url(vars.$heroImage_md);
+  }
+  @include mixins.tablet {
+    height: auto;
+    background-image: url(vars.$heroImage_sm);
+  }
+  @include mixins.mobile {
+    padding: 150px 0;
+    background-image: url(vars.$heroImage_mobile);
+  }
+  @include mixins.mobile-xs {
+    background-image: url(vars.$heroImage_xs);
+  }
+  &-content {
+    & * {
+      color: white;
+    }
+    h1 {
+      margin-bottom: 75px;
+      @include mixins.desktop-lg {
+        font-size: 50px;
+        margin-bottom: 50px;
+      }
+      @include mixins.mobile {
+        font-size: 40px;
+      }
+    }
+    &-tagline {
+      font-family: variables.$secondary-font;
+      font-weight: 300;
+      font-size: 15px;
+      margin-bottom: 0.5rem;
+    }
+    &-buttons {
+      margin: 0;
+      padding: 0;
+      li {
+        display: inline-block;
+        @include mixins.mobile {
+          display: block;
+        }
+        &:not(:last-child) {
+          margin-right: 30px;
+          @include mixins.mobile {
+            margin-right: 0;
+            margin-bottom: 20px;
+          }
+        }
+        .btn {
+          font-weight: 600;
+          @include mixins.mobile {
+            width: 90%;
+            margin: 0 auto;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  &-scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 70px;
+    transform: translateX(-50%);
+
+    &-arrow {
+      -webkit-mask-image: url(vars.$arrow_down_image);
+      mask-image: url(vars.$arrow_down_image);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      background-color: green;
+      width: 26px;
+      height: 33px;
+      display: block;
+    }
+  }
+}

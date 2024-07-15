@@ -1,0 +1,182 @@
+@use "../mixins";
+@use "../variables";
+
+.site-about {
+  &-header {
+    padding-top: 150px;
+    padding-bottom: 20px;
+    background-color: variables.$gray;
+    @include mixins.mobile {
+      padding-top: 120px;
+      text-align: center;
+    }
+    &-quote,
+    &-quote2 {
+      color: variables.$text-color;
+      font-family: variables.$primary-font;
+      margin-bottom: 16px;
+    }
+    &-quote {
+      font-size: 34px;
+      font-weight: 400;
+      @include mixins.desktop-lg {
+        font-size: 30px;
+      }
+      @include mixins.desktop {
+        font-size: 24px;
+      }
+      @include mixins.tablet {
+        font-size: 22px;
+      }
+      .fa-quote-left {
+        font-size: 44px;
+      }
+    }
+    &-quote2 {
+      font-size: 40px;
+      font-weight: 600;
+      @include mixins.desktop-lg {
+        font-size: 34px;
+      }
+      @include mixins.desktop {
+        font-size: 28px;
+      }
+      @include mixins.tablet {
+        font-size: 24px;
+      }
+      .fa-quote-right {
+        font-size: 14px;
+        vertical-align: super;
+      }
+    }
+    &-name {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    &-image-wrapper {
+      padding: 0 0 10px 0;
+      @include mixins.tablet {
+        text-align: center;
+      }
+    }
+    &-image {
+      width: 90%;
+      height: auto;
+      float: right !important;
+      @include mixins.mobile-xs {
+      }
+      @include mixins.mobile {
+      }
+      @include mixins.tablet {
+        float: unset !important;
+      }
+      @include mixins.desktop-lg {
+        width: 100%;
+      }
+    }
+    &-participations {
+      display: flex;
+      @include mixins.md {
+        width: 200%;
+      }
+      &-item {
+        text-align: center;
+        i {
+          font-size: 45px;
+          color: variables.$tertiary-color;
+          padding-bottom: 10px;
+          @include mixins.md {
+            font-size: 38px;
+          }
+          @include mixins.tablet {
+            font-size: 28px;
+          }
+          @include mixins.mobile {
+            font-size: 24px;
+          }
+        }
+        a {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        &-text {
+          color: variables.$tertiary-color;
+          display: block;
+          font-size: 18px;
+          @include mixins.md {
+            font-size: 16px;
+          }
+          @include mixins.tablet {
+            font-size: 13px;
+          }
+          @include mixins.mobile {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  &-name {
+    background: variables.$primary-color;
+    margin-bottom: 30px;
+    h1 {
+      color: variables.$white;
+      font-weight: 400;
+      font-size: 25px;
+      line-height: 60px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      margin: 0;
+    }
+  }
+  &-description {
+    p {
+      font-size: 30px;
+      font-weight: 300;
+    }
+  }
+
+  &-expertise {
+    background: variables.$gray;
+    .section-title {
+      margin-bottom: 0;
+    }
+    &-container {
+      &-margin {
+        height: 8px;
+        background-color: variables.$primary-color;
+        margin: 0;
+      }
+      &-wrapper {
+        margin: 40px 0;
+      }
+      &-list {
+        padding: 0;
+        margin: 0;
+        @include mixins.mobile {
+          text-align: center;
+          margin: 0;
+        }
+        li {
+          list-style: none;
+          font-size: 25px;
+          font-weight: 300;
+          color: variables.$text-color-dark;
+          &:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+  & > .site-ways-to-contact {
+    padding: 0 0 30px 0;
+  }
+}

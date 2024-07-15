@@ -1,0 +1,41 @@
+@use "../mixins";
+@use "../variables";
+@use "hugo:vars" as vars;
+
+.site-ways-to-contact {
+  padding: 50px 0 100px;
+  @include mixins.desktop {
+    padding: 40px 0 80px;
+  }
+  @include mixins.mobile {
+    padding: 30px 0 50px;
+  }
+  .section-title {
+    margin-bottom: 100px;
+    @include mixins.desktop {
+      margin-bottom: 30px;
+    }
+  }
+  &-wrapper {
+    i {
+      font-size: 70px;
+      color: variables.$tertiary-color;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    @include mixins.desktop {
+      justify-content: center;
+    }
+  }
+  &-item {
+    text-align: center;
+    width: calc(100% / vars.$ways_to_contact_len);
+    padding-top: 30px;
+    @include mixins.desktop {
+      width: 33.33%;
+    }
+    @include mixins.mobile {
+      width: 50%;
+    }
+  }
+}

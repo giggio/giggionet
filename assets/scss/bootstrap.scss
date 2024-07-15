@@ -1,0 +1,38 @@
+@use "./variables";
+
+.badge {
+  &-primary {
+    background-color: variables.$primary-color;
+    color: white;
+  }
+  &-secondary {
+    background-color: variables.$secondary-color;
+    color: white;
+  }
+  &-tertiary {
+    background-color: variables.$tertiary-color;
+    color: white;
+  }
+}
+
+.btn {
+  &:focus,
+  &:active {
+    background-color: variables.$tertiary-color !important;
+    color: white !important;
+  }
+}
+
+.button {
+  &-tertiary {
+    background-color: variables.$tertiary-color;
+    color: white;
+  }
+}
+
+/*! purgecss start ignore */
+[data-toggle="modal"],
+[data-toggle="popover"] {
+  cursor: pointer;
+}
+/*! purgecss end ignore */

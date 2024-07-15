@@ -1,0 +1,43 @@
+- name: Victor Hugo Germano
+  url: https://victorhg.com/
+  weight: 10
+  kind:
+    - tech
+    - agile
+    - ai
+    - business
+- name: Roberta Arcoverde
+  url: https://rla4.com/
+  weight: 10
+  kind:
+    - dev
+- name: Amos Wenger (fasterthanlime)
+  url: https://fasterthanli.me/
+  weight: 20
+  kind:
+    - dev
+- name: Konrad Kokosa
+  url: https://tooslowexception.com/
+  weight: 20
+  kind:
+    - dev
+- name: Eric Lippert
+  url: https://ericlippert.com/
+  weight: 20
+  kind:
+    - dev
+- name: Vida de programador
+  url: https://developerslife.tech/
+  weight: 30
+  kind:
+    - strips
+- name: XKCD
+  url: https://xkcd.com/
+  weight: 40
+  kind:
+    - strips
+- name: Jesus me chicoteia
+  url: https://jesusmechicoteia.com.br/
+  weight: 40
+  kind:
+    - personal

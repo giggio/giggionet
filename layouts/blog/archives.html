@@ -1,0 +1,16 @@
+{{ define "main" }}
+  {{ partial "post_group_header.html" . }}
+
+
+  <section class="site-blog">
+    <div class="container">
+      {{/* Get pages from your main sections or all pages if set */}}
+      {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+      {{ if site.Params.ShowAllPagesInArchive }}
+        {{ $pages = site.RegularPages }}
+      {{ end }}
+
+      {{ partial "post_list_by_date.html" ($pages.GroupByPublishDate "2006") }}
+    </div>
+  </section>
+{{ end }}

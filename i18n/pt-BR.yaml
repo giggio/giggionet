@@ -1,0 +1,56 @@
+share_on: Compartilhar por
+share: Compartilhar
+latest_blog_posts: Últimos posts no blog
+gitinfo: Git commit {{ .AbbreviatedHash }} ({{ .Subject }}) criado em {{ .AuthorDate.Format "01/02/2006" }}, comitado em {{ .CommitDate.Format "01/02/2006" }}, por {{ .AuthorName }}.
+menu_about: Quem eu sou
+menu_contact: Entre em contato
+menu_contact_smaller: Contato
+menu_participations: Participações
+ways_to_contact_title: Entre em contato
+site_map: Mapa do site
+languages: Idiomas
+read_time:
+  one: '{{ . }} min'
+  other: '{{ . }} mins'
+read_time_long:
+  one: '{{ . }} minuto de leitura'
+  other: '{{ . }} minutos de leitura'
+words:
+  one: '{{ . }} palavra'
+  other: '{{ . }} palavras'
+copyright: © Copyright {{ . }} - Direitos reservados Giovanni Bassi
+counter:
+  title: Trajetória em números
+  projects_delivered: Projetos entregues
+  cups_of_coffee: Xícaras de café
+  posts: Posts nas redes sociais
+  distance: Quilômetros rodados
+archives: Arquivos
+categories: Categorias
+tags: Tags
+read_more_aria: Ler mais sobre '{{ .Title }}'
+menu: Menu
+logo: Site do Giovanni Bassi
+blog_feature_image_alt: Chip de computador
+search: Busca
+change_language_to: Change language to
+social_share:
+  bluesky: Compartilhar no Bluesky
+  facebook: Compartilhar no Facebook
+  linkedin: Compartilhar no LinkedIn
+  twitter: Compartilhar no Twitter
+  whatsapp: Compartilhar no WhatsApp
+  email: Compartilhar por e-mail
+back_to_top: Voltar ao topo
+go_to_next_section: Ir para a próxima seção
+logo_alt: Logo do Giovanni Bassi
+learn_more: Saiba mais
+filter_by: Filtrar por
+no_participations: Nenhuma participação encontrada.
+social_networks: Redes sociais
+publications: Publicações
+footer:
+  reading: Eu leio
+  podcasts: Eu ouço
+close: Fechar
+blog_no_posts_yet: Ainda sem posts no blog

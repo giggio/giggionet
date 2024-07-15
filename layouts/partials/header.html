@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-md site-navigation">
+  <div class="container-sm">
+    <a class="navbar-brand" href="{{ .Site.BaseURL | relLangURL }}">
+      {{ partial "img.html" (dict "src" .Site.Params.logo "alt" (i18n "logo_alt") "class" "nav-logo") }}
+    </a>
+    <button
+      class="navbar-toggler collapsed"
+      type="button"
+      data-toggle="collapse"
+      data-target="#sitenavbar"
+      title="{{ i18n "menu" }}"
+    >
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="sitenavbar">
+      <ul class="navbar-nav ml-auto main-nav">
+        {{- $menu := (.Site.Menus.nav) }}
+        {{- $len := (len $menu) }}
+        {{- range $element := $menu }}
+          {{- $url := .PageRef | relLangURL }}
+          {{- $name := (or (i18n .Identifier) .Name | safeHTML) }}
+          {{- $name_smaller := i18n (printf "%s_smaller" .Identifier) }}
+          <li class="nav-item" {{ if .Params.aria_disabled }}aria-disabled="true"{{ end }}>
+            {{- $number_of_links := cond $name_smaller 2 1 }}
+            {{- range $num := (seq $number_of_links) }}
+              {{- $extra_classes := "" }}
+              {{- if $element.Params.featured }}
+                {{- $extra_classes = " btn btn-sm btn-primary btn-sm-rounded" -}}
+              {{- end }}
+              {{- if eq $number_of_links 2 }}
+                {{- if eq $num 1 }}
+                  {{- $extra_classes = printf "%s d-block d-md-none d-lg-block" $extra_classes -}}
+                {{- else }}
+                  {{- $extra_classes = printf "%s d-none d-md-block d-lg-none" $extra_classes -}}
+                {{- end }}
+              {{- end }}
+              <a
+                class="nav-link{{ $extra_classes }}"
+                href="{{ $url }}"
+                {{ if $element.Params.aria_disabled }}tabindex="-1"{{ end -}}
+                {{ if eq $num 2 -}}aria-hidden="true"{{- end -}}
+              >
+                {{- if eq $num 1 -}}
+                  {{- $name -}}
+                {{- else -}}
+                  {{- $name_smaller -}}
+                {{- end -}}
+              </a>
+            {{- end }}
+          </li>
+        {{- end }}
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{{ "search" | relLangURL }}"
+            aria-label="{{ i18n "search" }}"
+            title="{{ i18n "search" }}"
+            ><i class="fa fa-search nav-search"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          {{- range .Translations }}
+            <a href="{{ .RelPermalink }}" aria-label="{{ i18n "change_language_to" }} {{ .Language.LanguageName }}">
+              {{ .Language.Params.flag_emoji | safeHTML }}
+            </a>
+          {{- end }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

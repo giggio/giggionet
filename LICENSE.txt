@@ -1,0 +1,7 @@
+Everything under the content/blog folder and every markdown file (.md)
+outside of that folder is licensed under the
+Creative Commons Attribution-ShareAlike 4.0 International.
+See: https://creativecommons.org/licenses/by-sa/4.0/
+
+Everything else is licensed under the MIT License.
+See: https://opensource.org/license/MIT

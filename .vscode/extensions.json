@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "budparr.language-hugo-vscode",
+    "davidanson.vscode-markdownlint",
+    "dnut.rewrap-revived",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "kaellarkin.hugo-shortcode-syntax",
+    "redhat.vscode-yaml",
+    "shardulm94.trailing-spaces",
+    "yzhang.markdown-all-in-one",
+    "dbaeumer.vscode-eslint",
+  ],
+  "unwantedRecommendations": []
+}

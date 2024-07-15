@@ -1,0 +1,33 @@
+{{- with .Params.banner }}
+  {{- "<!-- Site Hero Start -->" | safeHTML }}
+  <section class="site-hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <div class="site-hero-content text-center">
+            <div class="site-hero-content-tagline">{{ .tagline }}</div>
+            <h1>
+              {{ .heading }}
+            </h1>
+            <ul class="site-hero-content-buttons">
+              <li>
+                <a href="{{ "about" | relLangURL }}" class="btn btn-primary">
+                  <span class="btn-area">{{ .primary_button }}</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ "blog" | relLangURL }}" class="btn btn-secondary">
+                  <span class="btn-area">{{ .secondary_button }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#counter" class="site-hero-scroll scroll-to" aria-label="{{ i18n "go_to_next_section" }}">
+      <i class="site-hero-scroll-arrow"></i>
+    </a>
+  </section>
+  {{- "<!-- Site Hero End -->" | safeHTML }}
+{{- end }}
