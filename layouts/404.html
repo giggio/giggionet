@@ -1,0 +1,25 @@
+{{- define "main" }}
+  <section class="site-notfound-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h1>Página não encontrada | Page not found</h1>
+        </div>
+        <div class="col-lg-8">
+          <p class="lead">
+            A página que você está procurando não existe ou foi movida.<br />
+            Você pode voltar para a <a href="{{ "/" | relURL }}">página inicial</a>, usar
+            <a href="{{ "/search" | relURL }}">a busca</a>, dar uma olhada no <a href="{{ "/blog" | relURL }}">blog</a>,
+            ou <a href="{{ "/contact" | relURL }}">entrar em contato</a> comigo.
+          </p>
+          <p class="lead">
+            The page you are looking for does not exist or has been moved.<br />
+            You can go back to <a href="{{ "/" | relURL }}">home</a>, use <a href="{{ "/search" | relURL }}">search</a>,
+            check out the <a href="{{ "/blog" | relURL }}">blog</a>, or
+            <a href="{{ "/contact" | relURL }}">get in touch</a> with me.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end }}

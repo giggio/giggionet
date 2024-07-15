@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "unused-css": "purgecss --css ./public/css/site.css --content './public/**/*.html' --rejected --safelist nav-bg badge-secondary missing-alt entry-hint | jq .[].rejected"
+  },
+  "devDependencies": {
+    "@azure/static-web-apps-cli": "^2.0.4",
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@fullhuman/postcss-purgecss": "^7.0.2",
+    "@types/bootstrap": "4.3.1",
+    "@types/jquery": "^3.5.32",
+    "@types/node": "^22.13.10",
+    "autoprefixer": "^10.4.21",
+    "critical": "^7.2.1",
+    "globby": "^14.1.0",
+    "lightbox2": "^2.11.5",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "prettier-plugin-go-template": "^0.0.15"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "kaellarkin.hugo-shortcode-syntax",
+    "budparr.language-hugo-vscode",
+    "esbenp.prettier-vscode",
+    "davidanson.vscode-markdownlint",
+    "editorconfig.editorconfig",
+    "yzhang.markdown-all-in-one",
+    "stkb.rewrap",
+    "shardulm94.trailing-spaces",
+    "redhat.vscode-yaml"
+  ],
+  "unwantedRecommendations": []
+}

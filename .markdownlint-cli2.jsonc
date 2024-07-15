@@ -1,0 +1,22 @@
+{
+  "config": {
+    "MD013": {
+      "line_length": 120
+    },
+    "MD034": false
+  },
+  "globs": [
+    "**/*.md"
+  ],
+  "ignores": [
+    "node_modules/**/*",
+    "public/**/*",
+    ".*/**/*",
+    ".*",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "gitignore": true
+}

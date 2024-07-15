@@ -1,0 +1,67 @@
+{{/* From: https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/partials/_funcs/get-page-images.html */}}
+{{/* Used by opengraph to create og:image */}}
+{{- $imgs := slice }}
+{{- $imgParams := .Params.images }}
+{{- $resources := .Resources.ByType "image" -}}
+{{/* *** This is custom code for this func. Get image from param feature_image *** */}}
+{{- if not $imgParams }}
+  {{- if .Params.feature_image }}
+    {{- $imgParams = slice .Params.feature_image }}
+  {{- end }}
+{{- end }}
+{{/* Find featured image resources if the images parameter is empty. */}}
+{{- if not $imgParams }}
+  {{- $featured := $resources.GetMatch "*feature*" -}}
+  {{- if not $featured }}{{ $featured = $resources.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
+  {{- with $featured }}
+    {{- $imgs = $imgs | append (dict
+      "Image" .
+      "RelPermalink" .RelPermalink
+      "Permalink" .Permalink)
+    }}
+  {{- end }}
+{{- end }}
+{{/* Use the first one of site images as the fallback. */}}
+{{- if and (not $imgParams) (not $imgs) }}
+  {{/* *** This is custom code for this func. Get blog_feature_image. *** */}}
+  {{- if eq .Section "blog" }}
+    {{- $imgParams = slice site.Params.blog_feature_image }}
+  {{- else }}
+    {{- with site.Params.images }}
+      {{- $imgParams = first 1 . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{/* *** This is custom code for this func. Will check if a global resource is available before falling back to url. *** */}}
+{{- $siteResources := resources.ByType "image" -}}
+{{/* Parse page's images parameter. */}}
+{{- range $imgParams }}
+  {{- $img := . }}
+  {{- $url := urls.Parse $img }}
+  {{- if eq $url.Scheme "" }}
+    {{/* Internal image. */}}
+    {{/* *** This is custom code for this func. We are also checking site resources. *** */}}
+    {{- with or ($resources.GetMatch $img) ($siteResources.GetMatch $img) -}}
+      {{/* Image resource. */}}
+      {{- $imgs = $imgs | append (dict
+        "Image" .
+        "RelPermalink" .RelPermalink
+        "Permalink" .Permalink)
+      }}
+    {{- else }}
+      {{- $imgs = $imgs | append (dict
+        "RelPermalink" (relURL $img)
+        "Permalink" (absURL $img)
+        )
+      }}
+    {{- end }}
+  {{- else }}
+    {{/* External image */}}
+    {{- $imgs = $imgs | append (dict
+      "RelPermalink" $img
+      "Permalink" $img
+      )
+    }}
+  {{- end }}
+{{- end }}
+{{- return $imgs }}

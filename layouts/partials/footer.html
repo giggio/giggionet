@@ -1,0 +1,154 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="site-footer-logo">
+          {{ partial "img.html" (dict "src" .Site.Params.logo_footer "alt" (i18n "logo_alt")) }}
+        </div>
+      </div>
+      {{ with .Site.Params.footer.sitemap }}
+        <div class="col-lg-2 col-md-6">
+          <div class="site-footer-widget">
+            <h1 class="site-footer-widget-title">{{ i18n "site_map" }}</h1>
+            <ul class="site-footer-widget-links">
+              {{ range .link }}
+                {{- $name := (or (i18n .identifier) .name | safeHTML) }}
+                <li><a href="{{ .url | relLangURL }}">{{ $name }}</a></li>
+              {{ end }}
+            </ul>
+          </div>
+        </div>
+      {{ end }}
+      {{ with .Site.Data.ways_to_contact }}
+        <div class="col-lg-2 col-md-6">
+          <div class="site-footer-widget">
+            <h1 class="site-footer-widget-title">{{ i18n "menu_contact" }}</h1>
+            <ul class="site-footer-widget-links">
+              {{ range . }}
+                <li><a href="{{ .url }}">{{ .name }}</a></li>
+              {{ end }}
+            </ul>
+          </div>
+        </div>
+      {{ end }}
+      {{ with site.Data.reading }}
+        <div class="col-lg-2 col-md-6">
+          <div class="site-footer-widget">
+            <h1 class="site-footer-widget-title">{{ i18n "footer.reading" }}</h1>
+            <ul class="site-footer-widget-links">
+              {{- $sorted := slice -}}
+              {{- range (apply . "collections.Index" "." "weight" | uniq | sort) }}
+                {{- range (sort (where site.Data.reading "weight" .) "name") }}
+                  {{- $sorted = $sorted | append . }}
+                {{- end }}
+              {{- end }}
+              {{- range ($sorted | first 6) }}
+                <li><a href="{{ .url }}">{{ .name }}</a></li>
+              {{- end }}
+            </ul>
+          </div>
+        </div>
+      {{ end }}
+      {{ with site.Data.reading }}
+        <div class="col-lg-2 col-md-6">
+          <div class="site-footer-widget">
+            <h1 class="site-footer-widget-title">{{ i18n "footer.podcasts" }}</h1>
+            <ul class="site-footer-widget-links">
+              {{- $sorted := slice -}}
+              {{- range (apply . "collections.Index" "." "weight" | uniq | sort) }}
+                {{- range (sort (where site.Data.podcasts "weight" .) "name") }}
+                  {{- $sorted = $sorted | append . }}
+                {{- end }}
+              {{- end }}
+              {{- range ($sorted | first 6) }}
+                <li><a href="{{ .url }}">{{ .name }}</a></li>
+              {{- end }}
+            </ul>
+          </div>
+        </div>
+      {{ end }}
+      <div class="col-lg-2 col-md-6">
+        <div class="site-footer-widget">
+          <h1 class="site-footer-widget-title">{{ i18n "languages" }}</h1>
+          <p class="site-footer-widget-description">
+            {{ range site.Home.AllTranslations }}
+              <a href="{{ .RelPermalink }}">
+                {{ .Language.LanguageName }}
+                {{ .Language.Params.flag_emoji | safeHTML }}
+              </a>
+              <br />
+            {{ end }}
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-2 col-12">
+        <a href="#top" class="site-footer-widget-top" aria-label="{{ i18n "back_to_top" }}">
+          {{ partial "img.html" (dict "src" "images/base/to-top.svg" "alt" "back_to_top") }}
+          <p>{{- .Site.Params.footer.back_to_top.description | safeHTML -}}</p>
+        </a>
+      </div>
+      <div class="col-12">
+        <div class="site-footer-copyright">
+          <p>{{ i18n "copyright" (dateFormat "2006" now) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+  defer
+></script>
+{{- if (.Store.Get "popover") }}
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"
+    integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    defer
+  ></script>
+{{- end -}}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"
+  integrity="sha512-7rusk8kGPFynZWu26OKbTeI+QPoYchtxsmPeBqkHIEXJxeun4yJ4ISYe7C6sz9wdxeE1Gk3VxsIWgCZTc+vX3g=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+  defer
+></script>
+{{- $script := resources.Get "js/script.js" -}}
+{{- if hugo.IsProduction -}}
+  {{- $script = $script | minify | fingerprint "sha256" -}}
+{{- end -}}
+{{- with $script }}
+  <script
+    src="{{ .RelPermalink }}"
+    {{ with .Data.Integrity }}integrity="{{ . }}"{{ end }}
+    crossorigin="anonymous"
+    defer
+  ></script>
+{{- end -}}
+{{- if (.Store.Get "lightbox-count") }}
+  {{ "<!-- lightbox -->" | safeHTML -}}
+  <!-- stylesheet added to end of body because we don't know if we will need it until after the content page has rendered -->
+  {{ partial "stylesheet.html" (dict "href" "js/lightbox2/css/lightbox.min.css") }}
+  {{- "<!-- images -->" | safeHTML }}
+  {{ range resources.Match "js/lightbox2/images/*.*" -}}{{ printf `<!-- %q -->` .RelPermalink | safeHTML }}{{ end }}
+  {{- $lbscript := resources.Get "js/lightbox2/js/lightbox.min.js" -}}
+  {{- with $lbscript | fingerprint "sha256" }}
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
+  {{- end }}
+  {{ "<!-- end lightbox -->" | safeHTML }}
+{{- end }}
+{{- with .GitInfo }}
+  <nominify style="display: none;">{{ i18n "gitinfo" . }}</nominify>
+{{- end }}
+<div class="github-fork-ribbon-wrapper">
+  <a class="github-fork-ribbon right-bottom" href="https://github.com/giggio/giggionet" data-ribbon="Fork me on GitHub"
+    >Fork me on GitHub</a
+  >
+</div>
+{{- template "_internal/google_analytics.html" . }}

@@ -1,0 +1,21 @@
+{{- if and hugo.IsProduction (default site.Params.Comments .Params.Comments) .Params.comment_term -}}
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="giggio/giggionet"
+    data-repo-id="R_kgDON6GRvQ"
+    data-category="Comments"
+    data-category-id="DIC_kwDON6GRvc4Cm_1n"
+    data-mapping="specific"
+    data-term="{{- .Params.comment_term -}}"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="noborder_light"
+    data-lang="{{ .Language.Params.short_lang_code }}"
+    crossorigin="anonymous"
+    async
+  ></script>
+{{- else -}}
+  {{- "<!-- giscus comments disabled -->" | safeHTML -}}
+{{- end -}}

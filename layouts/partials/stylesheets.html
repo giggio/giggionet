@@ -1,0 +1,75 @@
+{{- $stylesheets := (slice
+  (dict "href" (css.Sass (resources.Get "scss/imports.scss")))
+  (dict "href" "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" "integrity" "sha512-rt/SrQ4UNIaGfDyEXZtNcyWvQeOq0QLygHluFQcSjaGB04IxWhal71tKuzP6K8eYXYB6vJV4pHkXcmFGGQ1/0w==")
+  (dict "href" "/css/fontawesome/css/all.css" "noconcat" true)
+  (dict "href" "https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700|Montserrat:300,400,500,600,700&display=swap" )
+  (dict "href" "https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" "integrity" "sha512-TktJbycEG5Van9KvrSHFUcYOKBroD7QCYkEe73HAutODCw9QTFcvF6fuxioYM1h6THNudK1GjVidazj6EslK4A==")
+  )
+-}}
+{{- with resources.Get "scss/site.scss" -}}
+  {{- $arrow_down_image := resources.Get "images/base/arrow-down.svg" -}}
+  {{- $angle_down_select_image := resources.Get "images/base/angle-down-select.svg" -}}
+  {{- $heroImageSrc := "images/backgrounds/forest-split.png" -}}
+  {{- $vars := dict
+    "heroImage_xl" (partial "img_towebp.html" (dict "src" $heroImageSrc)).RelPermalink
+    "heroImage_lg" (partial "img_towebp.html" (dict "src" $heroImageSrc "width" 1200)).RelPermalink
+    "heroImage_md" (partial "img_towebp.html" (dict "src" $heroImageSrc "width" 992)).RelPermalink
+    "heroImage_sm" (partial "img_towebp.html" (dict "src" $heroImageSrc "width" 768)).RelPermalink
+    "heroImage_mobile" (partial "img_towebp.html" (dict "src" "images/backgrounds/forest-split-mobile.png" "width" 564)).RelPermalink
+    "heroImage_xs" (partial "img_towebp.html" (dict "src" "images/backgrounds/forest-split-mobile-xs.png" "width" 400)).RelPermalink
+    "arrow_down_image" $arrow_down_image.RelPermalink
+    "angle_down_select_image" $angle_down_select_image.RelPermalink
+    "ways_to_contact_len" (len site.Data.ways_to_contact)
+  -}}
+  {{- $opts := dict
+    "enableSourceMap" (not hugo.IsProduction)
+    "outputStyle" (cond hugo.IsProduction "compressed" "expanded")
+    "targetPath" "css/site.css"
+    "transpiler" "dartsass"
+    "enableSourceMap" hugo.IsProduction
+    "sourceMapIncludeSources" true
+    "vars" $vars
+  -}}
+  {{- $stylesheets = $stylesheets | append (dict "href" (css.Sass $opts .)) -}}
+{{- end -}}
+{{- with $stylesheets }}
+  {{- if hugo.IsProduction -}}
+    {{- $individualizedSheets := slice -}}
+    {{- $concatSheets := slice -}}
+    {{- range . -}}
+      {{- $css := .href -}}
+      {{- if eq (printf "%T" .href) "string" -}}
+        {{- if (urls.Parse .href).IsAbs -}}
+          {{- with try (resources.GetRemote .href) -}}
+            {{- with .Err -}}
+              {{- errorf "%s" . -}}
+            {{- else with .Value -}}
+              {{- $css = . -}}
+            {{- else -}}
+              {{- warnidf "style" "Unable to get css for '%s'." .href -}}
+            {{- end -}}
+          {{- end -}}
+        {{- else -}}
+          {{- $css = resources.Get .href -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if .noconcat -}}
+        {{- $individualizedSheets = $individualizedSheets | append $css -}}
+      {{- else -}}
+        {{- $concatSheets = $concatSheets | append $css -}}
+      {{- end -}}
+    {{ end }}
+    {{- with ($concatSheets | resources.Concat "css/allstyles.css") -}}
+      {{- partial "stylesheet.html" (dict "href" .) -}}
+    {{- end -}}
+    {{- range $individualizedSheets -}}
+      {{- partial "stylesheet.html" (dict "href" .) -}}
+    {{- end -}}
+  {{- else -}}
+    {{- range . -}}
+      {{- partial "stylesheet.html" . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{ "<!-- webfonts -->" | safeHTML }}
+{{ range resources.Match "css/fontawesome/webfonts/*.*" -}}{{ printf `<!-- %q -->` .RelPermalink | safeHTML }}{{- end }}

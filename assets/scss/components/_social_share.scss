@@ -1,0 +1,49 @@
+@use "../variables";
+
+.sharebuttons {
+  display: flex;
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      list-style: none;
+      display: inline;
+      a {
+        margin: 0 0.5rem;
+        text-decoration: none;
+        i {
+          color: #d5d5d5;
+          &:hover {
+            transition: 500ms;
+            color: variables.$primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sharebuttons-wrapper {
+  padding: 0 0 30px 0;
+}
+
+.modal-body {
+  .sharebuttons {
+    justify-content: center;
+    &-title {
+      padding-bottom: 10px;
+      * {
+        font-size: 1.5rem;
+      }
+    }
+    ul {
+      li {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  .sharebuttons-wrapper {
+    padding: 30px 10px;
+    text-align: center;
+  }
+}

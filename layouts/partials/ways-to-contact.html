@@ -1,0 +1,25 @@
+{{ with .Site.Data.ways_to_contact }}
+  <section class="site-ways-to-contact" id="ways-to-contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          {{- if not $.Params.hide_ways_to_contact_title -}}
+            <div class="section-title">
+              <h2>{{ i18n "ways_to_contact_title" }}</h2>
+            </div>
+          {{- end -}}
+          <div class="site-ways-to-contact-wrapper">
+            {{- $len := len . -}}
+            {{- range . }}
+              <div class="site-ways-to-contact-item">
+                <a href="{{ .url }}" target="_blank" aria-label="{{ .name }}">
+                  <i class="{{ .icon }}"></i>
+                </a>
+              </div>
+            {{- end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

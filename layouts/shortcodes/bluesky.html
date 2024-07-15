@@ -1,0 +1,11 @@
+{{- $link := printf "https://bsky.app/profile/%s/post/%s" (.Get 0) (.Get 1) -}}
+{{- $request := printf "https://embed.bsky.app/oembed?%s" (querify "url" $link) -}}
+{{- with try (resources.GetRemote $request) -}}
+  {{- with .Err -}}
+    {{- errorf "%s" . -}}
+  {{- else with .Value -}}
+    {{- (. | transform.Unmarshal).html | safeHTML -}}
+  {{- else -}}
+    {{- warnidf "shortcode-bluesky-getremote" "The %q shortcode was unable to retrieve the remote data. See %s" $.Name $.Position -}}
+  {{- end -}}
+{{- end -}}

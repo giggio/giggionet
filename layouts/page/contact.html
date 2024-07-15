@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <section class="site-contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <h1 class="site-contact-title">
+            {{ .Params.heading | safeHTML }}
+          </h1>
+        </div>
+        <div class="col-lg-7 ml-auto site-contact-description">
+          <p class="site-contact-description">
+            {{ .Params.description | safeHTML }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{ partial "ways-to-contact.html" . }}
+{{ end }}

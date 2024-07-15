@@ -1,0 +1,24 @@
+{{- $toRender := cond (eq .render "main") .main .second -}}
+{{/* todo: we'd like to do this, but it fails because of eager evaluation */}}
+{{/* change when https://github.com/gohugoio/hugo/issues/5792 is fixed */}}
+{{/* {{- $page = cond $toRender.Params.use_top_level_rss (index (where $toRender.Site.Sections "LinkTitle" "Blog") 0) $toRender -}}
+*/}}
+{{- $page := $toRender -}}
+{{- with $toRender.Site -}}
+  {{- with (where .Sections "LinkTitle" "Blog") -}}
+    {{- if $toRender.Params.use_top_level_rss -}}
+      {{- $page = index . 0 -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{/* {{- $page = cond $toRender.Params.use_top_level_rss (index (where $toRender.Site.Sections "LinkTitle" "Blog") 0) $toRender -}}
+*/}}
+{{- $rss := ($page.OutputFormats.Get "rss") -}}
+{{- if or (not .second) (eq $toRender .second) -}}
+  {{- $toRender.Title -}}
+{{- else -}}
+  <a href="{{ $toRender.RelPermalink }}">{{- $toRender.Title -}}</a>
+{{- end -}}
+{{- with $rss -}}
+  {{- partial "rss_icon.html" . }}
+{{- end -}}

@@ -1,0 +1,62 @@
+{{ define "main" }}
+  <section class="site-blog-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h1>
+            {{- .Title }}
+            {{ partial "rss_icon.html" (.OutputFormats.Get "rss") }}
+          </h1>
+          <p>
+            {{ .Params.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{- $pages := .RegularPages.ByPublishDate.Reverse -}}
+  {{- if $pages }}
+    {{- $pager := 0 }}
+    {{- if .Params.paginate }}
+      {{- $pager = .Paginate (after 1 $pages) 10 }}
+    {{- end }}
+    {{- if or (not .Params.paginate) (eq 1 .Paginator.PageNumber) }}
+      {{- partial "blog_list_featuredpost.html" (dict "page" . "featuredPost" (index $pages 0) "firstH" "h2") }}
+    {{- end }}
+
+    {{- partial "blog_list.html" ((dict
+      "firstH" "h2"
+      "page" .)
+      | merge (cond .Params.paginate
+      (dict "pager" $pager)
+      (dict "pages" $pages)))
+    -}}
+
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="archive-section text-center my-5">
+              <a href="{{ "blog/archives" | relLangURL }}" class="btn btn-primary btn-lg">{{ i18n "archives" }}</a>
+              <a href="{{ "blog/categories" | relLangURL }}" class="btn btn-secondary btn-lg">
+                {{ i18n "categories" }}
+              </a>
+              <a href="{{ "blog/tags" | relLangURL }}" class="btn btn-secondary btn-lg">{{ i18n "tags" }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{- else }}
+    <section class="site-blog">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center mb-5">
+            <h2>{{ i18n "blog_no_posts_yet" }}</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{- end }}
+{{ end }}

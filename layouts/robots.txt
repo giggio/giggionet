@@ -1,0 +1,15 @@
+{{- $data := dict -}}
+{{- with try (resources.GetRemote "https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/refs/heads/main/robots.json") -}}
+  {{- with .Err -}}
+    {{- errorf "%s" . -}}
+  {{- else with .Value -}}
+    {{- $data = . | transform.Unmarshal -}}
+  {{- else -}}
+    {{- warnidf "robotstxt-getremote" "The %q robotstxt was unable to retrieve the remote data. See %s" $.Name $.Position -}}
+  {{- end -}}
+{{- end -}}
+{{- range $key,$_ := $data -}}
+User-agent: {{ $key }}
+{{ end -}}
+Disallow: /blog/
+Sitemap: {{ "sitemap.xml" | absURL }}

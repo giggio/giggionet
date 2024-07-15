@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script src="/pagefind/pagefind-ui.js"></script>
+
+  <section class="site-search-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>{{ .Title }}</h1>
+        </div>
+      </div>
+      <div class="row search-bar">
+        <div class="col-12">
+          <div id="search"></div>
+          <p class="pagefind-link">Powered by <a target="_blank" href="https://pagefind.app/">PageFind</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+      new PagefindUI({ element: "#search", showSubResults: true });
+    });
+  </script>
+{{ end }}

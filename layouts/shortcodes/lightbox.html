@@ -1,0 +1,95 @@
+{{- $index := add 1 (default 0 (.Page.Store.Get "lightbox-count")) -}}
+{{- .Page.Store.Set "lightbox-count" $index -}}
+
+{{- $width := .Get "width" -}}
+{{- $height := .Get "height" -}}
+{{- $thumb_width := .Get "thumb_width" -}}
+{{- $thumb_height := .Get "thumb_height" -}}
+{{- $src := urls.Parse (.Get "src") -}}
+{{- $maxWidth := .Site.Params.max_image_width -}}
+
+{{- $downloadedImage := 0 -}}
+{{- if and (or $height $width $thumb_height $thumb_width) $src.IsAbs (not (.Get "nodownload")) -}}
+  {{- with try (resources.GetRemote $src.String) -}}
+    {{- with .Err -}}
+      {{- errorf "%s" . -}}
+    {{- else with .Value -}}
+      {{- $downloadedImage = . -}}
+      {{- $src = urls.Parse .RelPermalink -}}
+    {{- else -}}
+      {{ errorf "Unable to get remote resource %q" $src.String }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $remoteImage := $src.IsAbs -}}
+{{- $thumb_img := 0 }}
+{{- $img := 0 }}
+{{- if not $remoteImage -}}
+  {{- with or $downloadedImage (.Page.Resources.Get $src.Path) (resources.Get $src.Path) -}}
+    {{- if or $width $height -}}
+      {{- $img = .Resize (printf "%sx%s webp" (default "" $width) (default "" $height)) }}
+    {{- else -}}
+      {{- $img = .Resize (printf "%dx%d webp" .Width .Height) }}
+    {{- end -}}
+    {{- if (or $thumb_height $thumb_width) -}}
+      {{- $thumb_img = .Resize (printf "%sx%s webp" (default "" $thumb_width) (default "" $thumb_height)) }}
+    {{- else -}}
+      {{- $thumb_img = $img }}
+    {{- end -}}
+    {{- if gt $thumb_img.Width $maxWidth -}}
+      {{/* make image smaller as it will be resized by the browser anyway */}}
+      {{- $thumb_img = .Resize (printf "%dx webp" $maxWidth) }}
+    {{- end -}}
+  {{- else -}}
+    {{- warnidf "shortcode-lightbox-missing-image" "The %q shortcode was unable to get the image. See %s" $.Name $.Position -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $key := "" -}}
+{{- with .Get "key" -}}
+  {{- $key = . -}}
+{{- else }}
+  {{- $path := index (last 1 (split .Page.Path "/")) 0 }}
+  {{- $key = printf (print $path "-%d") $index }}
+{{- end -}}
+{{- $title := "" -}}
+{{- with .Get "title" -}}
+  {{- $title = . -}}
+{{- end -}}
+{{- $alt := "" -}}
+{{- with .Get "alt" -}}
+  {{- $alt = . -}}
+{{- end -}}
+
+{{- if $remoteImage -}}
+  <a
+    href="{{ $src.String }}"
+    data-lightbox="{{ $key }}"
+    {{ with $title }}data-title="{{ . }}"{{ end }}
+    {{ with $alt }}data-alt="{{ . }}"{{- end -}}
+  >
+    <img
+      src="{{ $src.String }}"
+      {{ with $alt }}alt="{{ . }}"{{- end -}}
+      {{ if $thumb_height -}}height="{{ $thumb_height }}"{{- end -}}
+      {{ if $thumb_width -}}width="{{ $thumb_width }}"{{- end -}}
+    />
+  </a>
+{{- else -}}
+  <a
+    href="{{ $img.RelPermalink }}"
+    data-lightbox="{{ $key }}"
+    {{ with $title }}data-title="{{ . }}"{{ end }}
+    {{ with $alt }}data-alt="{{ . }}"{{- end -}}
+  >
+    {{ with $thumb_img -}}
+      <img
+        src="{{ .RelPermalink }}"
+        height="{{ .Height }}"
+        width="{{ .Width }}"
+        {{ with $alt }}alt="{{ . }}"{{- end -}}
+      />
+    {{- end -}}
+  </a>
+{{- end -}}

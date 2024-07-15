@@ -1,0 +1,11 @@
+{{- if or .Params.author site.Params.author.name }}
+  {{- $author := default site.Params.author.name .Params.author }}
+  {{- $author_type := (printf "%T" $author) }}
+  {{- if (or (eq $author_type "[]string") (eq $author_type "[]interface {}")) }}
+    {{- (delimit $author ", " ) }}
+  {{- else }}
+    {{- $author }}
+  {{- end }}
+{{- else }}
+  {{- "Autor desconhecido" }}
+{{- end -}}

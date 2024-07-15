@@ -1,0 +1,37 @@
+<meta charset="utf-8" />
+<title>
+  {{- site.Title }}
+  {{- $title := .Title }}
+  {{- if eq .Kind "term" }}
+    {{- $taxonomyPage := .Parent }}
+    {{- $title = printf "%s: %s" $taxonomyPage.Title .Title }}
+  {{- end }}
+  {{- cond $title (printf " - %s" $title) "" -}}
+</title>
+{{ "<!-- preconnect: fonts from fonts.googleapis.com -->" | safeHTML }}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+{{ "<!-- preconnect: cdn -->" | safeHTML }}
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+{{ "<!-- preconnect: google analytics -->" | safeHTML }}
+<link rel="preconnect" href="https://www.googletagmanager.com" />
+{{ "<!-- mobile responsive meta -->" | safeHTML }}
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+{{ "<!-- stylesheets -->" | safeHTML }}
+{{- partial "stylesheets.html" . }}
+{{ "<!-- custom meta -->" | safeHTML }}
+<meta name="author" content="{{ .Site.Params.author.name }}" />
+{{- with or .Description .Summary site.Params.description | plainify | htmlUnescape }}
+  <meta name="description" content="{{ trim . "\n\r\t " }}" />
+{{- end }}
+{{ "<!-- schema -->" | safeHTML -}}
+{{ template "_internal/schema.html" . }}
+{{ "<!-- opengraph -->" | safeHTML }}
+{{ template "_internal/opengraph.html" . -}}
+{{ "<!-- end opengraph -->" | safeHTML }}
+{{- with or (.OutputFormats.Get "rss") ((index (where .Site.Sections "LinkTitle" "Blog") 0).OutputFormats.Get "rss") }}
+  {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+{{- end }}
+{{ with (partial "img_towebp.html" (dict "src" .Site.Params.favicon_icon)) -}}
+  {{ printf `<link rel="icon" href=%q type=%q>` .Permalink .MediaType.Type | safeHTML }}
+{{- end }}

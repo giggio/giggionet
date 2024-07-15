@@ -1,0 +1,32 @@
+{{- $scratch := newScratch }}
+
+{{- if (.Param "categories") -}}
+  {{- $type := (printf "%T" .Params.categories) }}
+  {{- if (or (eq $type "[]string") (eq $type "[]interface {}")) }}
+    {{- $scratch.Add "meta" (slice (delimit .Params.categories ", " )) }}
+  {{- else }}
+    {{- $scratch.Add "meta" (slice .Params.categories) }}
+  {{- end }}
+{{- end }}
+
+{{- if not .Date.IsZero -}}
+  {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format ":date_long"))) }}
+{{- end }}
+
+{{- if (.Param "ShowReadingTime") -}}
+  {{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime)) }}
+{{- end }}
+
+{{- if (.Param "ShowWordCount") -}}
+  {{- $scratch.Add "meta" (slice (i18n "words" .WordCount)) }}
+{{- end }}
+
+{{- if not (.Param "hideAuthor") -}}
+  {{- with (partial "author.html" .) }}
+    {{- $scratch.Add "meta" (slice .) }}
+  {{- end }}
+{{- end }}
+
+{{- with ($scratch.Get "meta") }}
+  {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
+{{- end -}}

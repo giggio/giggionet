@@ -1,0 +1,31 @@
+{{ range . }}
+  {{ if ne .Key "0001" }}
+    <div class="archive-year">
+      {{ $year := replace .Key "0001" "" }}
+      <p class="archive-year-header" id="{{ $year }}">
+        <a class="archive-header-link archive-header-year-link" href="#{{ $year }}">
+          {{ $year }}
+        </a>
+        <sup class="archive-count">&nbsp;{{ len .Pages }}</sup>
+      </p>
+      {{/* Group pages within the year by month */}}
+      {{ range .Pages.GroupByDate "January" }}
+        <div class="archive-month">
+          <p class="archive-month-header" id="{{ $year }}-{{ .Key }}">
+            <a class="archive-header-link archive-header-month-link" href="#{{ $year }}-{{ .Key }}">
+              {{ .Key }}
+            </a>
+            <sup class="archive-count">&nbsp;{{ len .Pages }}</sup>
+          </p>
+          <div class="archive-posts">
+            {{ range .Pages }}
+              {{ if eq .Kind "page" }}
+                {{ partial "post_details.html" . }}
+              {{ end }}
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}

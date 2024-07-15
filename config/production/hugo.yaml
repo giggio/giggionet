@@ -1,0 +1,15 @@
+baseURL: https://preview.giggio.net/
+enableGitInfo: true
+build:
+  buildStats:
+    enable: true
+minify:
+  minifyOutput: true
+  tdewolff:
+    html:
+      templateDelims:
+        - "<nominify"
+        - "nominify>"
+privacy:
+  googleAnalytics:
+    disable: false

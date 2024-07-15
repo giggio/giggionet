@@ -1,0 +1,36 @@
+{{- $h := .firstH }}
+{{- with .featuredPost }}
+  <section class="site-blog">
+    <div class="container">
+      <div class="row site-blog-posthighlight-wrapper">
+        <div class="col-lg-12 site-blog-posthighlight-category">
+          {{- range (.GetTerms "categories") | first 1 }}
+            <span>{{ .LinkTitle }}</span>
+          {{- end }}
+        </div>
+        <div class="col-lg-6">
+          <div aria-disabled="true">
+            <a href="{{ .RelPermalink }}" tabindex="-1" title="{{ .Title }}">
+              {{- partial "blog_list_image.html" (dict "page" . "class" "site-blog-posthighlight-featureimage") }}
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 site-blog-posthighlight-content">
+          <div>
+            {{ printf `<%s class="site-blog-post-content-title">` $h | safeHTML }}<a href="{{ .RelPermalink }}"
+              >{{ .Title }}</a
+            >{{ printf "</%s>" $h | safeHTML }}
+            <span class="site-blog-post-content-date">{{ .PublishDate | time.Format ":date_long" }}</span>
+            {{- if (.Param "ShowReadingTime") -}}
+              &nbsp;|
+              <span class="site-blog-post-content-readingtime">
+                {{ (i18n "read_time_long" .ReadingTime) }}
+              </span>
+            {{- end -}}
+            <p class="site-blog-post-content-summary">{{ .Summary | truncate 150 | plainify }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end }}

@@ -1,0 +1,95 @@
+.archive-year {
+  margin: 3rem 0;
+
+  &-header {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.archive-header-link {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+}
+
+.archive-header-year-link {
+  font-weight: 700;
+}
+
+.archive-header-month-link {
+  font-weight: 600;
+}
+
+.archive-month {
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+
+  &-header {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #666;
+  }
+}
+
+.archive-posts {
+  margin-left: 1.5rem;
+}
+
+.archive-entry {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+.archive-entry-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+
+  sup {
+    font-size: 0.6rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.archive-count {
+  font-size: 1rem;
+  color: #999;
+  font-weight: normal;
+}
+
+.archive-meta {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.entry-hint-parent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.entry-hint {
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+}

@@ -1,0 +1,35 @@
+{{- $mainPage := . }}
+{{- $showTermParent := true }}
+{{- if reflect.IsMap . -}}
+  {{- if .page -}}
+    {{- $mainPage = .page -}}
+  {{- end -}}
+  {{- $showTermParent = not .hideTermParent -}}
+{{- end -}}
+{{- $secondaryPage := 0 }}
+{{- if and (eq $mainPage.Kind "term") $showTermParent -}}
+  {{- $secondaryPage = $mainPage }}
+  {{- $mainPage = $mainPage.Parent }}
+{{- end }}
+<section class="site-blog-header">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 text-center">
+        <h1 class="mainTitle">
+          {{- partial "post_group_header_title.html" (dict "main" $mainPage "second" $secondaryPage "render" "main") -}}
+        </h1>
+        {{- if $secondaryPage -}}
+          <span class="breadcrumb-follower">&nbsp;&gt;&nbsp;</span>
+          <h2 class="secondaryTitle">
+            {{- partial "post_group_header_title.html" (dict "main" $mainPage "second" $secondaryPage "render" "secondary") -}}
+          </h2>
+        {{- end -}}
+        {{- if .Params.description -}}
+          <p>
+            {{- .Params.description -}}
+          </p>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</section>

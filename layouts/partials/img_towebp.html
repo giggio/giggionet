@@ -1,0 +1,22 @@
+{{- $image := .image -}}
+{{- if not $image }}
+  {{- $image = or (.Page.Resources.Get .src) (resources.Get .src) -}}
+{{- end }}
+{{ if ne $image.MediaType.SubType "svg" }}
+  {{- $width := .width -}}
+  {{- $height := .height -}}
+  {{- if and (not $width) (not $height) -}}
+    {{- $width = $image.Width -}}
+    {{- $height = $image.Height -}}
+  {{- end -}}
+  {{- $size := "" -}}
+  {{- if and (not $height) $width -}}
+    {{- $size = printf "%dx webp" $width -}}
+  {{- else if and (not $width) $height -}}
+    {{- $size = printf "x%d webp" $height -}}
+  {{- else -}}
+    {{- $size = printf "%dx%d webp" $width $height -}}
+  {{- end -}}
+  {{- $image = $image.Resize $size -}}
+{{- end -}}
+{{- return $image -}}

@@ -1,0 +1,18 @@
+@use "../variables";
+
+.terms {
+  .term {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+
+    &::marker {
+      color: variables.$text-color-dark;
+    }
+
+    a {
+      text-decoration: none;
+      color: variables.$text-color-dark;
+    }
+  }
+}

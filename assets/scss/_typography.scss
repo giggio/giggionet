@@ -1,0 +1,47 @@
+@use "variables";
+
+body {
+  font-family: variables.$primary-font;
+  font-size: 16px;
+  color: variables.$text-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: variables.$secondary-font;
+  font-weight: 600;
+  color: variables.$text-color-dark;
+}
+
+p {
+  font-size: 16px;
+  color: variables.$text-color;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 25px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 15px;
+}

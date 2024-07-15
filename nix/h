@@ -1,0 +1,505 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function help() {
+  local ran_subcommand=false
+  if [ "$SUBCOMMAND" != "" ]; then ran_subcommand=true; fi
+  case "$SUBCOMMAND" in
+    showmissing)
+      cat <<EOF
+Shows missing content translations
+
+Usage:
+  `readlink -f "$0"` translations showmissing
+EOF
+      ;;
+    createmissing)
+      cat <<EOF
+Creates missing content translations
+
+Usage:
+  `readlink -f "$0"` translations createmissing
+EOF
+      ;;
+    azure)
+      cat <<EOF
+Deploys to Azure Static Web Apps
+
+Usage:
+  `readlink -f "$0"` deploy azure
+EOF
+      ;;
+    github)
+      cat <<EOF
+Deploys to Github Pages
+
+Usage:
+  `readlink -f "$0"` deploy github
+EOF
+      ;;
+    dev)
+      cat <<EOF
+Runs hugo dev server in development mode
+
+Usage:
+  `readlink -f "$0"` server (dev) [flags]
+EOF
+      ;;
+    prod)
+      cat <<EOF
+Runs hugo dev server in production mode
+
+Usage:
+  `readlink -f "$0"` server prod [flags]
+EOF
+      ;;
+    *)
+      ;;
+  esac
+  if $ran_subcommand; then exit 0; fi
+  case "$COMMAND" in
+    complete|completions|completion)
+      cat <<EOF
+Generates bash completion script
+
+Usage:
+  `readlink -f "$0"` complete
+EOF
+      ;;
+    build)
+      cat <<EOF
+Create a new post using hugo
+
+Usage:
+  `readlink -f "$0"` build
+EOF
+      ;;
+    makebundle)
+      cat <<EOF
+Create a new post using hugo
+
+Usage:
+  `readlink -f "$0"` makebundle <post_file>
+EOF
+      ;;
+    newpost)
+      cat <<EOF
+Create a new blog post using hugo
+
+Usage:
+  `readlink -f "$0"` newpost <post_name>
+EOF
+      ;;
+    newparticipation)
+      cat <<EOF
+Create a new participation using hugo
+
+Usage:
+  `readlink -f "$0"` newparticipation <participation_name> [<language>]
+
+Arguments:
+  participation_name        The name of the participation, use quotes if it has spaces
+  language                  The language of the participation (optional, eg: en)
+EOF
+      ;;
+    server)
+      cat <<EOF
+Runs hugo dev server [command] [flags]
+
+Usage:
+  `readlink -f "$0"` server [(dev)|prod]
+
+Commands:
+  dev                       Runs with environtment development (default)
+  prod                      Runs with environtment production
+
+Flags: hugo server flags
+EOF
+      ;;
+    translations)
+      cat <<EOF
+Translation related commands
+
+Usage:
+  `readlink -f "$0"` translations command
+
+Commands:
+  showmissing               Shows missing content translations
+  createmissing             Creates the missing content translations
+EOF
+      ;;
+    deploy)
+      cat <<EOF
+Translation related commands
+
+Usage:
+  `readlink -f "$0"` deploy command
+
+Commands:
+  azure                     Deploys to Azure Static Web Apps
+  github                    Deploys to Github Pages
+EOF
+      ;;
+    *)
+      cat <<EOF
+Runs Hugo commands
+
+Usage:
+  `readlink -f "$0"` command [flags] [command args]
+
+Commands:
+  build                     Builds the site
+  complete                  Generates bash completion script
+  deploy                    Deploy commands
+  makebundle                Create a bundle from a page
+  newpost                   Create a new post
+  newparticipation          Create a new participation
+  server                    Runs Hugo dev server
+  translations              Translation related commands
+Flags:
+      --verbose             Show verbose output
+  -h, --help                help
+EOF
+      ;;
+  esac
+  if [ $# -eq 1 ]; then exit $1; fi
+  exit 0
+}
+
+function die() {
+  echo "$1" >&2
+  exit 1
+}
+
+function build() {
+  if [ -d public ]; then
+    rm -rf public
+  fi
+  hugo --environment production
+  pagefind --site public
+  ./critical.mjs
+  exit 0
+}
+
+function makebundle() {
+  if [ $# -eq 0 ]; then
+    help 1
+  fi
+  local basename="$1"
+  local content="blog/$basename.md"
+  local file="content/$content"
+  if ! [ -f "$file" ]; then
+    echo "File $file does not exist."
+    exit 1
+  fi
+  local new_dir="content/blog/$basename"
+  if [ -d "$new_dir" ]; then
+    echo "Directory $new_dir already exists."
+    \ls -lah "$new_dir"
+    exit 1
+  else
+    mkdir -p "$new_dir/images"
+  fi
+  local new_file_name="$new_dir/index.md"
+  if git ls-files --error-unmatch $file --quiet &> /dev/null; then
+    git mv $file $new_file_name
+  else
+    mv $file $new_file_name
+  fi
+  exit 0
+}
+
+function newpost() {
+  if [ $# -eq 0 ]; then
+    help 1
+  fi
+  newcontent "$1" blog
+}
+
+function newparticipation() {
+  # $1 = basename
+  # $2 = language (optional - en, do not use pt or pt-BR)
+  if [ $# -eq 0 ]; then
+    help 1
+  fi
+  if [ -v 2 ]; then
+    newcontent "$1" participations "$2"
+  else
+    newcontent "$1" participations
+  fi
+}
+
+function newcontent() {
+  # $1 = basename
+  # $2 = archetype / folder (blog, participations)
+  # $3 = language (optional)
+  if [ $# -lt 2 ]; then
+    help 1
+  fi
+  local language=""
+  if [ -v 3 ]; then
+    language=".$3"
+  fi
+  local basename="$(echo "$1" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+  local content="$2/$basename$language.md"
+  local file="content/$content"
+  if [ -f "$file" ]; then
+    echo "File $file already exists."
+    \ls -lah "$file"
+    exit 1
+  fi
+  local new_file_name=""
+  if [[ $basename == *":"* ]]; then
+    new_file_name="$(echo "$file" | tr -d ':')"
+    if [ -f "$new_file_name" ]; then
+      echo "File $new_file_name already exists."
+      \ls -lah "$new_file_name"
+      exit 1
+    fi
+  fi
+  hugo new content "$content"
+  if [[ "$new_file_name" != '' ]]; then
+    mv "$file" "$new_file_name"
+    file="$new_file_name"
+  fi
+  code "$file"
+  exit 0
+}
+
+function server() {
+  if [[ $# -eq 0 ]]; then
+    SUBCOMMAND=dev
+  else
+    if [[ "$1" != -* ]]; then
+      SUBCOMMAND="$1"
+      shift
+    fi
+  fi
+  source $GET_GLOBAL_ARGS
+  case "$SUBCOMMAND" in
+    dev|development)
+      hugo server --buildDrafts  --printPathWarnings  --renderToMemory --baseURL http://local.giggio.net/ "$@"
+      ;;
+    prod|production)
+      hugo server --buildDrafts  --printPathWarnings  --renderToMemory --baseURL http://local.giggio.net/ --gc --environment production --disableLiveReload --disableFastRender "$@"
+      ;;
+    *)
+      help 1
+      ;;
+  esac
+  exit 0
+}
+
+function translations() {
+  if [[ $# -eq 0 ]]; then help 1; fi
+  SUBCOMMAND="$1"
+  shift
+  source "$GET_GLOBAL_ARGS"
+  function showmissing() {
+    find content -name "*.md" ! -name '*.en.md' | grep -v -F -f <(find content -name "*.en.md" | sed 's/.en.md$/.md/')
+    exit 0
+  }
+  function createmissing() {
+    find content -name "*.md" ! -name '*.en.md' | grep -v -F -f <(find content -name "*.en.md" | sed 's/.en.md$/.md/') | xargs -d $'\n' sh -c 'for arg do cp --verbose "$(dirname $arg)/$(basename $arg)" "${arg%.md}.en.md"; done' _
+    exit 0
+  }
+  case "$SUBCOMMAND" in
+    showmissing)
+      showmissing "$@"
+      ;;
+    createmissing)
+      createmissing "$@"
+      ;;
+    *)
+      ;;
+  esac
+  help 1
+}
+
+function deploy() {
+  if [[ $# -eq 0 ]]; then help 1; fi
+  SUBCOMMAND="$1"
+  shift
+  source "$GET_GLOBAL_ARGS"
+  function azure() {
+    swa deploy --env production
+    exit 0
+  }
+  function github() {
+    echo "Not implemented yet."
+    exit 0
+  }
+  case "$SUBCOMMAND" in
+    azure)
+      azure "$@"
+      ;;
+    github)
+      github "$@"
+      ;;
+    *)
+      ;;
+  esac
+  help 1
+}
+
+function complete() {
+  cat <<'EOF'
+#/usr/bin/env bash
+
+_forward_to_hugo() {
+  local -
+  set -o pipefail
+  local command_completion_function
+  if ! command_completion_function="$(complete -p hugo 2>/dev/null | sed 's/.*-F \([^ ]*\) .*/\1/')"; then
+    _completion_loader hugo
+    command_completion_function="$(complete -p hugo 2>/dev/null|sed 's/.*-F \([^ ]*\) .*/\1/')"
+  fi
+  if [ -v command_completion_function ]; then
+    COMP_LINE="hugo server ${COMP_WORDS[@]:COMP_CWORD}"
+    COMP_WORDS=("hugo" "server" ${COMP_WORDS[@]:COMP_CWORD} )
+    COMP_CWORD=2
+    $command_completion_function
+  fi
+}
+_hugo_local_completions() {
+  # echo len "${#COMP_WORDS[0]}"
+  # echo 0 "${COMP_WORDS[0]}"
+  # echo 1 "${COMP_WORDS[1]}"
+  # echo 2 "${COMP_WORDS[2]}"
+  # echo 3 "${COMP_WORDS[3]}"
+  # echo 0 $0
+  # echo 1 $1
+  # echo 2 $2
+  # echo 3 $3
+  # echo 4 $4
+  # echo COMP_CWORD $COMP_CWORD
+  # echo COMP_LINE $COMP_LINE
+  local common_options="-h --help --verbose"
+  case "${#COMP_WORDS[@]}" in
+    2)
+      COMPREPLY=($(compgen -W "build makebundle newpost newparticipation server translations deploy complete $common_options" -- "${COMP_WORDS[1]}"))
+      ;;
+    3)
+      case "${COMP_WORDS[1]}" in
+        translations)
+          COMPREPLY=($(compgen -W "showmissing createmissing $common_options" -- "${COMP_WORDS[2]}"))
+          ;;
+        deploy)
+          COMPREPLY=($(compgen -W "azure github $common_options" -- "${COMP_WORDS[2]}"))
+          ;;
+        server)
+          # forward to hugo server completions:
+          local local_options
+          local_options=($(compgen -W "dev prod $common_options" -- "${COMP_WORDS[2]}"))
+          _forward_to_hugo
+          COMPREPLY+=( "${local_options[@]}" )
+          ;;
+        build|makebundle|newpost|newparticipation|complete)
+          COMPREPLY=($(compgen -W "$common_options" -- "${COMP_WORDS[2]}"))
+          ;;
+        *)
+          return
+          ;;
+      esac
+      ;;
+    4)
+      case "${COMP_WORDS[1]}" in
+        translations|deploy)
+          if [[ "${COMP_WORDS[2]}" != -* ]]; then
+            COMPREPLY=($(compgen -W "$common_options" -- "${COMP_WORDS[3]}"))
+          fi
+          ;;
+        server)
+          _forward_to_hugo
+          ;;
+      esac
+      ;;
+    *)
+      return
+      ;;
+  esac
+}
+
+complete -F _hugo_local_completions ./h
+complete -F _hugo_local_completions h
+EOF
+  exit 0
+}
+
+function get_global_args() {
+  SHOW_HELP=false
+  VERBOSE=false
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --help|-h)
+      SHOW_HELP=true
+      shift
+      ;;
+      --verbose)
+      VERBOSE=true
+      shift
+      ;;
+      *)
+      break
+      ;;
+    esac
+  done
+  if $SHOW_HELP; then help; fi
+}
+
+function main() {
+  if [ "$EUID" == "0" ]; then
+    die "Please do not run this script as root"
+  fi
+
+  GET_GLOBAL_ARGS=`mktemp`
+  declare -f get_global_args | tail -n +3 | head -n -1 > $GET_GLOBAL_ARGS
+
+  local all_args
+  all_args=$*
+  COMMAND=""
+  SUBCOMMAND=""
+  if [[ $# -eq 0 ]]; then help; fi
+  COMMAND="$1"
+  shift
+
+  source $GET_GLOBAL_ARGS
+
+  if $VERBOSE; then
+    echo "Running `basename "$0"` $all_args"
+  fi
+
+  case "$COMMAND" in
+    complete)
+      complete "$@"
+      ;;
+    build)
+      build "$@"
+      ;;
+    makebundle)
+      makebundle "$@"
+      ;;
+    newpost)
+      newpost "$@"
+      ;;
+    newparticipation)
+      newparticipation "$@"
+      ;;
+    server)
+      server "$@"
+      ;;
+    translations)
+      translations "$@"
+      ;;
+    deploy)
+      deploy "$@"
+      ;;
+    *)
+      ;;
+  esac
+
+  help
+}
+
+main "$@"

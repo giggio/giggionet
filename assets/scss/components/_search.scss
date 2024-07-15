@@ -1,0 +1,33 @@
+@use "../mixins";
+
+.site-search {
+  &-header {
+    padding: 150px 0 0;
+
+    @include mixins.mobile {
+      padding: 100px 0 0;
+    }
+
+    h1 {
+      font-size: 60px;
+      display: contents;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 10px;
+      margin-bottom: 20px;
+
+      @include mixins.mobile {
+        font-size: 35px;
+      }
+    }
+
+    .search-bar {
+      margin-bottom: 60px;
+
+      .pagefind-link {
+        text-align: center;
+        font-size: 0.7em;
+      }
+    }
+  }
+}

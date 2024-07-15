@@ -1,0 +1,37 @@
+{{ define "main" }}
+  <section class="site-participations-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h1>
+            {{- .Title }}
+            {{ partial "rss_icon.html" (.OutputFormats.Get "rss") }}
+          </h1>
+          <p>
+            {{ .Description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  {{- $participationKinds := where .Site.Taxonomies.participation_kinds ".Page.Section" "participations" -}}
+  {{- if $participationKinds -}}
+    <section class="site-participations-kinds">
+      <div class="container">
+        <div class="row">
+          <div class="col site-participations-kinds-filter-by">{{ i18n "filter_by" }}</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="btn-group" role="group">
+              {{ range $participationKinds }}
+                <a class="btn btn-sm button-tertiary" href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  {{- partial "participation_kind_list.html" . }}
+{{ end }}

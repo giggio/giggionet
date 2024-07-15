@@ -1,0 +1,11 @@
+@use "variables";
+
+.github-fork-ribbon:before {
+  background-color: variables.$tertiary_color !important;
+}
+.github-fork-ribbon {
+  top: unset;
+}
+.github-fork-ribbon-wrapper {
+  position: relative;
+}

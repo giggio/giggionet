@@ -1,0 +1,55 @@
+@mixin mobile-xs {
+  // no bootstrap 4 equivalent
+  @media (max-width: 400px) {
+    @content;
+  }
+}
+@mixin mobile {
+  // bootstrap extra small (no designation)
+  @media (max-width: 575px) {
+    @content;
+  }
+}
+@mixin tablet {
+  // bootstrap small (sm)
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+@mixin desktop {
+  // bootstrap medium (md)
+  @media (max-width: 991px) {
+    @content;
+  }
+}
+@mixin desktop-lg {
+  // bootstrap large (lg)
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin desktop-xl {
+  // bootstrap extra large (xl)
+  @media (max-width: 1400px) {
+    @content;
+  }
+}
+
+@mixin desktop-4k {
+  // no bootstrap 4 equivalent
+  @media (min-width: 2000px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: 768px) and (max-width: 991px) {
+    @content;
+  }
+}
+
+@mixin size($size) {
+  width: $size;
+  height: $size;
+}
