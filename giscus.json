@@ -1,3 +1,3 @@
 {
-  "origins": ["https://giggio.net"]
+  "origins": ["https://giggio.net", "http://local.giggio.net"]
 }
