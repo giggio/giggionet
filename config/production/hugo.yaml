@@ -13,3 +13,7 @@ minify:
 privacy:
   googleAnalytics:
     disable: false
+
+caches:
+  images:
+    dir: :cacheDir/images

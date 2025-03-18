@@ -327,7 +327,7 @@ function deploy() {
     exit 0
   }
   function github() {
-    echo "Not implemented yet."
+    echo "Not possible, you need to use Github actions."
     exit 0
   }
   case "$SUBCOMMAND" in
