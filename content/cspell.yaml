@@ -5,7 +5,11 @@ words:
   - agilista
   - Carlucci
   - CloudClasters
+  - componentização
+  - componentizar
+  - debugando
   - devs
+  - embedar
   - headshot
   - heterarchy
   - heterarquia
@@ -18,8 +22,13 @@ words:
   - Pogcast
   - Raymon
   - sofware
+  - taggeamento
   - textões
   - Tivit
   - tudoeacessibilidade
   - uncategorized
   - Unplugged
+ignoreRegExpList:
+  - /comment_term.*/
+  - /feature_image.*/
+  - /\{\{</.*/

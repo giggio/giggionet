@@ -48,7 +48,7 @@ markup:
   highlight:
     codeFences: true
     guessSyntax: false
-    lineNos: true
+    lineNos: false
     lineNumbersInTable: true
     noClasses: true
     style: emacs
