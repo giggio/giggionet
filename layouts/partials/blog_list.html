@@ -16,10 +16,15 @@
   <div class="container">
     <div class="row">
       {{ range $pages }}
-        <div class="col-lg-6">
+        <div class="col-lg-6 mb-4 mb-lg-5">
           <article class="site-blog-post">
             <div class="site-blog-post-thumb" aria-disabled="true">
-              <a href="{{ .RelPermalink }}" tabindex="-1" title="{{ .Title }}">
+              <a
+                href="{{ .RelPermalink }}"
+                tabindex="-1"
+                title="{{ .Title }}"
+                {{ with .Params.feature_image_list_top_offset }}style="--top-offset:{{ . }};"{{ end }}
+              >
                 {{- partial "blog_list_image.html" (dict "page" . "class" "") -}}
               </a>
             </div>
