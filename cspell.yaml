@@ -26,6 +26,7 @@ words:
   - dartsass
   - direnv
   - disqus
+  - emacs
   - errorf
   - facebook
   - fasterthanlime
@@ -51,6 +52,7 @@ words:
   - lastmod
   - lbscript
   - lightbox
+  - linenos
   - linkedin
   - lippert
   - makebundle
