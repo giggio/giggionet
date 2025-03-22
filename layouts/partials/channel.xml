@@ -33,6 +33,7 @@
 
 <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} on {{ end }}{{ .Site.Title }}{{ end }}</title>
 <link>{{ .Permalink }}</link>
+<image>{{- with resources.Get site.Params.logo_png -}}{{ .Permalink }}{{- end -}}</image>
 <description>{{ if ne .Title .Site.Title }}{{ with .Title }}{{ . }} {{ end }}{{ end }} no site do {{ .Site.Title }}</description>
 <generator>Hugo</generator>
 <language>{{ site.Language.LanguageCode }}</language>{{ with $authorEmail }}

@@ -92,6 +92,7 @@ privacy:
     privacyEnhanced: true
 params:
   logo: images/base/logo-small.svg
+  logo_png: images/base/logo-small.png
   logo_footer: images/base/logo-invertido-small.svg
   favicon_icon: images/base/logo-icon.svg
   dateFormat: ":date_long"
