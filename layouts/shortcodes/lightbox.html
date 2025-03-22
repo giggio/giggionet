@@ -6,7 +6,7 @@
 {{- $thumb_width := .Get "thumb_width" -}}
 {{- $thumb_height := .Get "thumb_height" -}}
 {{- $src := urls.Parse (.Get "src") -}}
-{{- $maxWidth := .Site.Params.max_image_width -}}
+{{- $maxWidth := .Site.Params.postMaxImageWidth -}}
 
 {{- $downloadedImage := 0 -}}
 {{- if and (or $height $width $thumb_height $thumb_width) $src.IsAbs (not (.Get "nodownload")) -}}

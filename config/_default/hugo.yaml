@@ -104,7 +104,8 @@ params:
   mainSections: blog
   images: # using for og:image
     - images/base/logo.svg
-  max_image_width: 730
+  postMaxImageWidth: 730
+  postListMaxImageWidth: 540
   use_default_feature_image: true
   blog_feature_image: images/blog-placeholder-post-feature.jpg # used as fallback for og:image, coming from custom _funcs/get-page-images.html
   # spellchecker:disable-next-line

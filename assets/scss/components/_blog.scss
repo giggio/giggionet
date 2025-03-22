@@ -108,6 +108,7 @@
       position: relative;
       margin-bottom: 30px;
       transition: all 0.3s ease-in;
+      aspect-ratio: 1.325;
       @include mixins.desktop-lg {
         margin-bottom: 180px;
       }
@@ -124,6 +125,7 @@
       &-thumb {
         img {
           width: 100%;
+          position: absolute;
         }
       }
       &-content {

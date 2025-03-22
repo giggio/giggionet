@@ -31,7 +31,7 @@
                 <i class="fa-solid fa-triangle-exclamation missing-alt"></i>
                 {{- warnidf "post-thumb-missing-image-alt" "Post '%s' (%s) does not have feature image alt." .Title .Path -}}
               {{- end -}}
-              {{- $image = $image.Resize (printf "%.fx webp" (math.Min $image.Width .Site.Params.max_image_width)) -}}
+              {{- $image = partial "img_towebp.html" (dict "image" $image "limitWidth" site.Params.postMaxImageWidth) -}}
               <img class="feature-image" src="{{ $image.RelPermalink }}" alt="{{ $alt }}" />
             {{- end -}}
             {{- $toc := .TableOfContents }}

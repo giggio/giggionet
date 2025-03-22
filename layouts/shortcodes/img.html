@@ -5,7 +5,7 @@
 {{- end -}}
 {{- $image := or (.Page.Resources.Get $src) (resources.Get $src) -}}
 {{ if ne $image.MediaType.SubType "svg" }}
-  {{- $image = $image.Resize (printf "%.fx webp" (math.Min $image.Width .Site.Params.max_image_width)) -}}
+  {{- $image = $image.Resize (printf "%.fx webp" (math.Min $image.Width .Site.Params.postMaxImageWidth)) -}}
   <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}" width="{{ $image.Width }}" height="{{ $image.Height }}" />
 {{- else -}}
   <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}" />

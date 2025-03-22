@@ -2,9 +2,15 @@
 {{- if not $image }}
   {{- $image = or (.Page.Resources.Get .src) (resources.Get .src) -}}
 {{- end }}
-{{ if ne $image.MediaType.SubType "svg" }}
-  {{- $width := .width -}}
-  {{- $height := .height -}}
+{{- if ne $image.MediaType.SubType "svg" }}
+  {{- $width := 0 -}}
+  {{- $height := 0 -}}
+  {{- if .limitWidth }}
+    {{- $width = int (math.Min $image.Width .limitWidth) -}}
+  {{- else -}}
+    {{- $width = .width -}}
+    {{- $height = .height -}}
+  {{- end -}}
   {{- if and (not $width) (not $height) -}}
     {{- $width = $image.Width -}}
     {{- $height = $image.Height -}}
