@@ -51,7 +51,7 @@ markup:
     lineNos: true
     lineNumbersInTable: true
     noClasses: true
-    style: vs
+    style: emacs
     tabWidth: 2
 menu:
   nav:
