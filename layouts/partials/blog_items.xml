@@ -16,7 +16,7 @@
   <title>{{ .Title }}</title>
   <link>{{ .Permalink }}</link>
   <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-  <author>{{ default site.Params.author.name .Params.author }}</author>
+  <author>{{ or (and (reflect.IsMap .Params.author) (isset .Params.author "email") .Params.author.email) site.Params.author.email }}</author>
   <guid>{{ .Permalink }}</guid>
   {{- range .Params.categories }}
   <category>{{ . }}</category>
