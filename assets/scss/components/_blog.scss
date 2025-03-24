@@ -111,7 +111,7 @@
       height: 100%;
       display: flex;
       flex-flow: row nowrap;
-        overflow: hidden;
+      overflow: hidden;
 
       &-thumb,
       &-content {
@@ -227,6 +227,7 @@
       }
       img {
         max-width: 100%;
+        height: auto;
         margin-bottom: 20px;
       }
       .blog-title-wrapper {

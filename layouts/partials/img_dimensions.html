@@ -1,17 +1,17 @@
 {{/* try  to get width and height from svg (xml) */}}
 {{- $image := . }}
-{{- $width := "" }}
-{{- $height := "" }}
+{{- $width := 0 }}
+{{- $height := 0 }}
 {{- if eq $image.MediaType.SubType "svg" }}
   {{- $imageObj := unmarshal $image.Content }}
   {{- with index $imageObj "-width" }}
     {{- with replaceRE `(\d+)px` "$1" . }}
-      {{- $width = . }}
+      {{- $width = int (float .) }}
     {{- end }}
   {{- end }}
   {{- with index $imageObj "-height" }}
     {{- with replaceRE `(\d+)px` "$1" . }}
-      {{- $height = . }}
+      {{- $height = int (float .) }}
     {{- end }}
   {{- end }}
 {{- else -}}

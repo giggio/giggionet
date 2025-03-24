@@ -13,11 +13,28 @@
 {{- if .style }}
   {{- $style = printf "%s %s" $style .style }}
 {{- end }}
-<img
-  src="{{ $image.RelPermalink }}"
-  alt="{{ .alt }}"
-  {{ with $dimensions.width }}width="{{ . }}"{{ end }}
-  {{ with $dimensions.height }}height="{{ . }}"{{ end }}
-  {{ with .class }}class="{{ . }}"{{ end }}
-  {{ with $style }}style="{{ $style | safeCSS }}"{{ end }}
-/>
+{{ define "partials/img-only.html" }}
+  <img
+    src="{{ .image.RelPermalink }}"
+    alt="{{ .alt }}"
+    {{ with .dimensions.width }}width="{{ . }}"{{ end }}
+    {{ with .dimensions.height }}height="{{ . }}"{{ end }}
+    {{ with .class }}class="{{ . }}"{{ end }}
+    {{ with .style }}style="{{ . | safeCSS }}"{{ end }}
+  />
+{{ end }}
+{{- if eq $image.MediaType.SubType "svg" }}
+  {{ partial "img-only.html" (dict "image" $image "alt" .alt "dimensions" $dimensions "class" .class "style" $style) }}
+{{- else }}
+  <picture>
+    {{- $widths := slice -}}
+    {{- $ctx := . -}}
+    {{- range slice 400 575 767 991 1200 1400 2000 -}}
+      {{- $resizedImage := partial "img_towebp.html" (merge $ctx (dict "width" .)) -}}
+      {{- if ge $resizedImage.Width . -}}
+        <source media="(max-width:{{ . }}px)" srcset="{{ $resizedImage.RelPermalink }}" />
+      {{- end -}}
+    {{- end -}}
+    {{ partial "img-only.html" (dict "image" $image "alt" .alt "dimensions" $dimensions "class" .class "style" $style) }}
+  </picture>
+{{- end }}

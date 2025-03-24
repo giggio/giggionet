@@ -2,7 +2,7 @@
   <section class="site-blog details">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-sm-12 col-md-11 col-lg-10 col-xl-8">
           <article class="site-blog-details">
             <div>
               <span class="float-right">{{ .PublishDate | time.Format ":date_medium" }}</span>
@@ -31,8 +31,7 @@
                 <i class="fa-solid fa-triangle-exclamation missing-alt"></i>
                 {{- warnidf "post-thumb-missing-image-alt" "Post '%s' (%s) does not have feature image alt." .Title .Path -}}
               {{- end -}}
-              {{- $image = partial "img_towebp.html" (dict "image" $image "limitWidth" site.Params.postMaxImageWidth) -}}
-              <img class="feature-image" src="{{ $image.RelPermalink }}" alt="{{ $alt }}" />
+              {{ partial "img.html" (dict "image" $image "class" "feature-image" "alt" $alt "limitWidth" site.Params.postMaxImageWidth) }}
             {{- end -}}
             {{- $toc := .TableOfContents }}
             {{- if gt (strings.Count "<li>" $toc) 3 }}

@@ -7,22 +7,25 @@
   {{- $height := 0 -}}
   {{- if .limitWidth }}
     {{- $width = int (math.Min $image.Width .limitWidth) -}}
+    {{- if .width }}
+      {{- $width = int (math.Min $width .width) -}}
+    {{- end -}}
   {{- else -}}
     {{- $width = .width -}}
     {{- $height = .height -}}
   {{- end -}}
-  {{- if and (not $width) (not $height) -}}
-    {{- $width = $image.Width -}}
-    {{- $height = $image.Height -}}
+  {{- if and (or $width $height) (lt $height $image.Height) (lt $width $image.Width) -}}
+    {{- $size := "" -}}
+    {{- if and (not $height) $width -}}
+      {{- $size = printf "%dx webp" $width -}}
+    {{- else if and (not $width) $height -}}
+      {{- $size = printf "x%d webp" $height -}}
+    {{- else -}}
+      {{- $size = printf "%dx%d webp" $width $height -}}
+    {{- end -}}
+    {{- $image = $image.Resize $size -}}
+  {{- else if ne $image.MediaType.SubType "webp" -}}
+    {{- $image = $image.Process "webp" -}}
   {{- end -}}
-  {{- $size := "" -}}
-  {{- if and (not $height) $width -}}
-    {{- $size = printf "%dx webp" $width -}}
-  {{- else if and (not $width) $height -}}
-    {{- $size = printf "x%d webp" $height -}}
-  {{- else -}}
-    {{- $size = printf "%dx%d webp" $width $height -}}
-  {{- end -}}
-  {{- $image = $image.Resize $size -}}
 {{- end -}}
 {{- return $image -}}

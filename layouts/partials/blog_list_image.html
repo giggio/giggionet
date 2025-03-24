@@ -6,6 +6,5 @@
     {{- $alt = i18n "blog_feature_image_alt" -}}
   {{- end -}}
 {{- end -}}
-{{- $image = partial "img_towebp.html" (dict "image" $image "limitWidth" site.Params.postListMaxImageWidth) -}}
 <!--alt is null on purpose, so screen readers don't pick up the feature image -->
-{{ partial "img.html" (dict "image" $image "class" .class "alt" "" "ignoreAlt" true "forceAspectRatio" true "style" .page.Params.feature_image_list_extra_style) }}
+{{ partial "img.html" (dict "image" $image "class" .class "alt" "" "ignoreAlt" true "forceAspectRatio" true "style" .page.Params.feature_image_list_extra_style "limitWidth" site.Params.postListMaxImageWidth) }}
