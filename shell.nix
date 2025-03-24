@@ -19,11 +19,13 @@ let
 in
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
+    delta
     h_completions
     hugo
     pagefind
     dart-sass
     nodePackages_latest.nodejs
+    yq
   ];
   shellHook = ''
     if ! [ -d node_modules ]; then

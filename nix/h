@@ -8,7 +8,7 @@ function help() {
   case "$SUBCOMMAND" in
     showmissing)
       cat <<EOF
-Shows missing content translations
+Shows missing content file translations
 
 Usage:
   `readlink -f "$0"` translations showmissing
@@ -16,10 +16,18 @@ EOF
       ;;
     createmissing)
       cat <<EOF
-Creates missing content translations
+Creates missing content file translations
 
 Usage:
   `readlink -f "$0"` translations createmissing
+EOF
+      ;;
+    showmissingterms)
+      cat <<EOF
+Shows missing terms in translation files
+
+Usage:
+  `readlink -f "$0"` translations showmissingterms
 EOF
       ;;
     azure)
@@ -156,8 +164,9 @@ Usage:
   `readlink -f "$0"` translations command
 
 Commands:
-  showmissing               Shows missing content translations
-  createmissing             Creates the missing content translations
+  showmissing               Shows missing content file translations
+  showmissingterms          Shows missing terms in translation files
+  createmissing             Creates the missing content file translations
 EOF
       ;;
     deploy)
@@ -383,12 +392,20 @@ function translations() {
     showmissing | xargs -d $'\n' sh -c 'for arg do cp --verbose "$(dirname $arg)/$(basename $arg)" "${arg%.md}.en.md"; done' _
     exit 0
   }
+  function showmissingterms() {
+    delta <(yq -r '([paths|(map(".\(.)")|join(""))]|unique).[]' i18n/pt-BR.yaml ) \
+      <(yq -r '([paths|(map(".\(.)")|join(""))]|unique).[]' i18n/en.yaml) || true
+    exit 0
+  }
   case "$SUBCOMMAND" in
     showmissing)
       showmissing "$@"
       ;;
     createmissing)
       createmissing "$@"
+      ;;
+    showmissingterms)
+      showmissingterms "$@"
       ;;
     *)
       ;;
@@ -468,7 +485,7 @@ _hugo_local_completions() {
           COMPREPLY=($(compgen -W "$(find content/blog -maxdepth 1 -name '*.md' -not -name '_index*.md' -exec basename -s .md -- {} +) $common_options" -- "${COMP_WORDS[2]}"))
           ;;
         translations)
-          COMPREPLY=($(compgen -W "showmissing createmissing $common_options" -- "${COMP_WORDS[2]}"))
+          COMPREPLY=($(compgen -W "showmissing createmissing showmissingterms $common_options" -- "${COMP_WORDS[2]}"))
           ;;
         deploy)
           COMPREPLY=($(compgen -W "azure github $common_options" -- "${COMP_WORDS[2]}"))
