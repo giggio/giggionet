@@ -375,11 +375,12 @@ function translations() {
   shift
   source "$GET_GLOBAL_ARGS"
   function showmissing() {
-    find content -name "*.md" ! -name '*.en.md' | grep -v -F -f <(find content -name "*.en.md" | sed 's/.en.md$/.md/')
+    find content -name "*.md" -not -name '*.en.md' -not -path 'content/participations/*' \
+      | grep -v -F -f <(find content -name "*.en.md" | sed 's/.en.md$/.md/') || true
     exit 0
   }
   function createmissing() {
-    find content -name "*.md" ! -name '*.en.md' | grep -v -F -f <(find content -name "*.en.md" | sed 's/.en.md$/.md/') | xargs -d $'\n' sh -c 'for arg do cp --verbose "$(dirname $arg)/$(basename $arg)" "${arg%.md}.en.md"; done' _
+    showmissing | xargs -d $'\n' sh -c 'for arg do cp --verbose "$(dirname $arg)/$(basename $arg)" "${arg%.md}.en.md"; done' _
     exit 0
   }
   case "$SUBCOMMAND" in
