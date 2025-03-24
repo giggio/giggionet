@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <section class="site-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="site-page-title">
+            {{ .Title | safeHTML }}
+          </h1>
+        </div>
+        {{- with .Params.description }}
+          <div class="col-12 pb-3">
+            <h2 class="site-page-description">
+              {{ . | safeHTML }}
+            </h2>
+          </div>
+        {{- end }}
+        <div class="col-12">
+          <p class="site-page-content">
+            {{ .Content }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

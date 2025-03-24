@@ -12,4 +12,11 @@
 User-agent: {{ $key }}
 {{ end -}}
 Disallow: /blog/
+
+{{ with where site.Pages "Sitemap.Disable" "eq" true -}}
+User-agent: *
+{{ range . -}}
+Disallow: {{ .RelPermalink }}
+{{ end -}}
+{{- end }}
 Sitemap: {{ "sitemap.xml" | absURL }}

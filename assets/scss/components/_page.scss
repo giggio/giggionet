@@ -1,0 +1,21 @@
+@use "../mixins";
+@use "../variables";
+
+.site-page {
+  padding: 150px 0 100px;
+  background: variables.$gray;
+  @include mixins.mobile {
+    padding: 120px 0 100px;
+  }
+  &-title {
+    font-weight: 700;
+    @include mixins.tablet {
+      font-size: 40px;
+    }
+  }
+  &-description {
+    font-size: 25px;
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+}
