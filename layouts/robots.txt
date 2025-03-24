@@ -1,3 +1,4 @@
+{{- $disabledPages := where site.Pages "Sitemap.Disable" "eq" true -}}
 {{- $data := dict -}}
 {{- with try (resources.GetRemote "https://raw.githubusercontent.com/ai-robots-txt/ai.robots.txt/refs/heads/main/robots.json") -}}
   {{- with .Err -}}
@@ -12,8 +13,13 @@
 User-agent: {{ $key }}
 {{ end -}}
 Disallow: /blog/
+{{ with $disabledPages -}}
+{{ range . -}}
+Disallow: {{ .RelPermalink }}
+{{ end }}
+{{ end }}
 
-{{ with where site.Pages "Sitemap.Disable" "eq" true -}}
+{{- with $disabledPages -}}
 User-agent: *
 {{ range . -}}
 Disallow: {{ .RelPermalink }}
