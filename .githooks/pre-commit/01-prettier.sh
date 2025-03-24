@@ -15,4 +15,5 @@ if [ -z "$all_files" ]; then
 fi
 echo "Running prettier on the following files:"
 echo "$all_files"
+echo "Files that need checking (if any):"
 prettier --list-different $all_files
