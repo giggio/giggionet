@@ -256,10 +256,19 @@
       }
       &-content {
         font-family: variables.$text-font;
+        & * {
+          scroll-margin-top: 85px;
+        }
       }
     }
   }
 }
 .rss-icon {
   color: #007bff;
+}
+
+#TableOfContents {
+  a {
+    color: variables.$tertiary-color;
+  }
 }
