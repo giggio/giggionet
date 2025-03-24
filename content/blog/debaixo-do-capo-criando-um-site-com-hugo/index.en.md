@@ -4,8 +4,8 @@ date: 2025-03-24T15:00:00-03:00
 slug: under-the-hood-creating-a-site-with-hugo
 comment_term: under-the-hood-creating-a-site-with-hugo
 author: Giovanni Bassi
-feature_image: images/hugo-logo.svg
-feature_image_alt: Logo do Hugo
+featureImage: images/hugo-logo.svg
+featureImageAlt: Logo do Hugo
 feature_image_list_top_offset: "30%"
 categories:
   - web

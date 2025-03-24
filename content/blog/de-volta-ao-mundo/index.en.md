@@ -4,8 +4,8 @@ date: 2025-03-21T11:00:00-03:00
 slug: returning-to-the-world
 comment_term: returning-to-the-world
 author: Giovanni Bassi
-feature_image: images/giovanni_sentado_moto.jpg
-feature_image_alt: Giovanni sitting in his motorcycle, at the garage
+featureImage: images/giovanni_sentado_moto.jpg
+featureImageAlt: Giovanni sitting in his motorcycle, at the garage
 summary: After fifteen years I have a personal website again. In this post I tell you a little about what I'm going to publish here.
 categories:
   - misc

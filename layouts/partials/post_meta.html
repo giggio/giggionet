@@ -14,7 +14,7 @@
 {{- end }}
 
 {{- if (.Param "ShowReadingTime") -}}
-  {{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime)) }}
+  {{- $scratch.Add "meta" (slice (i18n "readTime" .ReadingTime)) }}
 {{- end }}
 
 {{- if (.Param "ShowWordCount") -}}

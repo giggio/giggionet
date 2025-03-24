@@ -26,16 +26,16 @@ languages:
     languageName: Português
     weight: 1
     params:
-      flag_emoji: "&#x1F1E7;&#x1F1F7;"
-      short_lang_code: pt
+      flagEmoji: "&#x1F1E7;&#x1F1F7;"
+      shortLangCode: pt
   en:
     disabled: false
     languageCode: en
     languageName: English
     weight: 2
     params:
-      flag_emoji: "&#x1F1EC;&#x1F1E7;"
-      short_lang_code: en
+      flagEmoji: "&#x1F1EC;&#x1F1E7;"
+      shortLangCode: en
 taxonomies:
   category: categories
   tag: tags
@@ -56,23 +56,23 @@ markup:
 menu:
   nav:
     - name: Home
-      identifier: menu_home
+      identifier: menu.home
       pageRef: ""
       weight: 10
       params:
-        aria_disabled: true
-    - identifier: menu_about
+        ariaDisabled: true
+    - identifier: menu.about
       pageRef: about
       weight: 20
     - name: Blog
-      identifier: menu_blog
+      identifier: menu.blog
       pageRef: blog
       weight: 30
     - name: Participations
-      identifier: menu_participations
+      identifier: menu.participations
       pageRef: participations
       weight: 40
-    - identifier: menu_contact
+    - identifier: menu.contact
       pageRef: contact
       weight: 50
       params:
@@ -92,9 +92,9 @@ privacy:
     privacyEnhanced: true
 params:
   logo: images/base/logo-small.svg
-  logo_png: images/base/logo-small.png
-  logo_footer: images/base/logo-invertido-small.svg
-  favicon_icon: images/base/logo-icon.svg
+  logoPng: images/base/logo-small.png
+  logoFooter: images/base/logo-invertido-small.svg
+  faviconIcon: images/base/logo-icon.svg
   dateFormat: ":date_long"
   description: Página pessoal do Giovanni Bassi
   comments: true
@@ -106,14 +106,14 @@ params:
     - images/base/logo.svg
   postMaxImageWidth: 730
   postListMaxImageWidth: 690
-  use_default_feature_image: true
-  blog_feature_image: images/blog-placeholder-post-feature.jpg # used as fallback for og:image, coming from custom _funcs/get-page-images.html
+  useDefaultFeatureImage: true
+  blogFeatureImage: images/blog-placeholder-post-feature.jpg # used as fallback for og:image, coming from custom _funcs/get-page-images.html
   # spellchecker:disable-next-line
-  contact_feature_image: images/giovanni-bassi.jpg
+  contactFeatureImage: images/giovanni-bassi.jpg
   author:
     email: giggio@giggio.net
     name: Giovanni Bassi
-  social_share:
+  socialShare:
     bluesky: true
     whatsapp: true
     twitter: true
@@ -124,16 +124,16 @@ params:
     sitemap:
       link:
         - name: Home
-          identifier: menu_home
+          identifier: menu.home
           url: /
-        - identifier: menu_about
+        - identifier: menu.about
           url: about
         - name: Blog
-          identifier: menu_blog
+          identifier: menu.blog
           url: blog
-        - identifier: menu_participations
+        - identifier: menu.participations
           url: participations
-        - identifier: menu_contact
+        - identifier: menu.contact
           url: contact
 permalinks:
   taxonomy:

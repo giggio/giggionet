@@ -3,8 +3,8 @@ title: De volta ao mundo
 date: 2025-03-21T11:00:00-03:00
 comment_term: de-volta-ao-mundo
 author: Giovanni Bassi
-feature_image: images/giovanni_sentado_moto.jpg
-feature_image_alt: Giovanni sentado na lateral moto, na garagem
+featureImage: images/giovanni_sentado_moto.jpg
+featureImageAlt: Giovanni sentado na lateral moto, na garagem
 summary: Depois de quinze anos volto a ter um site pessoal. Nesse post conto um pouco o que vou publicar por aqui.
 categories:
   - misc

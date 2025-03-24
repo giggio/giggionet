@@ -1,9 +1,9 @@
-{{- $image := or (.page.Resources.Get .page.Params.feature_image) (.page.Parent.Resources.Get .page.Params.feature_image) -}}
-{{- $alt := .page.Params.feature_image_alt -}}
+{{- $image := or (.page.Resources.Get .page.Params.featureImage) (.page.Parent.Resources.Get .page.Params.featureImage) -}}
+{{- $alt := .page.Params.featureImageAlt -}}
 {{- if not $image -}}
-  {{- if or (and (eq .page.Params.use_default_feature_image nil) site.Params.use_default_feature_image) .page.Params.use_default_feature_image }}
-    {{- $image = (site.GetPage "/blog/").Resources.Get site.Params.blog_feature_image -}}
-    {{- $alt = i18n "blog_feature_image_alt" -}}
+  {{- if or (and (eq .page.Params.useDefaultFeatureImage nil) site.Params.useDefaultFeatureImage) .page.Params.useDefaultFeatureImage }}
+    {{- $image = (site.GetPage "/blog/").Resources.Get site.Params.blogFeatureImage -}}
+    {{- $alt = i18n "blogFeatureImageAlt" -}}
   {{- end -}}
 {{- end -}}
 <!--alt is null on purpose, so screen readers don't pick up the feature image -->

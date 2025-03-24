@@ -2,65 +2,65 @@
 {{- $textBody := print .Title "\n" (.Summary | plainify | truncate 200) "\n" $url "\n" }}
 <div class="sharebuttons-wrapper">
   <div class="sharebuttons">
-    <span>{{ i18n "share_on" }}</span>
+    <span>{{ i18n "shareOn" }}</span>
     <ul>
-      {{- if site.Params.social_share.bluesky }}
+      {{- if site.Params.socialShare.bluesky }}
         <li>
           <a
             href="https://bsky.app/intent/compose?text={{- (print .Title " de @giggio.net\n" $url) | urlquery -}}"
             target="_blank"
             rel="noopener"
-            aria-label="{{ i18n "social_share.bluesky" }}"
+            aria-label="{{ i18n "socialShare.bluesky" }}"
             ><i class="fa-brands fa-bluesky"></i
           ></a>
         </li>
       {{- end }}
-      {{- if site.Params.social_share.facebook }}
+      {{- if site.Params.socialShare.facebook }}
         <li>
           <a
             href="https://www.facebook.com/sharer.php?u={{ $url }}&t={{ .Title }}"
             target="_blank"
             rel="noopener"
-            aria-label="{{ i18n "social_share.facebook" }}"
+            aria-label="{{ i18n "socialShare.facebook" }}"
             ><i class="fa-brands fa-facebook-f"></i>
           </a>
         </li>
       {{- end }}
-      {{- if site.Params.social_share.twitter }}
+      {{- if site.Params.socialShare.twitter }}
         <li>
           <a
             href="https://twitter.com/intent/tweet?text={{- print .Title " de @giovannibassi" -}}&url={{ $url }}"
             target="_blank"
             rel="noopener"
-            aria-label="{{ i18n "social_share.twitter" }}"
+            aria-label="{{ i18n "socialShare.twitter" }}"
             ><i class="fa-brands fa-twitter"></i>
           </a>
         </li>
       {{- end }}
-      {{- if site.Params.social_share.linkedin }}
+      {{- if site.Params.socialShare.linkedin }}
         <li>
           <a
             href="https://www.linkedin.com/shareArticle?mini=true&url={{ $url }}"
             target="_blank"
             rel="noopener"
-            aria-label="{{ i18n "social_share.linkedin" }}"
+            aria-label="{{ i18n "socialShare.linkedin" }}"
             ><i class="fa-brands fa-linkedin-in"></i>
           </a>
         </li>
       {{- end }}
-      {{- if site.Params.social_share.whatsapp }}
+      {{- if site.Params.socialShare.whatsapp }}
         <li>
           <a href="whatsapp://send?text={{ $textBody }}" target="_blank"
-            ><i class="fa-brands fa-whatsapp" aria-label="{{ i18n "social_share.whatsapp" }}"></i
+            ><i class="fa-brands fa-whatsapp" aria-label="{{ i18n "socialShare.whatsapp" }}"></i
           ></a>
         </li>
       {{- end }}
-      {{- if site.Params.social_share.mail }}
+      {{- if site.Params.socialShare.mail }}
         <li>
           <a
             href="mailto:?subject={{ .Title }}&body={{ $textBody | urlquery }}"
             target="_blank"
-            aria-label="{{ i18n "social_share.mail" }}"
+            aria-label="{{ i18n "socialShare.mail" }}"
             ><i class="fa-regular fa-envelope"></i>
           </a>
         </li>

@@ -3,13 +3,13 @@
     <div class="row">
       <div class="col-12">
         <div class="site-footer-logo">
-          {{ partial "img.html" (dict "src" .Site.Params.logo_footer "alt" (i18n "logo_alt")) }}
+          {{ partial "img.html" (dict "src" .Site.Params.logoFooter "alt" (i18n "logoAlt")) }}
         </div>
       </div>
       {{ with .Site.Params.footer.sitemap }}
         <div class="col-lg-2 col-md-6">
           <div class="site-footer-widget">
-            <h1 class="site-footer-widget-title">{{ i18n "site_map" }}</h1>
+            <h1 class="site-footer-widget-title">{{ i18n "siteMap" }}</h1>
             <ul class="site-footer-widget-links">
               {{ range .link }}
                 {{- $name := (or (i18n .identifier) .name | safeHTML) }}
@@ -22,7 +22,7 @@
       {{ with .Site.Data.ways_to_contact }}
         <div class="col-lg-2 col-md-6">
           <div class="site-footer-widget">
-            <h1 class="site-footer-widget-title">{{ i18n "menu_contact" }}</h1>
+            <h1 class="site-footer-widget-title">{{ i18n "menu.contact" }}</h1>
             <ul class="site-footer-widget-links">
               {{ range . }}
                 <li><a href="{{ .url }}">{{ .name }}</a></li>
@@ -74,7 +74,7 @@
             {{ range site.Home.AllTranslations }}
               <a href="{{ .RelPermalink }}">
                 {{ .Language.LanguageName }}
-                {{ .Language.Params.flag_emoji | safeHTML }}
+                {{ .Language.Params.flagEmoji | safeHTML }}
               </a>
               <br />
             {{ end }}
@@ -82,9 +82,9 @@
         </div>
       </div>
       <div class="col-lg-2 col-12">
-        <a href="#top" class="site-footer-widget-top" aria-label="{{ i18n "back_to_top" }}">
-          {{ partial "img.html" (dict "src" "images/base/to-top.svg" "alt" "back_to_top") }}
-          <p>{{- .Site.Params.footer.back_to_top.description | safeHTML -}}</p>
+        <a href="#top" class="site-footer-widget-top" aria-label="{{ i18n "backToTop" }}">
+          {{ partial "img.html" (dict "src" "images/base/to-top.svg" "alt" (i18n "backToTop")) }}
+          <p>{{- i18n "backToTop" -}}</p>
         </a>
       </div>
       <div class="col-12">

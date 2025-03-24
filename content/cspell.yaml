@@ -30,5 +30,5 @@ words:
   - Unplugged
 ignoreRegExpList:
   - /comment_term.*/
-  - /feature_image.*/
+  - /featureImage.*/
   - /\{\{</.*/

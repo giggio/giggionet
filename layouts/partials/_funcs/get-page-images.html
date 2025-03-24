@@ -11,10 +11,10 @@
 {{- if and .Parent .Parent.Resources -}}
   {{- $parentResources = .Parent.Resources.ByType "image" -}}
 {{- end -}}
-{{/* *** This is custom code for this func. Get image from param feature_image *** */}}
+{{/* *** This is custom code for this func. Get image from param featureImage *** */}}
 {{- if not $imgParams }}
-  {{- if .Params.feature_image }}
-    {{- $imgParams = slice .Params.feature_image }}
+  {{- if .Params.featureImage }}
+    {{- $imgParams = slice .Params.featureImage }}
   {{- end }}
 {{- end }}
 {{/* Find featured image resources if the images parameter is empty. */}}
@@ -34,9 +34,9 @@
 {{- end }}
 {{/* Use the first one of site images as the fallback. */}}
 {{- if and (not $imgParams) (not $imgs) }}
-  {{/* *** This is custom code for this func. Get blog_feature_image. *** */}}
+  {{/* *** This is custom code for this func. Get blogFeatureImage. *** */}}
   {{- if eq .Section "blog" }}
-    {{- $imgParams = slice site.Params.blog_feature_image }}
+    {{- $imgParams = slice site.Params.blogFeatureImage }}
   {{- else }}
     {{- with site.Params.images }}
       {{- $imgParams = first 1 . }}

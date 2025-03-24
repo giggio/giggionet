@@ -8,8 +8,8 @@ title: {{ $title }}
 date: {{ .Date }}
 comment_term: {{ .File.BaseFileName | anchorize }}
 author: Giovanni Bassi
-feature_image: images/blog-placeholder-post-feature.jpg
-feature_image_alt: Placeholder alt text
+featureImage: images/blog-placeholder-post-feature.jpg
+featureImageAlt: Placeholder alt text
 categories:
   - uncategorized
 tags:

@@ -21,7 +21,7 @@
 <title>{{ $title }}</title>
 <link>{{ .Permalink }}</link>
 <image>
-  <url>{{- with resources.Get site.Params.logo_png -}}{{ .Permalink }}{{- end -}}</url>
+  <url>{{- with resources.Get site.Params.logoPng -}}{{ .Permalink }}{{- end -}}</url>
   <title>{{ $title }}</title>
   <link>{{ .Permalink }}</link>
 </image>

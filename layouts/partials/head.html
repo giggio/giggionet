@@ -32,6 +32,6 @@
 {{- with or (.OutputFormats.Get "rss") ((index (where .Site.Sections "LinkTitle" "Blog") 0).OutputFormats.Get "rss") }}
   {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
 {{- end }}
-{{ with (partial "img_towebp.html" (dict "src" .Site.Params.favicon_icon)) -}}
+{{ with (partial "img_towebp.html" (dict "src" .Site.Params.faviconIcon)) -}}
   {{ printf `<link rel="icon" href=%q type=%q>` .Permalink .MediaType.Type | safeHTML }}
 {{- end }}

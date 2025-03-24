@@ -24,7 +24,7 @@
             {{- if (.Param "ShowReadingTime") -}}
               &nbsp;|
               <span class="site-blog-post-content-readingtime">
-                {{ (i18n "read_time_long" .ReadingTime) }}
+                {{ (i18n "readTimeLong" .ReadingTime) }}
               </span>
             {{- end -}}
             <p class="site-blog-post-content-summary">{{ .Summary | truncate 150 | plainify }}</p>

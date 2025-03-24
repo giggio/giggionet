@@ -7,72 +7,72 @@
         </button>
         <div class="sharebuttons-wrapper">
           <div class="sharebuttons-title">
-            <p>{{ i18n "share_on" }}</p>
+            <p>{{ i18n "shareOn" }}</p>
           </div>
           <div class="sharebuttons">
             <ul>
-              {{- if site.Params.social_share.bluesky }}
+              {{- if site.Params.socialShare.bluesky }}
                 <li>
                   <a
                     href="https://bsky.app/intent/compose?text=#text#"
                     target="_blank"
                     rel="noopener"
                     class="share-button-bluesky"
-                    aria-label="{{ i18n "social_share.bluesky" }}"
+                    aria-label="{{ i18n "socialShare.bluesky" }}"
                   >
                     <i class="fa-brands fa-bluesky"></i>
                   </a>
                 </li>
               {{- end }}
-              {{- if site.Params.social_share.facebook }}
+              {{- if site.Params.socialShare.facebook }}
                 <li>
                   <a
                     href="https://www.facebook.com/sharer.php?u=#url#&t=#title#"
                     target="_blank"
                     rel="noopener"
-                    aria-label="{{ i18n "social_share.facebook" }}"
+                    aria-label="{{ i18n "socialShare.facebook" }}"
                     class="share-button-facebook"
                     ><i class="fa-brands fa-facebook-f"></i>
                   </a>
                 </li>
               {{- end }}
-              {{- if site.Params.social_share.twitter }}
+              {{- if site.Params.socialShare.twitter }}
                 <li>
                   <a
                     href="https://twitter.com/intent/tweet?text=#text#&url=#url#"
                     target="_blank"
                     rel="noopener"
-                    aria-label="{{ i18n "social_share.twitter" }}"
+                    aria-label="{{ i18n "socialShare.twitter" }}"
                     class="share-button-twitter"
                     ><i class="fa-brands fa-twitter"></i>
                   </a>
                 </li>
               {{- end }}
-              {{- if site.Params.social_share.linkedin }}
+              {{- if site.Params.socialShare.linkedin }}
                 <li>
                   <a
                     href="https://www.linkedin.com/shareArticle?mini=true&url=#url#"
                     target="_blank"
                     rel="noopener"
-                    aria-label="{{ i18n "social_share.linkedin" }}"
+                    aria-label="{{ i18n "socialShare.linkedin" }}"
                     class="share-button-linkedin"
                     ><i class="fa-brands fa-linkedin-in"></i>
                   </a>
                 </li>
               {{- end }}
-              {{- if site.Params.social_share.whatsapp }}
+              {{- if site.Params.socialShare.whatsapp }}
                 <li>
                   <a href="whatsapp://send?text=#textBody#" target="_blank" class="share-button-whatsapp"
-                    ><i class="fa-brands fa-whatsapp" aria-label="{{ i18n "social_share.whatsapp" }}"></i
+                    ><i class="fa-brands fa-whatsapp" aria-label="{{ i18n "socialShare.whatsapp" }}"></i
                   ></a>
                 </li>
               {{- end }}
-              {{- if site.Params.social_share.mail }}
+              {{- if site.Params.socialShare.mail }}
                 <li>
                   <a
                     href="mailto:?subject=#title#&body=#textBody#"
                     target="_blank"
-                    aria-label="{{ i18n "social_share.mail" }}"
+                    aria-label="{{ i18n "socialShare.mail" }}"
                     class="share-button-mail"
                     ><i class="fa-regular fa-envelope"></i>
                   </a>

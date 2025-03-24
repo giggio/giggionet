@@ -1,53 +1,57 @@
-share_on: Share on
+shareOn: Share on
 share: Share
-latest_blog_posts: Latest blog posts
+latestBlogPosts: Latest blog posts
+blogNoPostsYet: No posts yet
 gitinfo: Git commit {{ .AbbreviatedHash }} ({{ .Subject }}) authored on {{ .AuthorDate.Format "02/01/2006" }}, commited on {{ .CommitDate.Format "02/01/2006" }}, by {{ .AuthorName }}.
-menu_about: About me
-menu_contact: Contact
-menu_participations: Participations
-ways_to_contact_title: Get in touch with me
-site_map: Site map
+menu:
+  title: Menu
+  about: About me
+  contact: Contact
+  contactSmaller: Contact
+  participations: Participations
+waysToContactTitle: Get in touch with me
+siteMap: Site map
 languages: Languages
-read_time:
+readTime:
   one: "{{ . }} min"
   other: "{{ . }} mins"
+readTimeLong:
+  one: '{{ . }} reading minute'
+  other: '{{ . }} reading minutes'
 words:
   one: "{{ . }} word"
   other: "{{ . }} words"
 copyright: © Copyright {{ . }} - Rights reserved Giovanni Bassi
 counter:
   title: Numbers on the way
-  projects_delivered: Projects delivered
-  cups_of_coffee: Cups of coffee
+  projectsDelivered: Projects delivered
+  cupsOfCoffee: Cups of coffee
   posts: Social media posts
   distance: Kilometers traveled
 archives: Archives
 categories: Categories
 tags: Tags
-read_more_aria: read more about '{{ .Title }}'
-menu: Menu
 logo: Giovanni Bassi's site
-blog_feature_image_alt: PC chip
+blogFeatureImageAlt: Placeholder
 search: Search
-change_language_to: Trocar o idioma para
-social_share:
+changeLanguageTo: Trocar o idioma para
+socialShare:
   bluesky: Share on Bluesky
   facebook: Share on Facebook
   linkedin: Share on LinkedIn
   twitter: Share on Twitter
   whatsapp: Share on WhatsApp
   email: Share by e-mail
-back_to_top: Back to top
-go_to_next_section: Move to the next section
-logo_alt: Giovanni Bassi's logo
-learn_more: Learn more
-filter_by: Filter by
-no_participations: No participations found.
-social_networks: Social networks
+backToTop: Back to top
+goToNextSection: Move to the next section
+logoAlt: Giovanni Bassi's logo
+learnMore: Learn more
+filterBy: Filter by
+noParticipations: No participations found.
+socialNetworks: Social networks
 publications: Publications
 footer:
   reading: Reading
   podcasts: Listening
 close: Close
-blog_no_posts_yet: No posts yet
 content: Content

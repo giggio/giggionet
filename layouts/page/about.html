@@ -36,9 +36,9 @@
                   </p>
                 {{- end }}
                 <p class="site-about-header-participations-item">
-                  <a href="#ways-to-contact" aria-label="{{ i18n "social_networks" }}">
+                  <a href="#ways-to-contact" aria-label="{{ i18n "socialNetworks" }}">
                     <i class="fa-solid fa-hexagon-nodes"></i>
-                    <span class="site-about-header-participations-item-text">{{ i18n "social_networks" }}</span>
+                    <span class="site-about-header-participations-item-text">{{ i18n "socialNetworks" }}</span>
                   </a>
                 </p>
                 {{- with site.GetPage "/participation_kinds/talks/" }}
@@ -65,10 +65,10 @@
             </div>
           </div>
           <div class="col-12 col-md-6 col-lg-6 site-about-header-image-wrapper">
-            {{- $image := resources.Get site.Params.contact_feature_image -}}
-            {{- $alt := .Params.feature_image_alt -}}
+            {{- $image := resources.Get site.Params.contactFeatureImage -}}
+            {{- $alt := .Params.featureImageAlt -}}
             {{- if not $alt -}}
-              {{- warnidf "missing-feature_image-alt" "About does not have feature_image alt." -}}
+              {{- warnidf "missing-featureImage-alt" "About does not have featureImage alt." -}}
             {{- end -}}
             {{- $image = $image.Resize (printf "%dx webp" 400) -}}
             <img
@@ -99,7 +99,7 @@
       <div class="container site-about-expertise-container">
         <div class="row site-about-expertise-container-margin"></div>
         <div class="row site-about-expertise-container-wrapper">
-          {{ with .Params.expertise_title }}
+          {{ with .Params.expertiseTitle }}
             <div class="col-12 col-md-5 align-items-center d-flex">
               <div class="section-title">
                 <h2>{{ . }}</h2>
@@ -108,7 +108,7 @@
           {{ end }}
           <div class="col-12 col-md-7">
             <ul class="site-about-expertise-container-list">
-              {{ range .Params.expertise_sectors }}
+              {{ range .Params.expertiseSectors }}
                 <li>{{ . }}</li>
               {{ end }}
             </ul>

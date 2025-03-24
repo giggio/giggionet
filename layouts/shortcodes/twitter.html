@@ -15,7 +15,7 @@
 
 {{- define "render-tweet" -}}
   {{- $url := printf "https://twitter.com/%v/status/%v" .user .id -}}
-  {{- $query := querify "url" $url "dnt" .dnt "lang" .Language.Params.short_lang_code -}}
+  {{- $query := querify "url" $url "dnt" .dnt "lang" .Language.Params.shortLangCode -}}
   {{- $request := printf "https://publish.twitter.com/oembed?%s" $query -}}
   {{- with try (resources.GetRemote $request) -}}
     {{- with .Err -}}
