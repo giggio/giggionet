@@ -35,7 +35,7 @@
             {{- end -}}
             {{- $toc := .TableOfContents }}
             {{- if gt (strings.Count "<li>" $toc) 3 }}
-              <h3>Conteúdo:</h3>
+              <h3>{{ i18n "content" }}:</h3>
               {{ $toc }}
             {{- end }}
             <div class="site-blog-details-content">
