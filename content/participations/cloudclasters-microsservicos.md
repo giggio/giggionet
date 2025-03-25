@@ -5,6 +5,6 @@ description: |
   A primeira de uma série de conversas com André Carlucci e o time do CloudClasters
   sobre microsserviços. E claro que falamos muito de Kubernetes.
 link: https://cloudcasters.io/pt-br/microservicos-parte-1/
-participation_kinds:
+participationkinds:
   - podcasts
 ---

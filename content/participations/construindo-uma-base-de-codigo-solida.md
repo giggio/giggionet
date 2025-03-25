@@ -5,6 +5,6 @@ description: |
   Palestra sobre boas práticas no desenvolvimento de software no evento
   TheBug Conference 2020, em Manaus.
 link: https://youtu.be/AqDyRIi29i8?si=GuWmTbMxWKQR2EEK
-participation_kinds:
+participationkinds:
   - videos
 ---

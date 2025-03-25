@@ -133,7 +133,7 @@ prop: true
 Hugo has a taxonomy system, which is a way to categorize your pages. The most common, and what I’m using, are categories
 and tags for blog posts, but you could use it to organize anything. I also used it to build pages for types of
 contributions (for example, [videos](http://giggio.net/participations/kinds/videos/) – check its code on
-[Github](https://github.com/giggio/giggionet/tree/main/content/participation_kinds)).
+[Github](https://github.com/giggio/giggionet/tree/main/content/participationkinds)).
 
 The example they use in the [documentation](https://gohugo.io/content-management/taxonomies/) is with movies and actors.
 Thus, a movie page can list its actors. Actor is the `taxonomy`, the actor’s name becomes the `term`. The cool thing is

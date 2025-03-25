@@ -8,7 +8,7 @@ title: {{ $title }}
 date: {{ .Date }}
 description: TBD
 link: https://...
-participation_kinds:
+participationkinds:
   - uncategorized
 draft: true
 ---

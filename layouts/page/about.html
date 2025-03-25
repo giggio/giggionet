@@ -17,10 +17,10 @@
                 <p class="site-about-header-name text-right">Giovanni Bassi</p>
               </div>
               <div class="mt-auto site-about-header-participations justify-content-around">
-                {{- with site.GetPage "/participation_kinds/videos/" }}
+                {{- with site.GetPage "/participationkinds/videos/" }}
                   {{- if .Pages -}}
                     <p class="site-about-header-participations-item">
-                      <a href="{{ .RelPermalink }}" target="_blank" aria-label="{{ .LinkTitle }}">
+                      <a href="{{ .RelPermalink }}" aria-label="{{ .LinkTitle }}">
                         <i class="fa-brands fa-youtube"></i>
                         <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
                       </a>
@@ -29,7 +29,7 @@
                 {{- end }}
                 {{- with site.GetPage "/blog/" }}
                   <p class="site-about-header-participations-item">
-                    <a href="{{ .RelPermalink }}" target="_blank" aria-label="{{ i18n "publications" }}">
+                    <a href="{{ .RelPermalink }}" aria-label="{{ i18n "publications" }}">
                       <i class="fa-regular fa-pen-to-square"></i>
                       <span class="site-about-header-participations-item-text">{{ i18n "publications" }}</span>
                     </a>
@@ -41,20 +41,20 @@
                     <span class="site-about-header-participations-item-text">{{ i18n "socialNetworks" }}</span>
                   </a>
                 </p>
-                {{- with site.GetPage "/participation_kinds/talks/" }}
+                {{- with site.GetPage "/participationkinds/talks/" }}
                   {{- if .Pages -}}
                     <p class="site-about-header-participations-item">
-                      <a href="{{ .RelPermalink }}" target="_blank" aria-label="{{ .LinkTitle }}">
+                      <a href="{{ .RelPermalink }}" aria-label="{{ .LinkTitle }}">
                         <i class="fa-solid fa-person-chalkboard"></i>
                         <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
                       </a>
                     </p>
                   {{- end }}
                 {{- end }}
-                {{- with site.GetPage "/participation_kinds/podcasts/" }}
+                {{- with site.GetPage "/participationkinds/podcasts/" }}
                   {{- if .Pages -}}
                     <p class="site-about-header-participations-item">
-                      <a href="{{ .RelPermalink }}" target="_blank" aria-label="{{ .LinkTitle }}">
+                      <a href="{{ .RelPermalink }}" aria-label="{{ .LinkTitle }}">
                         <i class="fa-solid fa-podcast"></i>
                         <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
                       </a>

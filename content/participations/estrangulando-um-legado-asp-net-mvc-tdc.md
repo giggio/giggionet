@@ -5,6 +5,6 @@ description: |
   Nessa palestra no evento TDC mostro como estrangular uma aplicação MVC/WebApi
   e gradualmente movimentá-la para ASP.NET Core.
 link: https://thedevconf.com/tdc/2022/business/trilha-arquitetura-dotnet
-participation_kinds:
+participationkinds:
   - talks
 ---

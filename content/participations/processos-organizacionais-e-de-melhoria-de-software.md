@@ -5,6 +5,6 @@ description: |
   Fui "ludibriado" pelo Carlos Nogueira a participar desse episódio sobre melhoria de processos organizacionais e
   de construção de software. Falamos de gestão, de engenharia e diversos outros assuntos
 link: https://youtu.be/JRbULlcaf9I?si=LT2DhWtX8O2FdLZz
-participation_kinds:
+participationkinds:
   - videos
 ---

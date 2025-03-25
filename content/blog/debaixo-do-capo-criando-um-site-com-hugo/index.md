@@ -131,7 +131,7 @@ prop: true
 O Hugo tem um sistema de taxonomia, que é uma forma de categorizar suas páginas. O mais comum, e o que estou usando, são
 categorias e tags para os posts do blog, mas você poderia usar para organizar qualquer coisa. Também usei para montar as
 páginas de tipos de participações (por exemplo, as de [vídeos](http://giggio.net/participations/kinds/videos/) - veja
-seu código no [Github](https://github.com/giggio/giggionet/tree/main/content/participation_kinds).
+seu código no [Github](https://github.com/giggio/giggionet/tree/main/content/participationkinds).
 
 O exemplo que eles usam na [documentação](https://gohugo.io/content-management/taxonomies/) é com filmes e atores.
 Assim, uma página de um filme pode ter anotado quais são seus atores. Ator é a `taxonomia`, o nome do ator se torna o

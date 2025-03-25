@@ -5,6 +5,6 @@ description: |
   Nesta palestra desafio os limites do tamanho de contêineres, criando uma aplicação
   completa rodando em um contêiner, com poucos megabytes, e usando Rust.
 link: https://www.youtube.com/live/uTUHRIMkdxw?si=suAfc2Xq3RqGrEhe
-participation_kinds:
+participationkinds:
   - videos
 ---

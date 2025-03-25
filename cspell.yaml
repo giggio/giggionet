@@ -69,6 +69,8 @@ words:
   - opengraph
   - pagefind
   - participations
+  - participationkind
+  - participationkinds
   - plainify
   - posthighlight
   - purgecss

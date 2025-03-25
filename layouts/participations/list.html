@@ -14,8 +14,7 @@
       </div>
     </div>
   </section>
-  {{- $participationKinds := where .Site.Taxonomies.participation_kinds ".Page.Section" "participations" -}}
-  {{- if $participationKinds -}}
+  {{- with where .Site.Taxonomies.participationkinds ".Page.Section" "participations" -}}
     <section class="site-participations-kinds">
       <div class="container">
         <div class="row">
@@ -24,7 +23,7 @@
         <div class="row justify-content-center">
           <div class="col-12">
             <div class="btn-group" role="group">
-              {{ range $participationKinds }}
+              {{ range . }}
                 <a class="btn btn-sm button-tertiary" href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
               {{ end }}
             </div>
@@ -33,5 +32,5 @@
       </div>
     </section>
   {{ end }}
-  {{- partial "participation_kind_list.html" . }}
+  {{- partial "participationKind_list.html" . }}
 {{ end }}

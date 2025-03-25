@@ -39,7 +39,7 @@ languages:
 taxonomies:
   category: categories
   tag: tags
-  participation_kind: participation_kinds
+  participationKind: participationkinds
 markup:
   tableOfContents:
     endLevel: 4
@@ -139,11 +139,11 @@ permalinks:
   taxonomy:
     tags: /blog/:section/
     categories: /blog/:section/
-    participation_kinds: /participations/:section/
+    participationkinds: /participations/:section/
   term:
     tags: /blog/tags/:slug/
     categories: /blog/categories/:slug/
-    participation_kinds: /participations/kinds/:slug/
+    participationkinds: /participations/kinds/:slug/
 
 module:
   mounts:

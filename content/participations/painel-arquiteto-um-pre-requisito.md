@@ -5,6 +5,6 @@ description: |
   Discutimos a necessidade de uma pessoa arquiteta em um projeto de software,
   no evento TDC.
 link: https://thedevconf.com/tdc/2022/business/trilha-arquitetura-dotnet
-participation_kinds:
+participationkinds:
   - talks
 ---

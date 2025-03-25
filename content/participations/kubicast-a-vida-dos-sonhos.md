@@ -6,6 +6,6 @@ description: |
   do que estou fazendo agora e sobre a venda da Lambda3. Falamos de tecnologia,
   desafios pessoais e muita reflexão sobre o que significa viver uma vida dos sonhos.
 link: https://getup.io/blog/kubicast-160
-participation_kinds:
+participationkinds:
   - podcasts
 ---
