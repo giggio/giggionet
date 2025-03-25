@@ -1,0 +1,10 @@
+{{- with .File -}}
+  {{- if not .IsContentAdapter -}}
+    {{- $href := printf site.Params.gitEditURLMask .Path -}}
+    <p class="site-blog-improve-page">
+      {{ i18n "improveThisPage.preText" }}
+      <a href="{{ $href }}" class="site-blog-improve-page-link">{{ i18n "improveThisPage.link" }}</a>
+      {{ i18n "improveThisPage.postText" }}
+    </p>
+  {{- end -}}
+{{- end -}}

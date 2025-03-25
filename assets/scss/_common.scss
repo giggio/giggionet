@@ -34,3 +34,10 @@ body {
 .nav-search {
   font-size: 1.5em;
 }
+
+a {
+  color: variables.$primary-color;
+  &:hover {
+    color: variables.$tertiary-color;
+  }
+}

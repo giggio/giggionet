@@ -55,3 +55,7 @@ footer:
   podcasts: Eu ouço
 close: Fechar
 content: Conteúdo
+improveThisPage:
+  preText: Encontrou um problema no texto?
+  link: Me mande uma sugestão de melhoria.
+  postText: O código é livre.

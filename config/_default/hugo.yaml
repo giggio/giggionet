@@ -110,6 +110,7 @@ params:
   blogFeatureImage: images/blog-placeholder-post-feature.jpg # used as fallback for og:image, coming from custom _funcs/get-page-images.html
   # spellchecker:disable-next-line
   contactFeatureImage: images/giovanni-bassi.jpg
+  gitEditURLMask: 'https://github.com/giggio/giggionet/edit/main/content/%s'
   author:
     email: giggio@giggio.net
     name: Giovanni Bassi
