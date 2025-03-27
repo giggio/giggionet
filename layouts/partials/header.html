@@ -1,22 +1,23 @@
 <nav class="navbar navbar-expand-md site-navigation">
-  <div class="container-sm">
+  <div class="container">
     <a class="navbar-brand" href="{{ .Site.BaseURL | relLangURL }}">
       {{ partial "img.html" (dict "src" .Site.Params.logo "alt" (i18n "logoAlt") "class" "nav-logo") }}
     </a>
     <button
       class="navbar-toggler collapsed"
       type="button"
-      data-toggle="collapse"
-      data-target="#sitenavbar"
-      title="{{ i18n "menu.title" }}"
+      data-bs-toggle="collapse"
+      data-bs-target="#sitenavbar"
+      aria-controls="sitenavbar"
+      aria-expanded="false"
+      aria-label="{{ i18n "menu.title" }}"
     >
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="sitenavbar">
-      <ul class="navbar-nav ml-auto main-nav">
+      <ul class="navbar-nav ms-auto main-nav">
         {{- $menu := (.Site.Menus.nav) }}
         {{- $len := (len $menu) }}
         {{- range $element := $menu }}
@@ -28,7 +29,9 @@
             {{- range $num := (seq $number_of_links) }}
               {{- $extra_classes := "" }}
               {{- if $element.Params.featured }}
-                {{- $extra_classes = " btn btn-sm btn-primary btn-sm-rounded" -}}
+                {{- $extra_classes = "btn btn-sm btn-primary btn-sm-rounded" -}}
+              {{- else }}
+                {{- $extra_classes = "nav-link" -}}
               {{- end }}
               {{- if eq $number_of_links 2 }}
                 {{- if eq $num 1 }}
@@ -38,7 +41,7 @@
                 {{- end }}
               {{- end }}
               <a
-                class="nav-link{{ $extra_classes }}"
+                class="{{ $extra_classes }}"
                 href="{{ $url }}"
                 {{ if $element.Params.ariaDisabled }}tabindex="-1"{{ end -}}
                 {{ if eq $num 2 -}}aria-hidden="true"{{- end -}}

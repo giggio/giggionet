@@ -16,7 +16,7 @@
   <div class="container">
     <div class="row">
       {{ range $pages }}
-        <div class="col-lg-6 mb-4 mb-lg-5">
+        <div class="col-12 col-lg-6 mb-4 mb-lg-5">
           <article class="site-blog-post">
             <div class="site-blog-post-thumb" aria-disabled="true">
               <a
@@ -38,22 +38,24 @@
                 <span class="site-blog-post-content-readingtime">
                   {{ (i18n "readTimeLong" .ReadingTime) }}
                 </span>
-                <span
-                  data-toggle="popover"
-                  data-content="<a data-toggle='modal' href='#shareModal' class='site-blog-post-share-modal-link'
-                    data-title='{{ .Title }}'
-                    data-summary='{{ chomp (.Summary | plainify) }}'
-                    data-url='{{ .Permalink | absLangURL }}'>
-                    <i class='fa-solid fa-share-from-square'></i>
-                    {{ i18n `share` }}</a>"
-                  data-html="true"
-                  data-trigger="focus"
-                  class="site-blog-post-share"
-                  tabindex="-1"
-                >
-                  <i class="fa-solid fa-ellipsis-vertical"></i>
-                </span>
               {{- end -}}
+              <span
+                data-bs-toggle="popover"
+                data-bs-content="<a data-bs-toggle='modal'
+                  data-bs-target='#shareModal'
+                  class='site-blog-post-share-modal-link'
+                  data-title='{{ .Title }}'
+                  data-summary='{{ chomp (.Summary | plainify) }}'
+                  data-url='{{ .Permalink | absLangURL }}'>
+                  <i class='fa-solid fa-share-from-square'></i>
+                  {{ i18n `share` }}</a>"
+                data-bs-html="true"
+                data-bs-trigger="focus"
+                class="site-blog-post-share"
+                tabindex="-1"
+              >
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </span>
               <p class="site-blog-post-content-summary">{{ .Summary | truncate 150 | plainify }}</p>
             </div>
           </article>

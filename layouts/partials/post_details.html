@@ -1,6 +1,6 @@
 <div class="archive-entry">
   {{- range (.GetTerms "categories") }}
-    <a href="{{ .RelPermalink }}" class="badge badge-primary">{{ .LinkTitle }}</a>
+    <a href="{{ .RelPermalink }}" class="badge text-bg-primary">{{ .LinkTitle }}</a>
   {{- end }}
   <h4 class="archive-entry-title entry-hint-parent">
     <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>

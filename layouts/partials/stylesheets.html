@@ -1,6 +1,5 @@
 {{- $stylesheets := (slice
   (dict "href" (css.Sass (resources.Get "scss/imports.scss")))
-  (dict "href" "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" "integrity" "sha512-rt/SrQ4UNIaGfDyEXZtNcyWvQeOq0QLygHluFQcSjaGB04IxWhal71tKuzP6K8eYXYB6vJV4pHkXcmFGGQ1/0w==")
   (dict "href" "/css/fontawesome/css/all.css" "noconcat" true)
   (dict "href" "https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700|Montserrat:300,400,500,600,700&display=swap" )
   (dict "href" "https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" "integrity" "sha512-TktJbycEG5Van9KvrSHFUcYOKBroD7QCYkEe73HAutODCw9QTFcvF6fuxioYM1h6THNudK1GjVidazj6EslK4A==")
@@ -21,6 +20,7 @@
     "angle_down_select_image" $angle_down_select_image.RelPermalink
     "ways_to_contact_len" (len site.Data.ways_to_contact)
   -}}
+  {{/* todo: silenceDeprecations are because of Bootstrap, remove when https://github.com/gohugoio/hugo/issues/13530 is done */}}
   {{- $opts := dict
     "enableSourceMap" (not hugo.IsProduction)
     "outputStyle" (cond hugo.IsProduction "compressed" "expanded")
@@ -28,6 +28,7 @@
     "transpiler" "dartsass"
     "enableSourceMap" hugo.IsProduction
     "sourceMapIncludeSources" true
+    "silenceDeprecations" (slice "import" "global-builtin" "mixed-decls" "color-functions")
     "vars" $vars
   -}}
   {{- $stylesheets = $stylesheets | append (dict "href" (css.Sass $opts .)) -}}

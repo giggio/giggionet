@@ -1,5 +1,6 @@
 @use "../mixins";
 @use "../variables";
+@use "sass:color";
 
 .site {
   &-blog {
@@ -56,7 +57,7 @@
           color: variables.$text-color-dark;
           &:hover {
             text-decoration: none;
-            background-color: lightgray;
+            background-color: color.adjust($color: variables.$primary-color, $lightness: 20%);
           }
         }
         font-size: 60px;

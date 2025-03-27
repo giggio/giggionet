@@ -8,6 +8,10 @@
   color: variables.$white !important;
   padding: 20px 45px;
   border-radius: 0;
+  &:focus,
+  &:active {
+    color: white !important;
+  }
   &:focus {
     box-shadow: none;
   }
@@ -64,18 +68,28 @@
   border-radius: 40px;
 }
 
-.btn-primary {
-  background: variables.$primary-color;
-  color: variables.$white;
-  &:hover {
-    background: color.adjust($color: variables.$primary-color, $lightness: -10%);
-  }
+.btn-secondary {
+  --bs-btn-hover-bg: #{color.adjust($color: variables.$tertiary-color, $lightness: -20%)};
+  --bs-btn-hover-border-color: #{color.adjust($color: variables.$tertiary-color, $lightness: -20%)};
+  --bs-btn-active-bg: #{variables.$tertiary-color};
+  --bs-btn-active-border-color: #{variables.$tertiary-color};
 }
 
-.btn-secondary {
-  background: variables.$secondary-color;
-  color: variables.$white;
-  &:hover {
-    background: color.adjust($color: variables.$secondary-color, $lightness: -10%);
-  }
+.btn-tertiary {
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: #{variables.$tertiary-color};
+  --bs-btn-border-color: #{variables.$tertiary-color};
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #{variables.$primary-color};
+  --bs-btn-hover-border-color: #{variables.$primary-color};
+  --bs-btn-focus-shadow-rgb: #{variables.$tertiary-color};
+  --bs-btn-active-color: var(--bs-white);
+  --bs-btn-active-bg: #{variables.$primary-color};
+  --bs-btn-active-border-color: #{variables.$primary-color};
+}
+
+.btn-close {
+  width: 0.5em;
+  height: 0.5em;
 }

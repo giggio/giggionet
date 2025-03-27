@@ -20,6 +20,11 @@
   @include mixins.tablet {
     padding: 15px;
   }
+  &.navbar {
+    & > .container {
+      padding: 0;
+    }
+  }
   .navbar-brand {
     padding: 0;
     margin: 0;
@@ -35,9 +40,13 @@
     }
     .nav-link {
       font-family: variables.$secondary-font;
+      font-size: var(--bs-btn-font-size);
       color: variables.$text-color-dark;
       transition: all 0.3s ease;
       padding: 15px 18px;
+      @include mixins.desktop {
+        padding: 15px 12px;
+      }
       position: relative;
       &:hover {
         transition: 500ms;

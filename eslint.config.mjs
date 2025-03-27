@@ -7,6 +7,13 @@ export default [
     ignores: ["node_modules/", "public/", "resources/", "outputs/"],
   },
   {
+    files: ["assets/**/*.mjs"],
+    languageOptions: {
+      sourceType: "module",
+      globals: { ...globals.browser },
+    },
+  },
+  {
     files: ["**/*.js"],
     languageOptions: {
       sourceType: "script",
@@ -22,6 +29,7 @@ export default [
   },
   {
     files: ["**/*.mjs"],
+    ignores: ["assets/"],
     languageOptions: {
       sourceType: "module",
       globals: globals.node,

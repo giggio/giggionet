@@ -95,43 +95,58 @@
     </div>
   </div>
 </footer>
-
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-  defer
-></script>
-{{- if (.Store.Get "popover") }}
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"
-    integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-    defer
-  ></script>
+{{- $vendor := 0 -}}
+{{- with resources.Get "/js/vendor.mjs" -}}
+  {{- $opts := dict
+    "minify" hugo.IsProduction
+    "sourceMap" (cond hugo.IsProduction "linked" "")
+    "format" "esm"
+    "targetPath" "/js/vendor.mjs"
+  -}}
+  {{- with . | js.Build $opts -}}
+    {{- if hugo.IsProduction -}}
+      {{- $vendor = . | fingerprint "sha256" -}}
+    {{- else }}
+      {{- $vendor = . -}}
+    {{- end }}
+    {{- printf `<!-- Vendor JavaScript file: %q -->` $vendor.RelPermalink | safeHTML }}
+  {{- end }}
+{{- else }}
+  {{- warnf "Missing vendor file." -}}
+{{- end }}
+{{- if hugo.IsProduction -}}
+  {{- with $vendor -}}
+  <script type="importmap">
+    {
+      "imports": {
+        "/js/vendor.mjs": "{{ .RelPermalink }}"
+      }
+    }
+  </script>
+  {{- end -}}
 {{- end -}}
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"
-  integrity="sha512-7rusk8kGPFynZWu26OKbTeI+QPoYchtxsmPeBqkHIEXJxeun4yJ4ISYe7C6sz9wdxeE1Gk3VxsIWgCZTc+vX3g=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-  defer
-></script>
-{{- $script := resources.Get "js/script.js" -}}
+{{- $script := resources.Get "js/script.mjs" -}}
 {{- if hugo.IsProduction -}}
   {{- $script = $script | minify | fingerprint "sha256" -}}
 {{- end -}}
 {{- with $script }}
   <script
     src="{{ .RelPermalink }}"
+    type="module"
     {{ with .Data.Integrity }}integrity="{{ . }}"{{ end }}
     crossorigin="anonymous"
     defer
   ></script>
 {{- end -}}
 {{- if (.Store.Get "lightbox-count") }}
+  {{ "<!-- jquery -->" | safeHTML -}}
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    defer
+  ></script>
   {{ "<!-- lightbox -->" | safeHTML -}}
   <!-- stylesheet added to end of body because we don't know if we will need it until after the content page has rendered -->
   {{ partial "stylesheet.html" (dict "href" "js/lightbox2/css/lightbox.min.css") }}

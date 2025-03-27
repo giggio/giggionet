@@ -2,15 +2,20 @@
 @use "../variables";
 
 .site-contact {
-  padding: 150px 0 100px;
+  padding: 150px 50px 100px;
   background: variables.$gray;
   @include mixins.mobile {
-    padding: 120px 0 100px;
+    padding: 120px 20px 100px;
   }
   &-title {
     font-weight: 700;
+    font-size: 65px;
+    @include mixins.desktop {
+      padding-bottom: 30px;
+    }
     @include mixins.tablet {
-      font-size: 40px;
+      font-size: 50px;
+      padding-bottom: 20px;
     }
     span {
       color: variables.$primary-color;
@@ -18,15 +23,10 @@
   }
   &-description {
     width: 60%;
-    padding-left: 50px;
+    font-size: 25px;
+    font-weight: 300;
     @include mixins.desktop {
       width: 100%;
-      padding: 0 38px;
-    }
-    p {
-      font-size: 25px;
-      font-weight: 300;
-      margin-bottom: 0;
     }
   }
 }

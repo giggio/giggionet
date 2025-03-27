@@ -1,12 +1,8 @@
 <section class="site-participations-items">
   <div class="container">
-    <div class="row">
-      <div class="col">
-        {{- range $i, $page := .Pages }}
-          <!-- prettier-ignore -->
-          {{- if eq 0 (mod $i 3) }}
-              <div class="card-deck">
-            {{- end }}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+      {{- range $i, $page := .Pages }}
+        <div class="col mt-5">
           <div class="card">
             <div class="card-header">
               {{- range .GetTerms "participationkinds" }}
@@ -26,14 +22,12 @@
               {{ .Date | time.Format ":date_long" }}
             </div>
           </div>
-          <!-- prettier-ignore -->
-          {{- if or (eq 2 (mod $i 3)) (eq $i (sub (len $.Pages) 1)) }}
-              </div>
-            {{- end }}
-        {{- else }}
+        </div>
+      {{- else }}
+        <div class="col">
           <h2 class="site-participations-items-empty text-center">{{ i18n "noParticipations" }}</h2>
-        {{- end }}
-      </div>
+        </div>
+      {{- end }}
     </div>
   </div>
 </section>

@@ -1,29 +1,23 @@
 @use "./variables";
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1100px,
+  xxl: 1140px,
+);
+$primary: variables.$primary-color;
+$secondary: variables.$secondary-color;
+$card-height: 100%;
+$navbar-light-toggler-border-color: white;
+$navbar-toggler-focus-width: 0;
+$navbar-light-icon-color: variables.$primary-color;
+$navbar-light-active-color: variables.$primary-color;
+$btn-close-color: variables.$primary-color;
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 .badge {
-  &-primary {
-    background-color: variables.$primary-color;
-    color: white;
-  }
-  &-secondary {
-    background-color: variables.$secondary-color;
-    color: white;
-  }
-  &-tertiary {
-    background-color: variables.$tertiary-color;
-    color: white;
-  }
-}
-
-.btn {
-  &:focus,
-  &:active {
-    background-color: variables.$tertiary-color !important;
-    color: white !important;
-  }
-}
-
-.button {
   &-tertiary {
     background-color: variables.$tertiary-color;
     color: white;
@@ -31,8 +25,8 @@
 }
 
 /*! purgecss start ignore */
-[data-toggle="modal"],
-[data-toggle="popover"] {
+[data-bs-toggle="modal"],
+[data-bs-toggle="popover"] {
   cursor: pointer;
 }
 /*! purgecss end ignore */

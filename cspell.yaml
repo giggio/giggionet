@@ -46,6 +46,7 @@ words:
   - github
   - gitinfo
   - hugo
+  - importmap
   - instagram
   - isset
   - kokosa
@@ -68,10 +69,11 @@ words:
   - notfound
   - opengraph
   - pagefind
-  - participations
   - participationkind
   - participationkinds
+  - participations
   - plainify
+  - popperjs
   - posthighlight
   - purgecss
   - quebradev
@@ -92,6 +94,7 @@ words:
   - unmarshal
   - unmatch
   - urlquery
+  - warnf
   - warnidf
   - webfonts
   - wenger
