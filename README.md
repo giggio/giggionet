@@ -92,7 +92,7 @@ All of those are also being check by Git hooks and by the Github workflow.
 
 ## Tips
 
-- Use `hugo build --environment development && npm run unused-css` to view css that is not being used.
+- Use `npm run unused-css` to view css that is not being used.
 - Install the git hooks. See the [README.md](./.githooks/README.md) for how to do it.
 - Lint the files before committing. See [the linting section above](#linting-and-spell-checking).
 

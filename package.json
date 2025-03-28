@@ -1,11 +1,18 @@
 {
+  "type": "module",
   "scripts": {
     "cspell": "cspell",
+    "cspell:run": "cspell -- lint --no-progress .",
     "eslint": "eslint",
+    "eslint:run": "eslint --max-warnings=0",
     "markdownlint": "markdownlint-cli2",
+    "markdownlint:run": "markdownlint-cli2",
     "prettier": "prettier",
-    "unused-css": "purgecss --css ./public/css/site.css --content './public/**/*.html' --rejected --safelist nav-bg badge-secondary missing-alt entry-hint | jq .[].rejected",
-    "slugify": "slugify"
+    "prettier:run": "prettier --list-different .",
+    "unused-css": "HUGO_BUILD_BUILDSTATS_ENABLE=true hugo build --environment development && echo 'Unused CSS rules:' && purgecss --config ./purgecss.config.mjs --css ./public/css/site.css --rejected | jq -r .[].rejected[] | sed '1,/site-css-starts-here/d' | awk '{$1=$1};1' | grep -v '^$' | sort | uniq | (pipe=\"$(cat)\"; if [ -z \"$pipe\" ]; then echo 'No unused selectors.'; else echo \"$pipe\"; fi)",
+    "postcss:run": "postcss --config postcss.config.mjs public/css/*.css",
+    "slugify": "slugify",
+    "lint": "npm run eslint:run && npm run prettier:run && npm run markdownlint:run && npm run cspell:run"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",

@@ -251,6 +251,7 @@
       }
       blockquote {
         p {
+          /*! purgecss ignore current */
           color: variables.$text-color-dark;
           font-size: 18px;
         }
@@ -262,10 +263,10 @@
         }
       }
     }
-  }
 
-  &-improve-page {
-    font-size: 14px;
+    &-improve-page {
+      font-size: 18px;
+    }
   }
 }
 .rss-icon {

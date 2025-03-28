@@ -17,6 +17,14 @@ $btn-close-color: variables.$primary-color;
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+/**
+* This is where our custom CSS starts
+*/
+site-css-starts-here {
+  // this selector is here so we know where our css starts and where bootstrap starts
+  color: #fff;
+}
+
 .badge {
   &-tertiary {
     background-color: variables.$tertiary-color;

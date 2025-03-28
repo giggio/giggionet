@@ -17,7 +17,7 @@
   {{ else }}
     {{- $css = .href -}}
   {{ end }}
-  {{- with $css | postCSS | minify | fingerprint | resources.PostProcess -}}
+  {{- with $css | postCSS (dict "config" "postcss.config.mjs") | minify | fingerprint | resources.PostProcess -}}
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" />
     {{/* todo: add crossorigin="anonymous" when https://github.com/bezoerb/inline-critical/issues/322 is fixed */}}
   {{- end -}}

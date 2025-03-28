@@ -1,5 +1,5 @@
 {{- $stylesheets := (slice
-  (dict "href" (css.Sass (resources.Get "scss/imports.scss")))
+  (dict "href" (css.Sass (dict "targetPath" "css/imports.css") (resources.Get "scss/imports.scss")))
   (dict "href" "/css/fontawesome/css/all.css" "noconcat" true)
   (dict "href" "https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700|Montserrat:300,400,500,600,700&display=swap" )
   (dict "href" "https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" "integrity" "sha512-TktJbycEG5Van9KvrSHFUcYOKBroD7QCYkEe73HAutODCw9QTFcvF6fuxioYM1h6THNudK1GjVidazj6EslK4A==")

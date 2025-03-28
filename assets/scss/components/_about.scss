@@ -117,11 +117,6 @@
       }
     }
   }
-  &-wrapper {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-  }
   &-name {
     background: variables.$primary-color;
     margin-bottom: 30px;

@@ -14,17 +14,10 @@ export default [
     },
   },
   {
-    files: ["**/*.js"],
+    files: ["static/**/*.js", "assets/**/*.js"],
     languageOptions: {
       sourceType: "script",
-      globals: { ...globals.browser, ...globals.jquery },
-    },
-  },
-  {
-    files: ["postcss.config.js"],
-    languageOptions: {
-      sourceType: "commonjs",
-      globals: globals.node,
+      globals: { ...globals.browser },
     },
   },
   {
