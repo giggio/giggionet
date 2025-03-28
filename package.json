@@ -10,8 +10,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.3",
-    "lightbox2": "^2.11.5"
+    "bootstrap": "^5.3.3"
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^2.0.4",
@@ -19,8 +18,8 @@
     "@eslint/js": "^9.23.0",
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "@types/bootstrap": "^5.2.10",
-    "@types/jquery": "^3.5.32",
-    "@types/node": "^22.13.13",
+    "@types/node": "^22.13.14",
+    "@types/photoswipe": "^4.1.6",
     "autoprefixer": "^10.4.21",
     "critical": "^7.2.1",
     "cspell": "^8.18.0",

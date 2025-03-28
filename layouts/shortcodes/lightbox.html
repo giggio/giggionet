@@ -1,95 +1,119 @@
 {{- $index := add 1 (default 0 (.Page.Store.Get "lightbox-count")) -}}
 {{- .Page.Store.Set "lightbox-count" $index -}}
 
-{{- $width := .Get "width" -}}
-{{- $height := .Get "height" -}}
-{{- $thumb_width := .Get "thumb_width" -}}
-{{- $thumb_height := .Get "thumb_height" -}}
 {{- $src := urls.Parse (.Get "src") -}}
-{{- $maxWidth := .Site.Params.postMaxImageWidth -}}
-
-{{- $downloadedImage := 0 -}}
-{{- if and (or $height $width $thumb_height $thumb_width) $src.IsAbs (not (.Get "nodownload")) -}}
+{{- $largeImageDimensions := (dict "width" (default 0 (.Get "width")) "height" (.Get "height")) }}
+{{- $thumbImageDimensions := (dict "width" (default 0 (.Get "thumb_width")) "height" (.Get "thumb_height")) }}
+{{- $originalImage := 0 -}}
+{{- $useRemoteImage := not (not (.Get "nodownload")) }}
+{{- if $src.IsAbs -}}
   {{- with try (resources.GetRemote $src.String) -}}
     {{- with .Err -}}
       {{- errorf "%s" . -}}
     {{- else with .Value -}}
-      {{- $downloadedImage = . -}}
-      {{- $src = urls.Parse .RelPermalink -}}
+      {{- $largeImageDimensions = (dict "width" .Width "height" .Height) -}}
+      {{- if not $useRemoteImage }}
+        {{- $originalImage = . -}}
+      {{- end -}}
     {{- else -}}
-      {{ errorf "Unable to get remote resource %q" $src.String }}
+      {{- errorf "Unable to get remote resource %q" $src.String }}
     {{- end -}}
   {{- end -}}
+{{- else -}}
+  {{- $originalImage = or (.Page.Resources.Get $src.String) (resources.Get $src.String) -}}
 {{- end -}}
 
-{{- $remoteImage := $src.IsAbs -}}
-{{- $thumb_img := 0 }}
-{{- $img := 0 }}
-{{- if not $remoteImage -}}
-  {{- with or $downloadedImage (.Page.Resources.Get $src.Path) (resources.Get $src.Path) -}}
-    {{- if or $width $height -}}
-      {{- $img = .Resize (printf "%sx%s webp" (default "" $width) (default "" $height)) }}
+{{- $imageURL := "" -}}
+{{- $thumbImageURL := "" -}}
+{{- if $useRemoteImage -}}
+  {{- $imageURL = $src.String -}}
+  {{- $thumbImageURL = $imageURL -}}
+{{- else -}}
+  {{- $image := 0 -}}
+  {{- $thumbImage := 0 }}
+  {{- with $originalImage -}}
+    {{- if (or $thumbImageDimensions.width $thumbImageDimensions.height) -}}
+      {{- $thumbImage = .Resize (printf "%sx%s webp" (default "" $thumbImageDimensions.width) (default "" $thumbImageDimensions.height)) }}
     {{- else -}}
-      {{- $img = .Resize (printf "%dx%d webp" .Width .Height) }}
+      {{- $thumbImage = .Process "webp" }}
     {{- end -}}
-    {{- if (or $thumb_height $thumb_width) -}}
-      {{- $thumb_img = .Resize (printf "%sx%s webp" (default "" $thumb_width) (default "" $thumb_height)) }}
-    {{- else -}}
-      {{- $thumb_img = $img }}
-    {{- end -}}
-    {{- if gt $thumb_img.Width $maxWidth -}}
+    {{- if gt $thumbImage.Width $.Site.Params.postMaxImageWidth -}}
       {{/* make image smaller as it will be resized by the browser anyway */}}
-      {{- $thumb_img = .Resize (printf "%dx webp" $maxWidth) }}
+      {{- $thumbImage = .Resize (printf "%dx webp" $.Site.Params.postMaxImageWidth) }}
+    {{- end -}}
+    {{- $thumbImageDimensions = (dict "width" $thumbImage.Width "height" $thumbImage.Height) }}
+    {{- if or $largeImageDimensions.width $largeImageDimensions.height -}}
+      {{- $image = .Resize (printf "%sx%s webp" (cond (eq 0 $largeImageDimensions.width) "" (string $largeImageDimensions.width)) (cond (eq 0 $largeImageDimensions.height) "" (string $largeImageDimensions.height))) }}
+    {{- else -}}
+      {{- $image = .Process "webp" -}}
     {{- end -}}
   {{- else -}}
     {{- warnidf "shortcode-lightbox-missing-image" "The %q shortcode was unable to get the image. See %s" $.Name $.Position -}}
   {{- end -}}
+  {{- $largeImageDimensions = (dict "width" $image.Width "height" $image.Height) -}}
+  {{- $imageURL = $image.RelPermalink -}}
+  {{- $thumbImageURL = $thumbImage.RelPermalink -}}
 {{- end -}}
 
-{{- $key := "" -}}
-{{- with .Get "key" -}}
-  {{- $key = . -}}
-{{- else }}
-  {{- $path := index (last 1 (split .Page.Path "/")) 0 }}
-  {{- $key = printf (print $path "-%d") $index }}
-{{- end -}}
-{{- $title := "" -}}
-{{- with .Get "title" -}}
-  {{- $title = . -}}
-{{- end -}}
-{{- $alt := "" -}}
-{{- with .Get "alt" -}}
-  {{- $alt = . -}}
-{{- end -}}
-
-{{- if $remoteImage -}}
-  <a
-    href="{{ $src.String }}"
-    data-lightbox="{{ $key }}"
-    {{ with $title }}data-title="{{ . }}"{{ end }}
-    {{ with $alt }}data-alt="{{ . }}"{{- end -}}
-  >
-    <img
-      src="{{ $src.String }}"
-      {{ with $alt }}alt="{{ . }}"{{- end -}}
-      {{ if $thumb_height -}}height="{{ $thumb_height }}"{{- end -}}
-      {{ if $thumb_width -}}width="{{ $thumb_width }}"{{- end -}}
-    />
-  </a>
-{{- else -}}
-  <a
-    href="{{ $img.RelPermalink }}"
-    data-lightbox="{{ $key }}"
-    {{ with $title }}data-title="{{ . }}"{{ end }}
-    {{ with $alt }}data-alt="{{ . }}"{{- end -}}
-  >
-    {{ with $thumb_img -}}
-      <img
-        src="{{ .RelPermalink }}"
-        height="{{ .Height }}"
-        width="{{ .Width }}"
-        {{ with $alt }}alt="{{ . }}"{{- end -}}
-      />
+{{- $largeImageSrcset := "" -}}
+{{- $thumbImageSrcset := "" -}}
+{{- $thumbImageSize := "" -}}
+{{- if not $useRemoteImage -}}
+  {{- $largeImageSrcsets := slice -}}
+  {{- $thumbImageSrcsets := slice -}}
+  {{- $thumbImageSizes := slice -}}
+  {{- range sort (slice 400 575 767 991 1200 1400 2000 $largeImageDimensions.width) -}}
+    {{- if ge $largeImageDimensions.width . }}
+      {{- $largeImageSrcsets = $largeImageSrcsets
+        | append (printf "%s %dw" ($originalImage.Resize (printf "%dx webp" .)).RelPermalink .)
+      -}}
     {{- end -}}
-  </a>
+  {{- end -}}
+  {{- range sort (slice  400 575 767 991 1200 1400 2000 $thumbImageDimensions.width) -}}
+    {{- if ge $thumbImageDimensions.width . }}
+      {{- $thumbImageSrcsets = $thumbImageSrcsets
+        | append (printf "%s %dw" ($originalImage.Resize (printf "%dx webp" .)).RelPermalink .)
+      -}}
+      {{- $thumbImageSizes = $thumbImageSizes | append (printf "%dpx" .) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if eq 1 (len $largeImageSrcsets) }}
+    {{- $largeImageSrcsets = slice -}}
+  {{- end -}}
+  {{- if eq 1 (len $thumbImageSrcsets) }}
+    {{- $thumbImageSrcsets = slice -}}
+  {{- end -}}
+  {{- $largeImageSrcset = delimit $largeImageSrcsets ", " -}}
+  {{- $thumbImageSrcset = delimit $thumbImageSrcsets ", " -}}
+  {{- $thumbImageSize = delimit $thumbImageSizes ", " -}}
+{{- end -}}
+{{- $title := default (.Get "alt") (.Get "title") -}}
+{{- $alt := default $title (.Get "alt") -}}
+<!-- prettier-ignore -->
+{{- if not .Parent -}}
+<div class="lightbox-gallery">
+{{- end -}}
+<a
+  href="{{ $imageURL }}"
+  data-pswp-width="{{ $largeImageDimensions.width }}"
+  data-pswp-height="{{ $largeImageDimensions.height }}"
+  target="_blank"
+  class="lightbox {{ .Get "link_class" }}"
+  data-alt="{{ $alt }}"
+  {{ with $title }}data-title="{{ . }}"{{ end }}
+  {{ with $largeImageSrcset }}{{ printf "data-pswp-srcset=%q" . | safeHTMLAttr }}{{ end }}
+>
+  <img
+    src="{{ $thumbImageURL }}"
+    alt="{{ $alt }}"
+    class="{{ .Get "img_class" }}"
+    {{ with $thumbImageSrcset }}{{ printf "srcset=%q" . | safeHTMLAttr }}{{ end }}
+    {{ with $thumbImageSize }}{{ printf "sizes=%q" . | safeHTMLAttr }}{{ end }}
+    width="{{ $thumbImageDimensions.width }}"
+    height="{{ $thumbImageDimensions.height }}"
+  />
+</a>
+<!-- prettier-ignore -->
+{{- if not .Parent -}}
+</div>
 {{- end -}}

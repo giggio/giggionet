@@ -115,14 +115,8 @@
   {{- warnf "Missing vendor file." -}}
 {{- end }}
 {{- if hugo.IsProduction -}}
-  {{- with $vendor -}}
-  <script type="importmap">
-    {
-      "imports": {
-        "/js/vendor.mjs": "{{ .RelPermalink }}"
-      }
-    }
-  </script>
+  {{- with $vendor.RelPermalink -}}
+  <script type="importmap">{ "imports": { "/js/vendor.mjs": "{{ . }}" } }</script>
   {{- end -}}
 {{- end -}}
 {{- $script := resources.Get "js/script.mjs" -}}
@@ -139,23 +133,36 @@
   ></script>
 {{- end -}}
 {{- if (.Store.Get "lightbox-count") }}
-  {{ "<!-- jquery -->" | safeHTML -}}
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+  {{ "<!-- lightbox -->" | safeHTML -}}
+  {{- $min := cond hugo.IsProduction ".min" "" }}
+  <script type="importmap">
+  {
+    "imports": {
+      "photoswipe": "https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/photoswipe-lightbox.esm{{- $min -}}.js",
+      "photoswipe-pswpModule": "https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/photoswipe.esm{{- $min -}}.js"
+    }
+  }
+  </script> {{- $lightbox := resources.Get "js/lightbox.mjs" -}}
+  {{- if hugo.IsProduction -}}
+    {{- $lightbox = $lightbox | minify | fingerprint "sha256" -}}
+  {{- end -}}
+  {{- with $lightbox }}
+    <script
+      src="{{ .RelPermalink }}"
+      type="module"
+      {{ with .Data.Integrity }}integrity="{{ . }}"{{ end }}
+      crossorigin="anonymous"
+      defer
+    ></script>
+  {{- end -}}
+  <!-- stylesheet added to end of body because we don't know if we will need it until after the content page has rendered -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/photoswipe.min.css"
+    integrity="sha512-LFWtdAXHQuwUGH9cImO9blA3a3GfQNkpF2uRlhaOpSbDevNyK1rmAjs13mtpjvWyi+flP7zYWboqY+8Mkd42xA=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
-    defer
-  ></script>
-  {{ "<!-- lightbox -->" | safeHTML -}}
-  <!-- stylesheet added to end of body because we don't know if we will need it until after the content page has rendered -->
-  {{ partial "stylesheet.html" (dict "href" "js/lightbox2/css/lightbox.min.css") }}
-  {{- "<!-- images -->" | safeHTML }}
-  {{ range resources.Match "js/lightbox2/images/*.*" -}}{{ printf `<!-- %q -->` .RelPermalink | safeHTML }}{{ end }}
-  {{- $lbscript := resources.Get "js/lightbox2/js/lightbox.min.js" -}}
-  {{- with $lbscript | fingerprint "sha256" }}
-    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
-  {{- end }}
+  />
   {{ "<!-- end lightbox -->" | safeHTML }}
 {{- end }}
 {{- with .GitInfo }}

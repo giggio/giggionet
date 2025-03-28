@@ -1,0 +1,11 @@
+@use "./variables";
+.pswp__custom-caption {
+  background: white;
+  color: variables.$primary-color;
+  padding: 0 20px;
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+}

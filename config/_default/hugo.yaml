@@ -153,6 +153,3 @@ module:
     - source: node_modules/@fortawesome/fontawesome-free
       target: assets/css/fontawesome
       disableWatch: true
-    - source: node_modules/lightbox2/dist
-      target: assets/js/lightbox2
-      disableWatch: true

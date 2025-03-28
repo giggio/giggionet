@@ -72,9 +72,11 @@ words:
   - participationkind
   - participationkinds
   - participations
+  - photoswipe
   - plainify
   - popperjs
   - posthighlight
+  - pswp
   - purgecss
   - quebradev
   - querify
@@ -87,6 +89,7 @@ words:
   - showmissing
   - sitenavbar
   - slugified
+  - srcsets
   - summarylength
   - tdewolff
   - towebp
