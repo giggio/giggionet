@@ -1,2 +1,2 @@
-import { Popover, Tooltip } from 'bootstrap';
-export { Popover, Tooltip };
+export { Popover, Tooltip } from 'bootstrap';
+export { initFontawesome } from './fontawesome.mjs';

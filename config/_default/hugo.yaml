@@ -150,6 +150,3 @@ module:
   mounts:
     - source: assets
       target: assets
-    - source: node_modules/@fortawesome/fontawesome-free
-      target: assets/css/fontawesome
-      disableWatch: true

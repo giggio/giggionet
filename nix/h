@@ -78,6 +78,22 @@ Usage:
   `readlink -f "$0"` check fix
 EOF
       ;;
+    view)
+      cat <<EOF
+Prints generated file in the editor
+
+Usage:
+  `readlink -f "$0"` fontawesome view
+EOF
+      ;;
+    generate)
+      cat <<EOF
+Generates the file into $PWD/assets/js/fontawesome.generated.mjs
+
+Usage:
+  `readlink -f "$0"` fontawesome generate
+EOF
+      ;;
     *)
       ;;
   esac
@@ -181,6 +197,18 @@ Commands:
   github                    Deploys to Github Pages
 EOF
       ;;
+    fontawesome)
+      cat <<EOF
+Creates the fontawesome JavaScript file from usages
+
+Usage:
+  `readlink -f "$0"` fontawesome [command]
+
+Commands:
+  view                     Prints generated file in the editor
+  generate                 Default. Generates the file into $PWD/assets/js/fontawesome.generated.mjs
+EOF
+      ;;
     *)
       cat <<EOF
 Runs Hugo commands
@@ -193,6 +221,7 @@ Commands:
   check                     Checks all files for linting and spelling errors
   complete                  Generates bash completion script
   deploy                    Deploy commands
+  fontawesome               Creates the fontawesome JavaScript file from usages
   makebundle                Create a bundle from a page
   newpost                   Create a new post
   newparticipation          Create a new participation
@@ -439,6 +468,94 @@ function deploy() {
   help 1
 }
 
+function fontawesome() {
+  if [[ $# -eq 0 ]]; then
+    SUBCOMMAND=generate
+  else
+    if [[ "$1" == -* ]]; then
+      SUBCOMMAND=generate
+    else
+      SUBCOMMAND="$1"
+      shift
+    fi
+  fi
+  source $GET_GLOBAL_ARGS
+  function generate_output() {
+    if ! [ -f hugo_stats.json ]; then
+      >&2 echo "File hugo_stats.json not found, running hugo build first."
+      HUGO_BUILD_BUILDSTATS_ENABLE=true hugo build --environment development
+    fi
+    if ! [ -d node_modules ]; then
+      >&2 echo "Node modules not found, running npm ci first."
+      npm ci
+    fi
+    local searched_files
+    searched_files=$(jq -r '.htmlElements.classes[]' hugo_stats.json | grep -E 'fa-' | grep -E --invert-match 'fa-brands|fa-solid' | sort | uniq | sed 's/-\([a-z]\)/\U\1/g' | awk '{ print $0".js" }')
+    local all_files=''
+    declare -A extra_classes
+    # space separated values, but we only have one, at the moment:
+    extra_classes['@fortawesome/free-solid-svg-icons']='faShareFromSquare'
+    extra_classes['@fortawesome/free-brands-svg-icons']=''
+    echo "import { dom, library } from '@fortawesome/fontawesome-svg-core';"
+    for package in @fortawesome/free-brands-svg-icons @fortawesome/free-solid-svg-icons; do
+      local package_dir="node_modules/$package"
+      if ! [ -d "$package_dir" ]; then
+        >&2 echo "Directory $package_dir not found. Was the package uninstalled?"
+        return 1
+      fi
+      local existing_files
+      existing_files=$(find $package_dir -maxdepth 1 -name 'fa*.js' -exec basename {} \; | sort | uniq)
+      local found_files
+      found_files=$(comm -12 <(echo "$searched_files") <(echo "$existing_files") | sed 's/\.js/,/')
+      all_files+=$'\n'"$found_files"
+      echo "import {"
+      echo "$found_files" | sed 's/^/  /'
+      if ! [ -z "${extra_classes[$package]}" ]; then
+        echo "${extra_classes[$package]}" | sed 's/ /\,\n/' | sed 's/^/  /'
+      fi
+      echo "} from "'"'$package'"'";"
+    done
+    all_files=$(echo "$all_files" | sed 1d)
+    echo 'library.add('
+    echo "$all_files" | sed 's/^/  /'
+    for elem in "${!extra_classes[@]}"; do
+      if ! [ -z "${extra_classes[${elem}]}" ]; then
+        echo "${extra_classes[${elem}]}" | sed 's/ /\,\n/' | sed 's/^/  /'
+      fi
+    done
+    echo ');'
+    all_files=$(echo "$all_files" | sed 's/,/.js/')
+    local files_not_found
+    files_not_found=$(comm -23 <(echo "$searched_files") <(echo "$all_files" | sort))
+    echo "export { dom, library };"
+    if [ -n "$files_not_found" ]; then
+      >&2 echo "Files not found:"
+      >&2 echo "$files_not_found"
+      return 1
+    fi
+  }
+  case "$SUBCOMMAND" in
+    view)
+      generate_output
+      exit $?
+      ;;
+    generate)
+      local output_file
+      output_file="$PWD/assets/js/fontawesome.generated.mjs"
+      if ! [ -f "$output_file" ]; then
+        >&2 echo "File $output_file not found, you are probably in the wrong directory. Please run this script from the root of the repository."
+        exit 1
+      fi
+      generate_output 1> "$output_file"
+      exit $?
+      ;;
+    *)
+      SUBCOMMAND=''
+      help 1
+      ;;
+  esac
+}
+
 function complete() {
   cat <<'EOF'
 #/usr/bin/env bash
@@ -474,7 +591,7 @@ _hugo_local_completions() {
   local common_options="-h --help --verbose"
   case "${#COMP_WORDS[@]}" in
     2)
-      COMPREPLY=($(compgen -W "build check makebundle newpost newparticipation server translations deploy complete $common_options" -- "${COMP_WORDS[1]}"))
+      COMPREPLY=($(compgen -W "build check fontawesome makebundle newpost newparticipation server translations deploy complete $common_options" -- "${COMP_WORDS[1]}"))
       ;;
     3)
       case "${COMP_WORDS[1]}" in
@@ -496,6 +613,9 @@ _hugo_local_completions() {
           local_options=($(compgen -W "dev prod $common_options" -- "${COMP_WORDS[2]}"))
           _forward_to_hugo
           COMPREPLY+=( "${local_options[@]}" )
+          ;;
+        fontawesome)
+          COMPREPLY=($(compgen -W "view generate $common_options" -- "${COMP_WORDS[2]}"))
           ;;
         build|newpost|newparticipation|complete)
           COMPREPLY=($(compgen -W "$common_options" -- "${COMP_WORDS[2]}"))
@@ -599,6 +719,9 @@ function main() {
       ;;
     deploy)
       deploy "$@"
+      ;;
+    fontawesome)
+      fontawesome "$@"
       ;;
     *)
       ;;

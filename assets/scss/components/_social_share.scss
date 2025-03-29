@@ -1,21 +1,27 @@
 @use "../variables";
 
-.sharebuttons {
-  display: flex;
-  ul {
+.site-blog {
+  .sharebuttons-wrapper {
     padding: 0;
-    margin: 0;
-    li {
-      list-style: none;
-      display: inline;
-      a {
-        margin: 0 0.5rem;
-        text-decoration: none;
-        i {
-          color: #d5d5d5;
-          &:hover {
+  }
+  .sharebuttons {
+    display: flex;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        list-style: none;
+        display: inline;
+        a {
+          margin: 0 0 0 0.6rem;
+          text-decoration: none;
+          font-size: 20px;
+          &:hover * {
             transition: 500ms;
             color: variables.$primary-color;
+          }
+          * {
+            color: #d5d5d5;
           }
         }
       }
@@ -23,12 +29,9 @@
   }
 }
 
-.sharebuttons-wrapper {
-  padding: 0;
-}
-
 .modal-body {
   .sharebuttons {
+    display: flex;
     justify-content: center;
     &-title {
       padding-bottom: 10px;
@@ -37,8 +40,25 @@
       }
     }
     ul {
+      padding: 0;
+      margin: 0;
       li {
-        font-size: 2.5rem;
+        list-style: none;
+        display: inline;
+        a {
+          margin: 0 0 0 0.6rem;
+          text-decoration: none;
+          font-size: 20px;
+          padding: 0 8px;
+          &:hover * {
+            transition: 500ms;
+            color: variables.$primary-color;
+          }
+          * {
+            color: #d5d5d5;
+            font-size: 2.5rem;
+          }
+        }
       }
     }
   }

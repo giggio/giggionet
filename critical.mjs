@@ -42,10 +42,6 @@ if (isMainThread) {
     },
     width: 900,
     height: 900,
-    rebase: {
-      from: '/css/css/fontawesome/webfonts/',
-      to: '/css/fontawesome/webfonts/',
-    },
     ignore: {
       atrule: ['@font-face'],
     }

@@ -17,10 +17,6 @@
     }
   }
   &-wrapper {
-    i {
-      font-size: 70px;
-      color: variables.$tertiary-color;
-    }
     display: flex;
     flex-wrap: wrap;
     @include mixins.desktop {
@@ -28,6 +24,10 @@
     }
   }
   &-item {
+    * {
+      font-size: 70px;
+      color: variables.$tertiary-color;
+    }
     text-align: center;
     width: calc(100% / vars.$ways_to_contact_len);
     padding-top: 30px;

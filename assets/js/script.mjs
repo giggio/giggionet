@@ -1,5 +1,6 @@
-import { Popover, Tooltip } from './vendor.mjs';
+import { Popover, Tooltip, initFontawesome } from './vendor.mjs';
 document.addEventListener("DOMContentLoaded", function () {
+  initFontawesome();
   const myDefaultAllowList = Tooltip.Default.allowList
   myDefaultAllowList['*'].push(/^data-[\w-]+/)
 
@@ -48,4 +49,22 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+  monitorIconsAdded();
 });
+
+function monitorIconsAdded() {
+  const callback = (mutationList) => {
+    const found = mutationList
+      .flatMap(mutation =>
+        mutation.type === "childList"
+        ? mutation.addedNodes.values().flatMap(n => n.nodeType === 1 ? n.querySelectorAll("i").values().toArray() : []).toArray()
+        : []
+      ).map(e => e.parentElement);
+    if (found.length)
+      initFontawesome(...found);
+  };
+  new MutationObserver(callback).observe(
+    document.getElementsByTagName("body")[0],
+    { attributes: false, childList: true, subtree: true }
+  );
+}

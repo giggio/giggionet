@@ -20,7 +20,11 @@
                 {{- with site.GetPage "/participationkinds/videos/" }}
                   {{- if .Pages -}}
                     <p class="site-about-header-participations-item">
-                      <a href="{{ .RelPermalink }}" aria-label="{{ .LinkTitle }}">
+                      <a
+                        href="{{ .RelPermalink }}"
+                        aria-label="{{ .LinkTitle }}"
+                        class="site-about-header-participations-item-link"
+                      >
                         <i class="fa-brands fa-youtube"></i>
                         <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
                       </a>
@@ -29,14 +33,22 @@
                 {{- end }}
                 {{- with site.GetPage "/blog/" }}
                   <p class="site-about-header-participations-item">
-                    <a href="{{ .RelPermalink }}" aria-label="{{ i18n "publications" }}">
-                      <i class="fa-regular fa-pen-to-square"></i>
+                    <a
+                      href="{{ .RelPermalink }}"
+                      aria-label="{{ i18n "publications" }}"
+                      class="site-about-header-participations-item-link"
+                    >
+                      <i class="fa-solid fa-pen-to-square"></i>
                       <span class="site-about-header-participations-item-text">{{ i18n "publications" }}</span>
                     </a>
                   </p>
                 {{- end }}
                 <p class="site-about-header-participations-item">
-                  <a href="#ways-to-contact" aria-label="{{ i18n "socialNetworks" }}">
+                  <a
+                    href="#ways-to-contact"
+                    aria-label="{{ i18n "socialNetworks" }}"
+                    class="site-about-header-participations-item-link"
+                  >
                     <i class="fa-solid fa-hexagon-nodes"></i>
                     <span class="site-about-header-participations-item-text">{{ i18n "socialNetworks" }}</span>
                   </a>
@@ -44,7 +56,11 @@
                 {{- with site.GetPage "/participationkinds/talks/" }}
                   {{- if .Pages -}}
                     <p class="site-about-header-participations-item">
-                      <a href="{{ .RelPermalink }}" aria-label="{{ .LinkTitle }}">
+                      <a
+                        href="{{ .RelPermalink }}"
+                        aria-label="{{ .LinkTitle }}"
+                        class="site-about-header-participations-item-link"
+                      >
                         <i class="fa-solid fa-person-chalkboard"></i>
                         <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
                       </a>
@@ -54,7 +70,11 @@
                 {{- with site.GetPage "/participationkinds/podcasts/" }}
                   {{- if .Pages -}}
                     <p class="site-about-header-participations-item">
-                      <a href="{{ .RelPermalink }}" aria-label="{{ .LinkTitle }}">
+                      <a
+                        href="{{ .RelPermalink }}"
+                        aria-label="{{ .LinkTitle }}"
+                        class="site-about-header-participations-item-link"
+                      >
                         <i class="fa-solid fa-podcast"></i>
                         <span class="site-about-header-participations-item-text">{{ .LinkTitle }}</span>
                       </a>
