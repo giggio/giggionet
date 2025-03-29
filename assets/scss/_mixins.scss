@@ -49,6 +49,12 @@
   }
 }
 
+@mixin lg {
+  @media (min-width: 992px) and (max-width: 1200px) {
+    @content;
+  }
+}
+
 @mixin size($size) {
   width: $size;
   height: $size;

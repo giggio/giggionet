@@ -3,7 +3,7 @@
     <section class="site-about-header">
       <div class="container">
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-6">
+          <div class="col-12 col-md-6 col-lg-6 order-2 order-md-1">
             <div class="h-100 d-flex flex-column">
               <div>
                 <h1 class="site-about-header-quote">
@@ -84,20 +84,13 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-6 col-lg-6 site-about-header-image-wrapper">
-            {{- $image := resources.Get site.Params.contactFeatureImage -}}
-            {{- $alt := .Params.featureImageAlt -}}
-            {{- if not $alt -}}
-              {{- warnidf "missing-featureImage-alt" "About does not have featureImage alt." -}}
-            {{- end -}}
-            {{- $image = $image.Resize (printf "%dx webp" 400) -}}
-            <img
-              class="site-about-header-image"
-              src="{{ $image.RelPermalink }}"
-              alt="{{ $alt }}"
-              width="{{ $image.Width }}"
-              height="{{ $image.Height }}"
-            />
+          <div class="col-12 col-md-6 col-lg-6 site-about-header-image-wrapper order-1 order-md-2">
+            {{ partial "img.html" (dict
+              "image" (resources.Get site.Params.contactFeatureImage)
+              "alt" .Params.featureImageAlt
+              "class" "site-about-header-image"
+              "limitWidth" 540)
+            }}
           </div>
         </div>
         <div class="row">
