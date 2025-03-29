@@ -90,6 +90,12 @@ And the spell checker is also running with VSCode support and the cspell command
 
 All of those are also being check by Git hooks and by the Github workflow.
 
+## Testing performance
+
+Don't validate tests like Lighthouse using `hugo server` or `h server prod`, as some optimizations happen outside
+of Hugo's build.
+Run `h build`, then run `http-server public --port 1313`.
+
 ## Tips
 
 - Use `npm run unused-css` to view css that is not being used.

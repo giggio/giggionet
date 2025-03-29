@@ -21,6 +21,7 @@ pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     delta
     h_completions
+    http-server
     hugo
     pagefind
     dart-sass
