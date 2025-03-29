@@ -82,8 +82,8 @@
         </div>
       </div>
       <div class="col-lg-2 col-12">
-        <a href="#top" class="site-footer-widget-top" aria-label="{{ i18n "backToTop" }}">
-          {{ partial "img.html" (dict "src" "images/base/to-top.svg" "alt" (i18n "backToTop")) }}
+        <a href="#top" class="site-footer-widget-top">
+          {{- partial "img.html" (dict "src" "images/base/to-top.svg" "ignoreAlt" true) -}}
           <p>{{- i18n "backToTop" -}}</p>
         </a>
       </div>

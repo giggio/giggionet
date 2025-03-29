@@ -13,7 +13,7 @@
 {{- if .style }}
   {{- $style = printf "%s %s" $style .style }}
 {{- end }}
-{{ define "partials/img-only.html" }}
+{{- define "partials/img-only.html" -}}
   <img
     src="{{ .image.RelPermalink }}"
     alt="{{ .alt }}"
@@ -22,7 +22,7 @@
     {{ with .class }}class="{{ . }}"{{ end }}
     {{ with .style }}style="{{ . | safeCSS }}"{{ end }}
   />
-{{ end }}
+{{- end -}}
 {{- if eq $image.MediaType.SubType "svg" }}
   {{ partial "img-only.html" (dict "image" $image "alt" .alt "dimensions" $dimensions "class" .class "style" $style) }}
 {{- else }}
