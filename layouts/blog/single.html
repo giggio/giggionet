@@ -31,7 +31,13 @@
                 <i class="fa-solid fa-triangle-exclamation missing-alt"></i>
                 {{- warnidf "post-thumb-missing-image-alt" "Post '%s' (%s) does not have feature image alt." .Title .Path -}}
               {{- end -}}
-              {{ partial "img.html" (dict "image" $image "class" "feature-image" "alt" $alt "limitWidth" site.Params.postMaxImageWidth) }}
+              {{ partial "img.html" (dict
+                "image" $image
+                "class" "feature-image"
+                "alt" $alt
+                "limitWidth" site.Params.postMaxImageWidth
+                "forceAspectRatio" true)
+              }}
             {{- end -}}
             {{- $toc := .TableOfContents }}
             {{- if gt (strings.Count "<li>" $toc) 3 }}

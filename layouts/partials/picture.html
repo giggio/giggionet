@@ -1,0 +1,40 @@
+{{- if and (not .alt) (not .ignoreAlt) -}}
+  {{- warnidf "missing-img-alt" "Unable to get img alt for '%s'." .alt -}}
+{{- end -}}
+{{- $image := partial "img_towebp.html" . -}}
+{{- $dimensions := partial "img_dimensions.html" $image -}}
+{{- $style := "" }}
+{{- $aspectRatio := float 0 }}
+{{- if and $dimensions.width $dimensions.height .forceAspectRatio }}
+  {{- $aspectRatio = div (float $dimensions.width) (float $dimensions.height) }}
+  {{- $dimensions = dict }}
+  {{- $style = printf "aspect-ratio: %g;" $aspectRatio }}
+{{- end }}
+{{- if .style }}
+  {{- $style = printf "%s %s" $style .style }}
+{{- end }}
+{{- define "partials/picture-img-only.html" -}}
+  <img
+    src="{{ .image.RelPermalink }}"
+    alt="{{ .alt }}"
+    {{ with .dimensions.width }}width="{{ . }}"{{ end }}
+    {{ with .dimensions.height }}height="{{ . }}"{{ end }}
+    {{ with .class }}class="{{ . }}"{{ end }}
+    {{ with .style }}style="{{ . | safeCSS }}"{{ end }}
+  />
+{{- end -}}
+{{- if eq $image.MediaType.SubType "svg" }}
+  {{ partial "picture-img-only.html" (dict "image" $image "alt" .alt "dimensions" $dimensions "class" .class "style" $style) }}
+{{- else }}
+  <picture>
+    {{- $widths := slice -}}
+    {{- $ctx := . -}}
+    {{- range slice 400 575 767 991 1200 1400 2000 -}}
+      {{- $resizedImage := partial "img_towebp.html" (merge $ctx (dict "width" .)) -}}
+      {{- if ge $resizedImage.Width . -}}
+        <source media="(max-width:{{ . }}px)" srcset="{{ $resizedImage.RelPermalink }}" />
+      {{- end -}}
+    {{- end -}}
+    {{ partial "picture-img-only.html" (dict "image" $image "alt" .alt "dimensions" $dimensions "class" .class "style" $style) }}
+  </picture>
+{{- end }}

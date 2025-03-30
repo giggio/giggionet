@@ -17,3 +17,8 @@ privacy:
 caches:
   images:
     dir: :cacheDir/images
+
+imaging:
+  hint: photo
+  quality: 75
+  resampleFilter: Lanczos

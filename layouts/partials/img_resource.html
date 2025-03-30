@@ -1,0 +1,5 @@
+{{- $image := .image -}}
+{{- if not $image }}
+  {{- $image = or (.Page.Resources.Get .src) (resources.Get .src) -}}
+{{- end }}
+{{- return $image -}}
