@@ -103,7 +103,7 @@ params:
   ShowReadingTime: true
   mainSections: blog
   images: # using for og:image
-    - images/base/logo.svg
+    - images/base/logo.png
   postMaxImageWidth: 730
   postListMaxImageWidth: 690
   useDefaultFeatureImage: true
