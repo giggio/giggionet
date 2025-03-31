@@ -35,6 +35,7 @@
     rel="stylesheet"
     href="{{ $css }}"
     {{ with .integrity }}integrity="{{ . }}"{{ end }}
+    {{ with .id }}id="{{ . }}"{{ end }}
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />

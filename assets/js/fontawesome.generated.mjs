@@ -11,15 +11,19 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import {
+  faCheck,
+  faCircleHalfStroke,
   faEllipsisVertical,
   faEnvelope,
   faHexagonNodes,
+  faMoon,
   faPenToSquare,
   faPersonChalkboard,
   faPodcast,
   faQuoteLeft,
   faQuoteRight,
   faSearch,
+  faSun,
   faShareFromSquare
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
@@ -32,15 +36,19 @@ library.add(
   faTwitter,
   faWhatsapp,
   faYoutube,
+  faCheck,
+  faCircleHalfStroke,
   faEllipsisVertical,
   faEnvelope,
   faHexagonNodes,
+  faMoon,
   faPenToSquare,
   faPersonChalkboard,
   faPodcast,
   faQuoteLeft,
   faQuoteRight,
   faSearch,
+  faSun,
   faShareFromSquare
 );
 export { dom, library };

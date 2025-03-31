@@ -59,3 +59,8 @@ improveThisPage:
   preText: Did you find a problem in the text?
   link: Send me an improvement suggestion.
   postText: This code is free.
+theme:
+  light: Light
+  dark: Dark
+  toggle: Toggle theme
+  auto: Auto

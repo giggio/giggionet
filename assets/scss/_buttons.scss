@@ -21,22 +21,7 @@
   .btn-area {
     display: block;
     overflow: hidden;
-    span {
-      position: relative;
-      display: inline-block;
-      padding: 2px 0;
-      transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
-      transform-origin: left center;
-      &::after {
-        content: attr(data-text);
-        position: absolute;
-        top: 150%;
-        left: 0;
-        transform: skewY(30deg);
-        transform-origin: left center;
-        transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
-      }
-    }
+    color: var(--color-on-dark-background);
   }
   &:hover {
     .btn-area {

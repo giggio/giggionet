@@ -4,6 +4,7 @@
 
 .site-ways-to-contact {
   padding: 50px 0 100px;
+  background: var(--secondary-body-color);
   @include mixins.desktop {
     padding: 40px 0 80px;
   }

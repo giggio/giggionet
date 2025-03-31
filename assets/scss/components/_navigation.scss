@@ -1,3 +1,4 @@
+@use "bootstrap";
 @use "../mixins";
 @use "../variables";
 
@@ -59,11 +60,12 @@
   .navbar-toggler {
     outline: 0;
     padding: 0;
+    border: none;
     .icon-bar {
       height: 2px;
       width: 25px;
       transition: all 0.2s;
-      color: var(--primary-color);
+      background-color: var(--primary-color);
       display: block;
       &:not(:last-child) {
         margin-bottom: 5px;
@@ -102,5 +104,43 @@
     @include mixins.mobile {
       padding: 15px;
     }
+  }
+  .theme-picker {
+    & * {
+      color: var(--text-color-dark) !important;
+    }
+    .dropdown-toggle {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .dropdown-menu {
+      min-width: unset;
+      .color-picker-icon {
+        padding-right: 10px;
+      }
+      .color-picker-check {
+        padding-left: 10px;
+      }
+    }
+    .dropdown-item.active > * {
+      display: block !important;
+    }
+  }
+}
+
+@include bootstrap.color-mode(light) {
+  .nav-logo-light {
+    display: inline;
+  }
+  .nav-logo-dark {
+    display: none;
+  }
+}
+@include bootstrap.color-mode(dark) {
+  .nav-logo-light {
+    display: none;
+  }
+  .nav-logo-dark {
+    display: inline;
   }
 }

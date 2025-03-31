@@ -31,6 +31,7 @@ export const safelist = {
     'h5',
     'h6',
     'site-page-description', // todo: remove when it is first used
+    'data-bs-theme',
   ],
   deep: [
     /lightbox.*/,

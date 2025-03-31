@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-md site-navigation">
   <div class="container">
     <a class="navbar-brand" href="{{ .Site.BaseURL | relLangURL }}">
-      {{ partial "img.html" (dict "src" .Site.Params.logo "alt" (i18n "logoAlt") "class" "nav-logo") }}
+      {{ partial "img.html" (dict "src" .Site.Params.logo "alt" (i18n "logoAlt") "class" "nav-logo nav-logo-light") }}
+      {{ partial "img.html" (dict "src" .Site.Params.logoFooter "alt" (i18n "logoAlt") "class" "nav-logo nav-logo-dark") }}
     </a>
     <button
       class="navbar-toggler collapsed"
@@ -35,7 +36,7 @@
               {{- end }}
               {{- if eq $number_of_links 2 }}
                 {{- if eq $num 1 }}
-                  {{- $extra_classes = printf "%s d-block d-md-none d-lg-block" $extra_classes -}}
+                  {{- $extra_classes = printf "%s d-block d-md-none d-lg-block mx-5 mx-lg-0" $extra_classes -}}
                 {{- else }}
                   {{- $extra_classes = printf "%s d-none d-md-block d-lg-none" $extra_classes -}}
                 {{- end }}
@@ -64,12 +65,70 @@
             ><i class="fa fa-search nav-search"></i
           ></a>
         </li>
+
+        <li class="nav-item dropdown theme-picker align-self-center align-self-md-start">
+          <button
+            class="btn btn-link nav-link py-2 dropdown-toggle d-flex align-items-center"
+            id="bd-theme"
+            type="button"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+            data-bs-display="static"
+            aria-label="Toggle theme (auto)"
+          >
+            <span class="theme-icon-active">
+              <i class="fa-solid fa-circle-half-stroke color-picker-icon"></i>
+            </span>
+            <span class="d-md-none ms-2" id="bd-theme-text">{{ i18n "theme.toggle" }}</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bd-theme-text">
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-theme-value="light"
+                aria-pressed="false"
+              >
+                <i class="fa-solid fa-sun color-picker-icon"></i>
+                {{ i18n "theme.light" }}
+                <i class="fa-solid fa-check d-none color-picker-check"></i>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center"
+                data-bs-theme-value="dark"
+                aria-pressed="false"
+              >
+                <i class="fa-solid fa-moon color-picker-icon"></i>
+                {{ i18n "theme.dark" }}
+                <i class="fa-solid fa-check d-none color-picker-check"></i>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="dropdown-item d-flex align-items-center active"
+                data-bs-theme-value="auto"
+                aria-pressed="true"
+              >
+                <i class="fa-solid fa-circle-half-stroke color-picker-icon"></i>
+                {{ i18n "theme.auto" }}
+                <i class="fa-solid fa-check d-none color-picker-check"></i>
+              </button>
+            </li>
+          </ul>
+        </li>
+
         <li class="nav-item">
-          {{- range .Translations }}
-            <a href="{{ .RelPermalink }}" aria-label="{{ i18n "changeLanguageTo" }} {{ .Language.LanguageName }}">
-              {{ .Language.Params.flagEmoji | safeHTML }}
-            </a>
-          {{- end }}
+          <p class="py-2">
+            {{- range .Translations }}
+              <a href="{{ .RelPermalink }}" aria-label="{{ i18n "changeLanguageTo" }} {{ .Language.LanguageName }}">
+                {{ .Language.Params.flagEmoji | safeHTML }}
+              </a>
+            {{- end }}
+          </p>
         </li>
       </ul>
     </div>

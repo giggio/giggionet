@@ -11,7 +11,7 @@
         <div class="col-lg-6">
           <div aria-disabled="true">
             <a href="{{ .RelPermalink }}" tabindex="-1" title="{{ .Title }}">
-              {{- partial "blog_list_image.html" (dict "page" . "class" "site-blog-posthighlight-featureimage") }}
+              {{- partial "blog_list_image.html" (dict "page" . "class" "site-blog-post-thumb-image site-blog-posthighlight-featureimage") }}
             </a>
           </div>
         </div>
@@ -20,13 +20,15 @@
             {{ printf `<%s class="site-blog-post-content-title">` $h | safeHTML }}<a href="{{ .RelPermalink }}"
               >{{ .Title }}</a
             >{{ printf "</%s>" $h | safeHTML }}
-            <span class="site-blog-post-content-date">{{ .PublishDate | time.Format ":date_long" }}</span>
-            {{- if (.Param "ShowReadingTime") -}}
-              &nbsp;|
-              <span class="site-blog-post-content-readingtime">
-                {{ (i18n "readTimeLong" .ReadingTime) }}
-              </span>
-            {{- end -}}
+            <span class="site-blog-post-content-metadata">
+              <span class="site-blog-post-content-date">{{ .PublishDate | time.Format ":date_long" }}</span>
+              {{- if (.Param "ShowReadingTime") -}}
+                &nbsp;|
+                <span class="site-blog-post-content-readingtime">
+                  {{ (i18n "readTimeLong" .ReadingTime) }}
+                </span>
+              {{- end -}}
+            </span>
             <span
               data-bs-toggle="popover"
               data-bs-content="<a data-bs-toggle='modal'

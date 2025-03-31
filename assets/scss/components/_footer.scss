@@ -2,7 +2,7 @@
 @use "../variables";
 
 .site-footer {
-  background: var(--secondary-color);
+  background: var(--alternate-body-color);
   padding: 100px 0;
   &-logo {
     margin-bottom: 50px;
@@ -19,17 +19,17 @@
     }
     &-title {
       font-size: 18px;
-      color: var(--inverse-text-color);
+      color: var(--color-on-dark-background);
       margin-bottom: 30px;
       @include mixins.desktop {
         margin-bottom: 20px;
       }
     }
     &-description {
-      color: var(--inverse-text-color);
+      color: var(--color-on-dark-background);
       line-height: 30px;
       a {
-        color: var(--inverse-text-color);
+        color: var(--color-on-dark-background);
       }
     }
     &-links {
@@ -38,9 +38,13 @@
       li {
         list-style: none;
         a {
-          color: var(--inverse-text-color);
+          color: var(--color-on-dark-background);
           transition: all 0.3s var(--site-ease);
           display: block;
+          &:hover {
+            transition: 500ms;
+            color: var(--primary-color);
+          }
         }
         &:not(:last-child) {
           a {
@@ -58,16 +62,17 @@
         margin-bottom: 20px;
       }
       p {
-        color: var(--inverse-text-color);
-      }
-      &:hover {
-        text-decoration: none;
+        color: var(--color-on-dark-background);
+        &:hover {
+          transition: 500ms;
+          color: var(--primary-color);
+        }
       }
     }
   }
   &-copyright {
     p {
-      color: var(--inverse-text-color);
+      color: var(--color-on-dark-background);
       margin: 50px auto 0;
       text-align: center;
     }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+<html lang="{{ .Site.LanguageCode }}">
   <head>
     {{ partial "head.html" . }}
     {{- block "head" . }}{{- end }}

@@ -57,7 +57,9 @@ function monitorIconsAdded() {
     const found = mutationList
       .flatMap(mutation =>
         mutation.type === "childList"
-        ? mutation.addedNodes.values().flatMap(n => n.nodeType === 1 ? n.querySelectorAll("i").values().toArray() : []).toArray()
+        ? mutation.addedNodes.values().flatMap(n => n.nodeType === 1
+            ? [...n.querySelectorAll("i").values().toArray(), ...[n].filter(node => node.matches("i"))]
+            : []).toArray()
         : []
       ).map(e => e.parentElement);
     if (found.length)

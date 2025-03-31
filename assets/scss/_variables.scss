@@ -5,14 +5,13 @@ $secondary-font: "Montserrat", sans-serif;
 $text-font: "Arial", sans-serif;
 
 @use "bootstrap";
-@include bootstrap.color-mode(dark) {
-}
 
 //site color variables
 $body-color: #fff;
 $inverse-body-color: #000;
 $primary-color: #db261d;
-$secondary-color: #000000;
+$primary-color-dark: #4d0400;
+$secondary-color: #000;
 $tertiary-color: #b00a02;
 $text-color: #38383f;
 $text-color-dark: #00113e;
@@ -21,10 +20,12 @@ $text-color-light-2: #999;
 $text-color-light-3: #d5d5d5;
 $background-color-light: rgba(0, 0, 0, 0.1);
 $inverse-text-color: #fff;
+$inverse-text-color-dark: #fff; // todo
 $gray: #f7f9ff;
 
 :root {
   --body-color: #{$body-color};
+  --alternate-body-color: #{$inverse-body-color};
   --inverse-body-color: #{$inverse-body-color};
   --secondary-body-color: #{$gray};
   --accent-background-color: #{color.adjust($color: $primary-color, $lightness: 20%)};
@@ -39,10 +40,38 @@ $gray: #f7f9ff;
   --text-color-light-3: #{$text-color-light-3};
   --background-color-light: #{$background-color-light};
   --inverse-text-color: #{$inverse-text-color};
+  --inverse-text-color-dark: #{$inverse-text-color-dark};
+  --color-on-dark-background: #{$inverse-text-color};
+  --accent-color-on-alternate-background: #{$primary-color};
   --site-ease: cubic-bezier(0.36, 0.03, 0, 0.91);
+  --share-icon-color: #d5d5d5;
+  --rss-icon-color: #007bff;
+  --arrow-color: green;
   --primary-font: #{$primary-font};
   --secondary-font: #{$secondary-font};
   --text-font: #{$text-font};
+}
+
+@include bootstrap.color-mode(dark) {
+  --body-color: #{$inverse-body-color};
+  --alternate-body-color: #{$primary-color-dark};
+  --inverse-body-color: #{$body-color};
+  --secondary-body-color: #{color.adjust($color: $inverse-body-color, $lightness: 3%)};
+  --accent-background-color: #{color.adjust($color: $primary-color, $lightness: 20%)};
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --tertiary-color: #{$tertiary-color};
+  --tertiary-color-light: #{color.adjust($color: $tertiary-color, $lightness: -20%)};
+  --text-color: #{$inverse-text-color};
+  --text-color-dark: #{$inverse-text-color-dark};
+  --text-color-light-1: #{$text-color-light-1};
+  --text-color-light-2: #{$text-color-light-2};
+  --text-color-light-3: #{$text-color-light-3};
+  --background-color-light: #{$background-color-light};
+  --inverse-text-color: #{$text-color-light-3};
+  --inverse-text-color-dark: #{$text-color-dark};
+  --color-on-dark-background: #{$inverse-text-color};
+  --accent-color-on-alternate-background: #{$text-color-light-2};
   --share-icon-color: #d5d5d5;
   --rss-icon-color: #007bff;
   --arrow-color: green;

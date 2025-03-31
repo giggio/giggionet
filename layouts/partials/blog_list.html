@@ -25,20 +25,22 @@
                 title="{{ .Title }}"
                 {{ with .Params.feature_image_list_top_offset }}style="--top-offset:{{ . }};"{{ end }}
               >
-                {{- partial "blog_list_image.html" (dict "page" . "class" "") -}}
+                {{- partial "blog_list_image.html" (dict "page" . "class" "site-blog-post-thumb-image") -}}
               </a>
             </div>
             <div class="site-blog-post-content">
               {{ printf `<%s class="site-blog-post-content-title">` $h | safeHTML }}<a href="{{ .RelPermalink }}"
                 >{{ .Title }}</a
               >{{ printf "</%s>" $h | safeHTML }}
-              <span class="site-blog-post-content-date">{{ .PublishDate | time.Format ":date_long" }}</span>
-              {{- if (.Param "ShowReadingTime") -}}
-                &nbsp;|
-                <span class="site-blog-post-content-readingtime">
-                  {{ (i18n "readTimeLong" .ReadingTime) }}
-                </span>
-              {{- end -}}
+              <span class="site-blog-post-content-metadata">
+                <span class="site-blog-post-content-date">{{ .PublishDate | time.Format ":date_long" }}</span>
+                {{- if (.Param "ShowReadingTime") -}}
+                  &nbsp;|
+                  <span class="site-blog-post-content-readingtime">
+                    {{ (i18n "readTimeLong" .ReadingTime) }}
+                  </span>
+                {{- end -}}
+              </span>
               <span
                 data-bs-toggle="popover"
                 data-bs-content="<a data-bs-toggle='modal'

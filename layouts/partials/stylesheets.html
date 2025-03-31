@@ -1,3 +1,19 @@
+<!-- color theme: -->
+{{- $syntaxHighlightingThemes := dict }}
+{{- range resources.Match "css/syntaxhighlighting/*.css" }}
+  {{- $syntaxHighlightingThemes = merge $syntaxHighlightingThemes
+    (dict (path.BaseName .Name) (. | minify | fingerprint).RelPermalink)
+  -}}
+{{- end }}
+{{- $colorThemeScript := resources.Get "js/color-theme.mjs" | js.Build (dict "params" $syntaxHighlightingThemes) -}}
+{{- if hugo.IsProduction -}}
+  {{- $colorThemeScript = $colorThemeScript | minify -}}
+{{- end -}}
+<link rel="stylesheet" href="" id="syntaxHighlightingStylesheet" />
+<script type="module">
+  {{ $colorThemeScript.Content | safeJS }}
+</script>
+<!-- sheets: -->
 {{- $stylesheets := (slice
   (dict "href" (css.Sass (dict "targetPath" "css/imports.css") (resources.Get "scss/imports.scss")))
   (dict "href" "https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700|Montserrat:300,400,500,600,700&display=swap" )

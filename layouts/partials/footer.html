@@ -70,15 +70,16 @@
       <div class="col-lg-2 col-md-6">
         <div class="site-footer-widget">
           <h1 class="site-footer-widget-title">{{ i18n "languages" }}</h1>
-          <p class="site-footer-widget-description">
+          <ul class="site-footer-widget-links">
             {{ range site.Home.AllTranslations }}
-              <a href="{{ .RelPermalink }}">
-                {{ .Language.LanguageName }}
-                {{ .Language.Params.flagEmoji | safeHTML }}
-              </a>
-              <br />
+              <li>
+                <a href="{{ .RelPermalink }}">
+                  {{ .Language.LanguageName }}
+                  {{ .Language.Params.flagEmoji | safeHTML }}
+                </a>
+              </li>
             {{ end }}
-          </p>
+          </ul>
         </div>
       </div>
       <div class="col-lg-2 col-12">

@@ -59,3 +59,8 @@ improveThisPage:
   preText: Encontrou um problema no texto?
   link: Me mande uma sugestão de melhoria.
   postText: O código é livre.
+theme:
+  light: Claro
+  dark: Escuro
+  toggle: Trocar tema
+  auto: Automático
