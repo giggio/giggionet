@@ -28,6 +28,7 @@
     "enableSourceMap" hugo.IsProduction
     "sourceMapIncludeSources" true
     "silenceDeprecations" (slice "import" "global-builtin" "mixed-decls" "color-functions")
+    "includePaths" (slice "node_modules/bootstrap/scss")
     "vars" $vars
   -}}
   {{- $stylesheets = $stylesheets | append (dict "href" (css.Sass $opts .)) -}}

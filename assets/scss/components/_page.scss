@@ -3,7 +3,7 @@
 
 .site-page {
   padding: 150px 0 100px;
-  background: variables.$gray;
+  background: var(--secondary-body-color);
   @include mixins.mobile {
     padding: 120px 0 100px;
   }

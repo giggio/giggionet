@@ -1,19 +1,49 @@
+@use "sass:color";
+// Font Variables
+$primary-font: "Josefin Sans", sans-serif;
+$secondary-font: "Montserrat", sans-serif;
+$text-font: "Arial", sans-serif;
+
+@use "bootstrap";
+@include bootstrap.color-mode(dark) {
+}
+
 //site color variables
 $body-color: #fff;
+$inverse-body-color: #000;
 $primary-color: #db261d;
 $secondary-color: #000000;
 $tertiary-color: #b00a02;
 $text-color: #38383f;
 $text-color-dark: #00113e;
-$site-ease: cubic-bezier(0.36, 0.03, 0, 0.91);
+$text-color-light-1: #666;
+$text-color-light-2: #999;
+$text-color-light-3: #d5d5d5;
+$background-color-light: rgba(0, 0, 0, 0.1);
+$inverse-text-color: #fff;
 $gray: #f7f9ff;
-$dark-gray: #646569;
 
-// solid colors
-$white: #fff;
-$black: #000;
-
-// Font Variables
-$primary-font: "Josefin Sans", sans-serif;
-$secondary-font: "Montserrat", sans-serif;
-$text-font: "Arial", sans-serif;
+:root {
+  --body-color: #{$body-color};
+  --inverse-body-color: #{$inverse-body-color};
+  --secondary-body-color: #{$gray};
+  --accent-background-color: #{color.adjust($color: $primary-color, $lightness: 20%)};
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --tertiary-color: #{$tertiary-color};
+  --tertiary-color-light: #{color.adjust($color: $tertiary-color, $lightness: -20%)};
+  --text-color: #{$text-color};
+  --text-color-dark: #{$text-color-dark};
+  --text-color-light-1: #{$text-color-light-1};
+  --text-color-light-2: #{$text-color-light-2};
+  --text-color-light-3: #{$text-color-light-3};
+  --background-color-light: #{$background-color-light};
+  --inverse-text-color: #{$inverse-text-color};
+  --site-ease: cubic-bezier(0.36, 0.03, 0, 0.91);
+  --primary-font: #{$primary-font};
+  --secondary-font: #{$secondary-font};
+  --text-font: #{$text-font};
+  --share-icon-color: #d5d5d5;
+  --rss-icon-color: #007bff;
+  --arrow-color: green;
+}

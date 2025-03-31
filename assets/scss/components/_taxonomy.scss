@@ -7,12 +7,12 @@
     border-radius: 8px;
 
     &::marker {
-      color: variables.$text-color-dark;
+      color: var(--text-color-dark);
     }
 
     a {
       text-decoration: none;
-      color: variables.$text-color-dark;
+      color: var(--text-color-dark);
     }
   }
 }

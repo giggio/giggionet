@@ -32,7 +32,7 @@
   }
   &-content {
     & * {
-      color: white;
+      color: var(--inverse-text-color);
     }
     h1 {
       margin-bottom: 75px;
@@ -45,7 +45,7 @@
       }
     }
     &-tagline {
-      font-family: variables.$secondary-font;
+      font-family: var(--secondary-font);
       font-weight: 300;
       font-size: 15px;
       margin-bottom: 0.5rem;
@@ -83,11 +83,9 @@
     transform: translateX(-50%);
 
     &-arrow {
-      -webkit-mask-image: url(vars.$arrow_down_image);
       mask-image: url(vars.$arrow_down_image);
-      -webkit-mask-repeat: no-repeat;
       mask-repeat: no-repeat;
-      background-color: green;
+      background-color: var(--arrow-color);
       width: 26px;
       height: 33px;
       display: block;

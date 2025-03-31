@@ -2,8 +2,8 @@
 @use "../variables";
 
 .site-counter {
-  color: variables.$white;
-  background: variables.$secondary-color;
+  color: var(--inverse-text-color);
+  background: var(--secondary-color);
   padding: 85px 0;
   scroll-margin-top: 85px;
   .section-title {
@@ -19,7 +19,7 @@
       font-weight: 300;
     }
     &-number {
-      color: variables.$white;
+      color: var(--inverse-text-color);
       font-size: 60px;
       margin-bottom: 0;
       font-weight: 700;

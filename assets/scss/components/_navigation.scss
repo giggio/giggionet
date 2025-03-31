@@ -3,14 +3,13 @@
 
 .site-navigation {
   padding: 20px 0;
-  background: variables.$white;
+  background: var(--body-color);
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   @include mixins.desktop {
-    background: variables.$white;
     margin: 10px;
     border-radius: 5px;
     top: 0;
@@ -39,9 +38,9 @@
       text-align: center;
     }
     .nav-link {
-      font-family: variables.$secondary-font;
+      font-family: var(--secondary-font);
       font-size: var(--bs-btn-font-size);
-      color: variables.$text-color-dark;
+      color: var(--text-color-dark);
       transition: all 0.3s ease;
       padding: 15px 18px;
       @include mixins.desktop {
@@ -50,7 +49,7 @@
       position: relative;
       &:hover {
         transition: 500ms;
-        color: variables.$primary-color;
+        color: var(--primary-color);
       }
     }
     &:last-child {
@@ -64,7 +63,7 @@
       height: 2px;
       width: 25px;
       transition: all 0.2s;
-      background: variables.$primary-color;
+      color: var(--primary-color);
       display: block;
       &:not(:last-child) {
         margin-bottom: 5px;

@@ -5,15 +5,15 @@
   &-header {
     padding-top: 150px;
     padding-bottom: 20px;
-    background-color: variables.$gray;
+    background-color: var(--secondary-body-color);
     @include mixins.mobile {
       padding-top: 120px;
       text-align: center;
     }
     &-quote,
     &-quote2 {
-      color: variables.$text-color;
-      font-family: variables.$primary-font;
+      color: var(--text-color);
+      font-family: var(--primary-font);
       margin-bottom: 16px;
     }
     &-quote {
@@ -87,12 +87,15 @@
       }
       &-item {
         text-align: center;
+        & *:hover {
+          color: var(--primary-color);
+        }
         &-link {
           &:hover {
             text-decoration: none;
           }
           font-size: 45px;
-          color: variables.$tertiary-color;
+          color: var(--tertiary-color);
           padding-bottom: 10px;
           @include mixins.md {
             font-size: 38px;
@@ -108,7 +111,7 @@
           }
         }
         &-text {
-          color: variables.$tertiary-color;
+          color: var(--tertiary-color);
           display: block;
           font-size: 18px;
           @include mixins.md {
@@ -125,10 +128,10 @@
     }
   }
   &-name {
-    background: variables.$primary-color;
+    background: var(--primary-color);
     margin-bottom: 30px;
     h1 {
-      color: variables.$white;
+      color: var(--inverse-text-color);
       font-weight: 400;
       font-size: 25px;
       line-height: 60px;
@@ -146,14 +149,14 @@
   }
 
   &-expertise {
-    background: variables.$gray;
+    background: var(--secondary-body-color);
     .section-title {
       margin-bottom: 0;
     }
     &-container {
       &-margin {
         height: 8px;
-        background-color: variables.$primary-color;
+        background-color: var(--primary-color);
         margin: 0;
       }
       &-wrapper {
@@ -170,7 +173,7 @@
           list-style: none;
           font-size: 25px;
           font-weight: 300;
-          color: variables.$text-color-dark;
+          color: var(--text-color-dark);
           &:not(:last-child) {
             margin-bottom: 10px;
           }

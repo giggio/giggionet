@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background: variables.$body-color;
+  background: var(--body-color);
   width: 100%;
 }
 
@@ -36,8 +36,8 @@ body {
 }
 
 a {
-  color: variables.$primary-color;
+  color: var(--primary-color);
   &:hover {
-    color: variables.$tertiary-color;
+    color: var(--tertiary-color);
   }
 }

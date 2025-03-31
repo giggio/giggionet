@@ -30,7 +30,7 @@
       }
       &-category {
         font-size: 50px;
-        color: variables.$tertiary-color;
+        color: var(--tertiary-color);
         margin-bottom: 10px;
       }
       &-featureimage {
@@ -54,10 +54,10 @@
       .secondaryTitle,
       .breadcrumb-follower {
         a {
-          color: variables.$text-color-dark;
+          color: var(--text-color-dark);
           &:hover {
             text-decoration: none;
-            background-color: color.adjust($color: variables.$primary-color, $lightness: 20%);
+            background-color: var(--accent-background-color);
           }
         }
         font-size: 60px;
@@ -88,14 +88,14 @@
             border-radius: 0;
             border: none;
             padding: 12px 20px;
-            color: variables.$text-color-dark;
+            color: var(--text-color-dark);
             font-weight: 300;
             transition: all 0.3s ease;
           }
           &.active {
             .page-link {
-              background-color: variables.$primary-color;
-              color: variables.$white;
+              background-color: var(--primary-color);
+              color: var(--inverse-text-color);
             }
           }
           &.disabled {
@@ -140,9 +140,9 @@
         margin-top: $image-height;
         display: inline-table;
 
-        background: variables.$gray;
+        background: var(--secondary-body-color);
         padding: 45px 50px;
-        transition: all 0.3s variables.$site-ease;
+        transition: all 0.3s var(--site-ease);
         @include mixins.desktop-lg {
           padding: 30px 35px 0px;
         }
@@ -160,26 +160,26 @@
         }
         &-date {
           font-size: 14px;
-          font-family: variables.$secondary-font;
-          color: variables.$primary-color;
+          font-family: var(--secondary-font);
+          color: var(--primary-color);
         }
         &-readingtime {
           font-size: 14px;
-          font-family: variables.$secondary-font;
-          color: variables.$primary-color;
+          font-family: var(--secondary-font);
+          color: var(--primary-color);
         }
         &-summary {
           padding-top: 10px;
-          font-family: variables.$text-font;
+          font-family: var(--text-font);
         }
         &-title {
           margin-bottom: 0;
           a {
-            color: variables.$text-color-dark;
+            color: var(--text-color-dark);
             transition: 0.3s ease;
             &:hover {
               text-decoration: none;
-              color: variables.$primary-color;
+              color: var(--primary-color);
             }
           }
           font-size: 30px;
@@ -200,18 +200,18 @@
         }
       }
       &-share {
-        color: dimgray;
+        color: var(--text-color-light-1);
         &:hover {
           transition: 500ms;
-          color: variables.$primary-color;
+          color: var(--primary-color);
           text-decoration: none;
         }
       }
       &-share-modal-link {
-        color: variables.$tertiary-color;
+        color: var(--tertiary-color);
         &:hover {
           transition: 500ms;
-          color: variables.$primary-color;
+          color: var(--primary-color);
           text-decoration: none;
         }
       }
@@ -224,7 +224,7 @@
     }
     &-details {
       .missing-alt {
-        color: orange;
+        color: orange; // only for debugging
       }
       img {
         max-width: 100%;
@@ -252,12 +252,12 @@
       blockquote {
         p {
           /*! purgecss ignore current */
-          color: variables.$text-color-dark;
+          color: var(--text-color-dark);
           font-size: 18px;
         }
       }
       &-content {
-        font-family: variables.$text-font;
+        font-family: var(--text-font);
         & * {
           scroll-margin-top: 85px;
         }
@@ -270,11 +270,11 @@
   }
 }
 .rss-icon {
-  color: #007bff;
+  color: var(--rss-icon-color);
 }
 
 #TableOfContents {
   a {
-    color: variables.$tertiary-color;
+    color: var(--tertiary-color);
   }
 }

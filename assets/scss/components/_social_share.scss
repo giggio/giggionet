@@ -18,10 +18,10 @@
           font-size: 20px;
           &:hover * {
             transition: 500ms;
-            color: variables.$primary-color;
+            color: var(--primary-color);
           }
           * {
-            color: #d5d5d5;
+            color: var(--share-icon-color);
           }
         }
       }
@@ -52,10 +52,10 @@
           padding: 0 8px;
           &:hover * {
             transition: 500ms;
-            color: variables.$primary-color;
+            color: var(--primary-color);
           }
           * {
-            color: #d5d5d5;
+            color: var(--share-icon-color);
             font-size: 2.5rem;
           }
         }

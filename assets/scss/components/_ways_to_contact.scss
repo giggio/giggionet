@@ -26,7 +26,10 @@
   &-item {
     * {
       font-size: 70px;
-      color: variables.$tertiary-color;
+      color: var(--tertiary-color);
+      *:hover {
+        color: var(--primary-color);
+      }
     }
     text-align: center;
     width: calc(100% / vars.$ways_to_contact_len);

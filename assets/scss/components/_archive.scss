@@ -11,7 +11,7 @@
 
 .archive-header-link {
   text-decoration: none;
-  color: inherit;
+  color: var(--text-color);
 
   &:hover {
     color: var(--primary-color);
@@ -34,7 +34,6 @@
   &-header {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    color: #666;
   }
 }
 
@@ -49,7 +48,7 @@
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: var(--background-color-light);
   }
 }
 
@@ -57,13 +56,13 @@
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 
-  sup {
+  .post-tag {
     font-size: 0.6rem;
   }
 
   a {
     text-decoration: none;
-    color: inherit;
+    color: var(--text-color-dark);
 
     &:hover {
       color: var(--primary-color);
@@ -73,13 +72,13 @@
 
 .archive-count {
   font-size: 1rem;
-  color: #999;
+  color: var(--text-color-light-2);
   font-weight: normal;
 }
 
 .archive-meta {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--text-color-light-1);
 }
 
 .entry-hint-parent {
@@ -89,7 +88,7 @@
 }
 
 .entry-hint {
-  color: #666;
+  color: var(--text-color-light-1);
   display: inline-flex;
   align-items: center;
 }

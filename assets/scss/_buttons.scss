@@ -3,14 +3,14 @@
 @use "variables";
 
 .btn {
-  font-family: variables.$secondary-font;
+  font-family: var(--secondary-font);
   border: none;
-  color: variables.$white !important;
+  color: var(--inverse-text-color) !important;
   padding: 20px 45px;
   border-radius: 0;
   &:focus,
   &:active {
-    color: white !important;
+    color: var(--inverse-text-color) !important;
   }
   &:focus {
     box-shadow: none;
@@ -69,24 +69,24 @@
 }
 
 .btn-secondary {
-  --bs-btn-hover-bg: #{color.adjust($color: variables.$tertiary-color, $lightness: -20%)};
-  --bs-btn-hover-border-color: #{color.adjust($color: variables.$tertiary-color, $lightness: -20%)};
-  --bs-btn-active-bg: #{variables.$tertiary-color};
-  --bs-btn-active-border-color: #{variables.$tertiary-color};
+  --bs-btn-hover-bg: var(--tertiary-color-light);
+  --bs-btn-hover-border-color: var(--tertiary-color-light);
+  --bs-btn-active-bg: var(--tertiary-color);
+  --bs-btn-active-border-color: var(--tertiary-color);
 }
 
 .btn-tertiary {
   --bs-btn-font-weight: 600;
-  --bs-btn-color: var(--bs-white);
-  --bs-btn-bg: #{variables.$tertiary-color};
-  --bs-btn-border-color: #{variables.$tertiary-color};
-  --bs-btn-hover-color: var(--bs-white);
-  --bs-btn-hover-bg: #{variables.$primary-color};
-  --bs-btn-hover-border-color: #{variables.$primary-color};
-  --bs-btn-focus-shadow-rgb: #{variables.$tertiary-color};
-  --bs-btn-active-color: var(--bs-white);
-  --bs-btn-active-bg: #{variables.$primary-color};
-  --bs-btn-active-border-color: #{variables.$primary-color};
+  --bs-btn-color: var(--text-color);
+  --bs-btn-bg: var(--tertiary-color);
+  --bs-btn-border-color: var(--tertiary-color);
+  --bs-btn-hover-color: var(--text-color);
+  --bs-btn-hover-bg: var(--primary-color);
+  --bs-btn-hover-border-color: var(--primary-color);
+  --bs-btn-focus-shadow-rgb: var(--tertiary-color);
+  --bs-btn-active-color: var(--primary-color);
+  --bs-btn-active-bg: var(--secondary-color);
+  --bs-btn-active-border-color: var(--secondary-color);
 }
 
 .btn-close {

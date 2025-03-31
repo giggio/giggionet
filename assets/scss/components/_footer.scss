@@ -2,7 +2,7 @@
 @use "../variables";
 
 .site-footer {
-  background: variables.$secondary-color;
+  background: var(--secondary-color);
   padding: 100px 0;
   &-logo {
     margin-bottom: 50px;
@@ -19,17 +19,17 @@
     }
     &-title {
       font-size: 18px;
-      color: variables.$white;
+      color: var(--inverse-text-color);
       margin-bottom: 30px;
       @include mixins.desktop {
         margin-bottom: 20px;
       }
     }
     &-description {
-      color: variables.$white;
+      color: var(--inverse-text-color);
       line-height: 30px;
       a {
-        color: variables.$white;
+        color: var(--inverse-text-color);
       }
     }
     &-links {
@@ -38,8 +38,8 @@
       li {
         list-style: none;
         a {
-          color: variables.$white;
-          transition: all 0.3s variables.$site-ease;
+          color: var(--inverse-text-color);
+          transition: all 0.3s var(--site-ease);
           display: block;
         }
         &:not(:last-child) {
@@ -58,7 +58,7 @@
         margin-bottom: 20px;
       }
       p {
-        color: variables.$white;
+        color: var(--inverse-text-color);
       }
       &:hover {
         text-decoration: none;
@@ -67,12 +67,12 @@
   }
   &-copyright {
     p {
-      color: variables.$white;
+      color: var(--inverse-text-color);
       margin: 50px auto 0;
       text-align: center;
     }
     a {
-      color: variables.$text-color-dark;
+      color: var(--text-color-dark);
       transition: all 0.3s ease;
       @include mixins.tablet {
         font-size: 20px;

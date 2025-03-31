@@ -3,7 +3,7 @@
 
 .site-contact {
   padding: 150px 50px 100px;
-  background: variables.$gray;
+  background: var(--secondary-body-color);
   @include mixins.mobile {
     padding: 120px 20px 100px;
   }
@@ -18,7 +18,7 @@
       padding-bottom: 20px;
     }
     span {
-      color: variables.$primary-color;
+      color: var(--primary-color);
     }
   }
   &-description {

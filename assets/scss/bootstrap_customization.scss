@@ -1,4 +1,4 @@
-@use "./variables";
+@use "variables";
 $container-max-widths: (
   sm: 540px,
   md: 720px,
@@ -9,27 +9,35 @@ $container-max-widths: (
 $primary: variables.$primary-color;
 $secondary: variables.$secondary-color;
 $card-height: 100%;
-$navbar-light-toggler-border-color: white;
+$navbar-light-toggler-border-color: variables.$body-color;
 $navbar-toggler-focus-width: 0;
 $navbar-light-icon-color: variables.$primary-color;
 $navbar-light-active-color: variables.$primary-color;
 $btn-close-color: variables.$primary-color;
+$color-mode-type: data;
 
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap";
 
 /**
 * This is where our custom CSS starts
 */
 site-css-starts-here {
   // this selector is here so we know where our css starts and where bootstrap starts
-  color: #fff;
+  color: #fff; // ignore this
 }
 
 .badge {
-  &-tertiary {
-    background-color: variables.$tertiary-color;
-    color: white;
+  a {
+    color: var(--inverse-text-color) !important;
+    &:hover {
+      color: var(--inverse-text-color) !important;
+    }
   }
+}
+
+.text-bg-tertiary {
+  background-color: var(--tertiary-color) !important;
+  color: var(--inverse-text-color) !important;
 }
 
 /*! purgecss start ignore */

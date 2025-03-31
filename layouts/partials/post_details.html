@@ -5,7 +5,7 @@
   <h4 class="archive-entry-title entry-hint-parent">
     <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
     {{- range (.GetTerms "tags") }}
-      <sup class="badge badge-pill badge-tertiary post-tag"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></sup>
+      <sup class="badge badge-pill text-bg-tertiary post-tag"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></sup>
     {{- end }}
     {{- if .Draft }}
       <span class="entry-hint" title="Draft">
