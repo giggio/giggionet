@@ -14,7 +14,7 @@
   "ignoreAlt" true
   "forceAspectRatio" true
   "style" .page.Params.feature_image_list_extra_style
-  "additionalSizes" (slice 456 516 690)
+  "additionalSizes" (slice 456 516 site.Params.postListMaxImageWidth (mul 2 site.Params.postListMaxImageWidth))
   "sizes" "(max-width: 575px) calc(100vw - 24px), (max-width: 767px) 516px, (max-width: 991px) 690px, (max-width: 1200px) 456px, 526px"
   )
 }}

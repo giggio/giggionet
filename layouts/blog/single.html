@@ -1,8 +1,8 @@
 {{ define "main" }}
   <section class="site-blog details">
-    <div class="container">
+    <div class="container-lg">
       <div class="row justify-content-center">
-        <div class="col-sm-12 col-md-11 col-lg-10 col-xl-8">
+        <div class="col-12 col-sm-11 col-md-10">
           <article class="site-blog-details">
             <div>
               <span class="float-right">{{ .PublishDate | time.Format ":date_medium" }}</span>
@@ -27,15 +27,11 @@
               {{- end -}}
             {{- end -}}
             {{- if $image -}}
-              {{- if not $alt -}}
-                <i class="fa-solid fa-triangle-exclamation missing-alt"></i>
-                {{- warnidf "post-thumb-missing-image-alt" "Post '%s' (%s) does not have feature image alt." .Title .Path -}}
-              {{- end -}}
               {{ partial "img.html" (dict
                 "image" $image
                 "class" "feature-image"
                 "alt" $alt
-                "limitWidth" site.Params.postMaxImageWidth
+                "additionalSizes" (slice site.Params.postMaxImageWidth (mul 2 site.Params.postMaxImageWidth))
                 "forceAspectRatio" true)
               }}
             {{- end -}}
