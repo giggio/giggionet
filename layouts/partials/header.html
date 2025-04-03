@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md site-navigation">
-  <div class="container">
+  <div class="container-md p-0">
     <a class="navbar-brand" href="{{ .Site.BaseURL | relLangURL }}">
       {{ partial "img.html" (dict "src" .Site.Params.logo "alt" (i18n "logoAlt") "class" "nav-logo nav-logo-light") }}
       {{ partial "img.html" (dict "src" .Site.Params.logoFooter "alt" (i18n "logoAlt") "class" "nav-logo nav-logo-dark") }}
