@@ -7,9 +7,6 @@
     padding: 0 0;
     overflow: hidden;
     background-color: var(--body-color);
-    @include mixins.mobile {
-      padding: 70px 0;
-    }
     &.details {
       padding: 150px 0 80px;
       @include mixins.tablet {
@@ -284,5 +281,14 @@
   pre {
     padding: 10px;
     border-radius: 4%;
+  }
+}
+
+.archive-section {
+  & > * {
+    margin-right: 0.5rem !important;
+    margin-left: 0.5rem !important;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 }
