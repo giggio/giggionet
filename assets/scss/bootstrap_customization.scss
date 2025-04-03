@@ -28,16 +28,16 @@ site-css-starts-here {
 
 .badge {
   a {
-    color: var(--inverse-text-color) !important;
+    color: var(--color-on-dark-background) !important;
     &:hover {
-      color: var(--inverse-text-color) !important;
+      color: var(--color-on-dark-background) !important;
     }
   }
 }
 
 .text-bg-tertiary {
   background-color: var(--tertiary-color) !important;
-  color: var(--inverse-text-color) !important;
+  color: var(--color-on-dark-background) !important;
 }
 
 /*! purgecss start ignore */

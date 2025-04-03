@@ -94,7 +94,7 @@
           &.active {
             .page-link {
               background-color: var(--primary-color);
-              color: var(--inverse-text-color);
+              color: var(--color-on-dark-background);
             }
           }
           &.disabled {

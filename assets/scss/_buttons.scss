@@ -5,12 +5,12 @@
 .btn {
   font-family: var(--secondary-font);
   border: none;
-  color: var(--inverse-text-color) !important;
+  color: var(--color-on-dark-background) !important;
   padding: 20px 45px;
   border-radius: 0;
   &:focus,
   &:active {
-    color: var(--inverse-text-color) !important;
+    color: var(--color-on-dark-background) !important;
   }
   &:focus {
     box-shadow: none;
@@ -62,16 +62,28 @@
 
 .btn-tertiary {
   --bs-btn-font-weight: 600;
-  --bs-btn-color: var(--text-color);
+  --bs-btn-color: var(--button-color);
   --bs-btn-bg: var(--tertiary-color);
   --bs-btn-border-color: var(--tertiary-color);
-  --bs-btn-hover-color: var(--text-color);
+  --bs-btn-hover-color: var(--button-color);
   --bs-btn-hover-bg: var(--primary-color);
   --bs-btn-hover-border-color: var(--primary-color);
   --bs-btn-focus-shadow-rgb: var(--tertiary-color);
-  --bs-btn-active-color: var(--primary-color);
+  --bs-btn-active-color: var(--button-color);
   --bs-btn-active-bg: var(--secondary-color);
   --bs-btn-active-border-color: var(--secondary-color);
+}
+
+.btn-inverse {
+  color: var(--inverse-text-color) !important;
+  background-color: var(--inverse-body-color) !important;
+  &:focus,
+  &:active,
+  &:hover {
+    color: var(--color-on-dark-background) !important;
+    background-color: var(--tertiary-color) !important;
+    border-color: var(--tertiary-color);
+  }
 }
 
 .btn-close {

@@ -2,7 +2,7 @@
 @use "../variables";
 
 .site-counter {
-  color: var(--inverse-text-color);
+  color: var(--color-on-dark-background);
   background: var(--alternate-body-color);
   padding: 85px 0;
   scroll-margin-top: 85px;
@@ -15,7 +15,6 @@
       text-align: center;
     }
     &-title {
-      color: white;
       font-size: 20px;
       font-weight: 300;
     }
