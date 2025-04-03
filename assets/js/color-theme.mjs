@@ -22,7 +22,7 @@ function setTheme(themeOrAuto) {
     : themeOrAuto;
   document.documentElement.setAttribute('data-bs-theme', theme)
   const syntaxHighlightingTheme = (theme === 'dark')
-    ? 'swapoff'
+    ? 'vim'
     : 'emacs'
   const syntaxHighlightingStylesheet = document.getElementById('syntaxHighlightingStylesheet')
   if (syntaxHighlightingStylesheet)

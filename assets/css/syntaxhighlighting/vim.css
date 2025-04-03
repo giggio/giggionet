@@ -1,7 +1,7 @@
 /* Generated using: hugo gen chromastyles --style=vim */
 
-/* Background */ .bg { color:#ccc;background-color:#000; }
-/* PreWrapper */ .chroma { color:#ccc;background-color:#000; }
+/* Background */ .bg { color:#ccc;background-color: #21252982; }
+/* PreWrapper */ .chroma { color:#ccc;background-color: #21252982; }
 /* Other */ .chroma .x {  }
 /* Error */ .chroma .err {  }
 /* CodeLine */ .chroma .cl {  }

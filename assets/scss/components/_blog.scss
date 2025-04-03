@@ -278,3 +278,11 @@
     color: var(--tertiary-color);
   }
 }
+
+.highlight {
+  margin: 30px 0;
+  pre {
+    padding: 10px;
+    border-radius: 4%;
+  }
+}
