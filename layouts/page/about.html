@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <div class="site-about">
+  <div class="site-about" data-pagefind-body>
     <section class="site-about-header">
       <div class="container">
         <div class="row">
@@ -14,7 +14,7 @@
                   {{- .Params.quote2 }}
                   <i class="fa-solid fa-quote-right"></i>
                 </h1>
-                <p class="site-about-header-name text-end">Giovanni Bassi</p>
+                <p class="site-about-header-name text-end" data-pagefind-meta="title">Giovanni Bassi</p>
               </div>
               <div class="mt-auto site-about-header-participations justify-content-around">
                 {{- with site.GetPage "/participationkinds/videos/" }}

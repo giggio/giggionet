@@ -4,7 +4,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
           <h1 class="site-participations-header-title">
-            {{- .Title }}
+            <span data-pagefind-meta="title">{{- .Title }}</span>
             {{ partial "rss_icon.html" (.OutputFormats.Get "rss") }}
           </h1>
           <p>
@@ -32,5 +32,7 @@
       </div>
     </section>
   {{ end }}
-  {{- partial "participationKind_list.html" . }}
+  <div data-pagefind-body>
+    {{- partial "participationKind_list.html" . }}
+  </div>
 {{ end }}

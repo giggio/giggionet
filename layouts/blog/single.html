@@ -1,19 +1,19 @@
 {{ define "main" }}
-  <section class="site-blog details">
+  <section class="site-blog details" data-pagefind-body>
     <div class="container-lg">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-11 col-md-10">
           <article class="site-blog-details">
             <div>
-              <span class="float-right">{{ .PublishDate | time.Format ":date_medium" }}</span>
+              <span class="float-right" data-pagefind-ignore>{{ .PublishDate | time.Format ":date_medium" }}</span>
               {{- range (.GetTerms "categories") }}
                 <a href="{{ .RelPermalink }}" class="badge badge-primary">{{ .LinkTitle }}</a>
               {{- end }}
             </div>
             <div class="blog-title-wrapper">
-              <h2 class="blog-title">{{ .Title }}</h2>
+              <h2 class="blog-title" data-pagefind-meta="title">{{ .Title }}</h2>
               {{- if (.Param "ShowReadingTime") -}}
-                <div class="blog-title-readingtime">
+                <div class="blog-title-readingtime" data-pagefind-ignore>
                   {{ (i18n "readTimeLong" .ReadingTime) }}
                 </div>
               {{- end -}}

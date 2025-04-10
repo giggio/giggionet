@@ -10,7 +10,7 @@
               {{- end }}
             </div>
             <div class="card-body site-participations-item d-flex flex-column">
-              <h2 class="card-title">{{ .Title }}</h2>
+              <h2 class="card-title" id="{{ anchorize .Title }}">{{ .Title }}</h2>
               <p class="card-text">{{ .Description | markdownify }}</p>
               <a
                 href="{{ .Params.link }}"
