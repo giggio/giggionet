@@ -1,0 +1,6 @@
+<h{{ .Level }} id="{{ .Anchor }}" {{- with .Attributes.class }} class="{{ . }}" {{- end }}>
+  <a href="#{{ .Anchor }}" class="site-blog-post-header">
+    <span class="site-blog-post-header-text">{{ .Text }}</span>
+    <i class="fa-solid fa-link site-blog-post-header-paragraph"></i>
+  </a>
+</h{{ .Level }}>

@@ -113,6 +113,25 @@
       flex-flow: row nowrap;
       overflow: hidden;
 
+      &-header {
+        &:hover &-paragraph {
+          display: unset;
+        }
+        &:hover &-text {
+          color: var(--tertiary-color);
+          transition: all 0.3s ease;
+        }
+        &-text {
+          color: var(--text-color-dark);
+        }
+        &-paragraph {
+          font-size: 1rem;
+          padding-left: 10px;
+          vertical-align: super;
+          display: none;
+          color: var(--tertiary-color);
+        }
+      }
       &-thumb,
       &-content {
         box-sizing: border-box;

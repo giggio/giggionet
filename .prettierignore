@@ -1,3 +1,5 @@
 **/*.*
 !**/*.html
 !**/*.scss
+# todo: remove bellow when fixed: https://github.com/NiklasPor/prettier-plugin-go-template/issues/120
+layouts/blog/_markup/render-heading.html
