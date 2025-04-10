@@ -506,7 +506,7 @@ function fontawesome() {
       local existing_files
       existing_files=$(find $package_dir -maxdepth 1 -name 'fa*.js' -exec basename {} \; | sort | uniq)
       local found_files
-      found_files=$(comm -12 <(echo "$searched_files") <(echo "$existing_files") | sed 's/\.js/,/')
+      found_files=$(comm -12 <(echo "$searched_files" | sort) <(echo "$existing_files") | sed 's/\.js/,/' | sort)
       all_files+=$'\n'"$found_files"
       echo "import {"
       echo "$found_files" | sed 's/^/  /'
@@ -526,7 +526,7 @@ function fontawesome() {
     echo ');'
     all_files=$(echo "$all_files" | sed 's/,/.js/')
     local files_not_found
-    files_not_found=$(comm -23 <(echo "$searched_files") <(echo "$all_files" | sort))
+    files_not_found=$(comm -23 <(echo "$searched_files" | sort) <(echo "$all_files" | sort))
     echo "export { dom, library };"
     if [ -n "$files_not_found" ]; then
       >&2 echo "Files not found:"
