@@ -10,7 +10,12 @@
               {{- end }}
             </div>
             <div class="card-body site-participations-item d-flex flex-column">
-              <h2 class="card-title" id="{{ anchorize .Title }}">{{ .Title }}</h2>
+              <h2 class="card-title" id="{{ anchorize .Title }}">
+                <a href="#{{ anchorize .Title }}" class="site-participations-item-header">
+                  <span class="site-participations-item-header-text">{{ .Title }}</span>
+                  <i class="fa-solid fa-link site-participations-item-header-paragraph"></i>
+                </a>
+              </h2>
               <p class="card-text">{{ .Description | markdownify }}</p>
               <a
                 href="{{ .Params.link }}"
