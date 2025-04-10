@@ -22,7 +22,16 @@ pkgs.mkShell {
     delta
     h_completions
     http-server
-    hugo
+    (hugo.overrideAttrs rec { # todo: remove override when https://github.com/NixOS/nixpkgs/pull/397795 is merged
+      version = "0.146.1";
+      src = fetchFromGitHub {
+        owner = "gohugoio";
+        repo = "hugo";
+        tag = "v${version}";
+        hash = "sha256-WZJdojnjQCzmpZjM8Cjh9iAP+Qtcq+XAY4sRGdua0t4=";
+      };
+      vendorHash = "sha256-LSNy65sIuq/zK3swdUvxGwbo/3ulq+JP5ur7M7aTdAs=";
+    })
     pagefind
     dart-sass
     nodePackages_latest.nodejs
