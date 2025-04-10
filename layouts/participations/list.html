@@ -22,7 +22,10 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-12">
-            <div class="btn-group" role="group">
+            <div
+              class="participation-kind-section d-flex flex-column flex-sm-row justify-content-start text-center"
+              role="group"
+            >
               {{ range . }}
                 <a class="btn btn-sm btn-tertiary" href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
               {{ end }}

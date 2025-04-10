@@ -37,3 +37,10 @@
     }
   }
 }
+
+.participation-kind-section {
+  & > * {
+    margin-right: 1rem !important;
+    margin-top: 0.5rem;
+  }
+}
