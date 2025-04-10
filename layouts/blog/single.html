@@ -7,7 +7,7 @@
             <div>
               <span class="float-right" data-pagefind-ignore>{{ .PublishDate | time.Format ":date_medium" }}</span>
               {{- range (.GetTerms "categories") }}
-                <a href="{{ .RelPermalink }}" class="badge badge-primary">{{ .LinkTitle }}</a>
+                <a href="{{ .RelPermalink }}" class="badge text-bg-tertiary">{{ .LinkTitle }}</a>
               {{- end }}
             </div>
             <div class="blog-title-wrapper">
@@ -49,7 +49,7 @@
                 <span class="site-blog-tags-title">Tags:</span>
                 {{- range $tags }}
                   <a href="{{ .RelPermalink }}">
-                    <span class="badge badge-pill badge-tertiary post-tag">{{ .LinkTitle }}</span>
+                    <span class="badge badge-pill text-bg-tertiary post-tag">{{ .LinkTitle }}</span>
                   </a>
                 {{- end -}}
               </div>
