@@ -17,19 +17,6 @@
     }
   }
 
-  &-kinds {
-    @include mixins.desktop {
-      .btn-group {
-        display: block;
-      }
-      .btn-group .btn {
-        display: block;
-        float: none;
-        width: 100%;
-      }
-    }
-  }
-
   &-item {
     &-header {
       &:hover &-paragraph {
