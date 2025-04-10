@@ -35,6 +35,7 @@
     "angle_down_select_image" $angle_down_select_image.RelPermalink
     "ways_to_contact_len" (len site.Data.ways_to_contact)
   -}}
+  {{/* todo: silenceDeprecations are because of Bootstrap, remove when https://github.com/gohugoio/hugo/issues/13530 is done */}}
   {{- $opts := dict
     "enableSourceMap" (not hugo.IsProduction)
     "outputStyle" (cond hugo.IsProduction "compressed" "expanded")
@@ -42,7 +43,7 @@
     "transpiler" "dartsass"
     "enableSourceMap" hugo.IsProduction
     "sourceMapIncludeSources" true
-    "SilenceDependencyDeprecations" true
+    "silenceDeprecations" (slice "import" "global-builtin" "mixed-decls" "color-functions")
     "includePaths" (slice "node_modules/bootstrap/scss")
     "vars" $vars
   -}}
