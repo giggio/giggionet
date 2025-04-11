@@ -247,8 +247,8 @@ function build() {
     rm -rf public
   fi
   hugo build --environment production "$@"
-  ./critical.mjs
   pagefind --site public
+  ./critical.mjs
   exit 0
 }
 
