@@ -101,6 +101,10 @@ Run `h build`, then run `http-server public --port 1313`.
 - Use `npm run unused-css` to view css that is not being used.
 - Install the git hooks. See the [README.md](./.githooks/README.md) for how to do it.
 - Lint the files before committing. See [the linting section above](#linting-and-spell-checking).
+- To view the build page, simulating github actions run:
+  `GIT_COMMIT_SHA=$(git show --format="%H" -s) GIT_AUTHOR_NAME=$(git show --format="%an" -s) GIT_AUTHOR_DATE=$(git show
+  --format="%ai" -s) GIT_COMMIT_MSG=$(git show --format="%s" -s) GITHUB_ACTIONS=true GITHUB_REF_NAME=main
+  GITHUB_REPOSITORY=giggio/giggionet GITHUB_RUN_ID=14393394914 GITHUB_WORKFLOW='My build' h server`
 
 ## Author
 

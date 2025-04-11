@@ -40,6 +40,7 @@ words:
   - fortawesome
   - fullhuman
   - funcs
+  - getenv
   - getremote
   - giggio
   - giggionet

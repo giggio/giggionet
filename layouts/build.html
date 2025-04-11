@@ -1,0 +1,73 @@
+{{ define "main" }}
+  <section class="site-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="site-page-title">
+            {{ .Title | safeHTML }}
+          </h1>
+        </div>
+        {{- with .Params.description }}
+          <div class="col-12 pb-3">
+            <h2 class="site-page-description">
+              {{ . | safeHTML }}
+            </h2>
+          </div>
+        {{- end }}
+        <div class="col-12">
+          {{- if eq "true" (getenv "GITHUB_ACTIONS") }}
+            <p class="site-page-content">
+              Built on {{ now | time.Format ":date_short" }} {{ now | time.Format ":time_long" }} from repo
+              <a href="https://github.com/{{ getenv "GITHUB_REPOSITORY" }}">{{ getenv "GITHUB_REPOSITORY" }}</a>
+              using workflow
+              <a href="https://github.com/{{ getenv "GITHUB_REPOSITORY" }}/actions/runs/{{ getenv "GITHUB_RUN_ID" }}"
+                >{{ getenv "GITHUB_WORKFLOW" }}</a
+              >.
+            </p>
+            <div class="site-page-content site-build-commit-details">
+              <p>Commit info:</p>
+              <p>Message: {{ getenv "GIT_COMMIT_MSG" -}}</p>
+              <p>
+                Date:
+                {{ getenv "GIT_AUTHOR_DATE" | time.Format ":date_short" }}
+                {{ getenv "GIT_AUTHOR_DATE" | time.Format ":time_long" }}
+              </p>
+              <p>
+                Sha:
+                <a href="https://github.com/{{ getenv "GITHUB_REPOSITORY" }}/commit/{{ getenv "GIT_COMMIT_SHA" }}">
+                  {{- getenv "GIT_COMMIT_SHA" | truncate 7 "" -}}
+                </a>
+              </p>
+              <p>
+                Ref:
+                {{ if eq (getenv "GITHUB_REF_NAME") "main" -}}
+                  {{- getenv "GITHUB_REF_NAME" -}}
+                {{- else }}
+                  <a href="https://github.com/{{ getenv "GITHUB_REPOSITORY" }}/tree/{{ getenv "GITHUB_REF_NAME" }}">
+                    {{- getenv "GITHUB_REF_NAME" -}}
+                  </a>
+                {{- end -}}
+              </p>
+              <p>
+                Author:
+                {{ getenv "GIT_AUTHOR_NAME" }}
+              </p>
+            </div>
+          {{- else -}}
+            <p class="site-page-content">
+              Built on {{ now | time.Format ":date_short" }} {{ now | time.Format ":time_long" }}.
+            </p>
+            <p class="site-page-content">
+              No commit details, you need to run the build in a GitHub Action to get them, or simulate (see README.md).
+            </p>
+          {{- end }}
+          {{- with .Content }}
+            <p class="site-page-content">
+              {{ . }}
+            </p>
+          {{- end }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

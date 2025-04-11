@@ -1,5 +1,4 @@
 baseURL: https://preview.giggio.net/
-enableGitInfo: true
 build:
   buildStats:
     enable: true

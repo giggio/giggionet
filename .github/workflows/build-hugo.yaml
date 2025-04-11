@@ -68,6 +68,10 @@ jobs:
             hugo-
       - name: Build with Hugo
         run: |
+          export GIT_COMMIT_SHA=$(git show --format="%H" -s) \
+            GIT_AUTHOR_NAME=$(git show --format="%an" -s) \
+            GIT_AUTHOR_DATE=$(git show --format="%ai" -s) \
+            GIT_COMMIT_MSG=$(git show --format="%s" -s)
           hugo \
             --gc \
             --baseURL "https://${{ steps.pages.outputs.host }}/" \

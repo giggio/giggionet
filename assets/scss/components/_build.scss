@@ -1,0 +1,10 @@
+@use "../mixins";
+@use "../variables";
+
+.site-build {
+  &-commit-details {
+    p {
+      margin: 0;
+    }
+  }
+}
