@@ -1,0 +1,24 @@
+{{ partial "post_group_header.html" . }}
+
+
+<section class="site-blog">
+  <div class="container">
+    {{- if .Data.Terms.Alphabetical }}
+      <div class="row">
+        <div class="col-12">
+          {{ .Content }}
+          <ul class="terms">
+            {{ range .Data.Terms.Alphabetical }}
+              <li class="term">
+                <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+                <sup class="archive-count">{{ len .Pages }} post{{ cond (gt (len .Pages) 1) "s" "" }}</sup>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    {{- end }}
+
+    {{ partial "post_list_by_date.html" ((where .Pages "Kind" "in" "page").GroupByPublishDate "2006") }}
+  </div>
+</section>
