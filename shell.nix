@@ -22,13 +22,13 @@ pkgs.mkShell {
     delta
     h_completions
     http-server
-    (hugo.overrideAttrs rec { # todo: remove override when https://github.com/NixOS/nixpkgs/pull/397795 is merged
-      version = "0.146.1";
+    (hugo.overrideAttrs rec { # todo: remove override when 0.146.2 is merged into nixpkgs
+      version = "0.146.2";
       src = fetchFromGitHub {
         owner = "gohugoio";
         repo = "hugo";
         tag = "v${version}";
-        hash = "sha256-WZJdojnjQCzmpZjM8Cjh9iAP+Qtcq+XAY4sRGdua0t4=";
+        hash = "sha256-sicfI+IRPcVzyWlGf7ZoQsr0my1csiQ/c+91fJDupUw=";
       };
       vendorHash = "sha256-LSNy65sIuq/zK3swdUvxGwbo/3ulq+JP5ur7M7aTdAs=";
     })
