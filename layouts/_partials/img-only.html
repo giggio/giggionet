@@ -1,0 +1,19 @@
+{{- $style := "" }}
+{{- if and .dimensions.width .dimensions.height .forceAspectRatio }}
+  {{- $style = printf "aspect-ratio: %g;" (div (float .dimensions.width) (float .dimensions.height)) }}
+{{- end }}
+{{- if .style }}
+  {{- $style = printf "%s %s" $style .style | trim }}
+{{- end }}
+<img
+  src="{{ with .image }}{{ .RelPermalink }}{{ end }}{{ with .src }}{{ . }}{{ end }}"
+  alt="{{ .alt }}"
+  {{ with .srcset }}{{ printf "srcset=%q" . | safeHTMLAttr }}{{ end }}
+  {{ with .sizes }}{{ printf "sizes=%q" . | safeHTMLAttr }}{{ end }}
+  {{- if not .forceAspectRatio }}
+    {{ with .dimensions.width }}width="{{ . }}"{{ end }}
+    {{ with .dimensions.height }}height="{{ . }}"{{ end }}
+  {{- end }}
+  {{ with .class }}class="{{ . }}"{{ end }}
+  {{ with $style }}style="{{ . | safeCSS }}"{{ end }}
+/>
