@@ -14,7 +14,6 @@
   }}
 {{- else }}
   {{- $srcsets := slice -}}
-  {{- $sizeNumbers := slice -}}
   {{- $lastSize := "" }}
   {{- $limitWidth := int (math.Min (default $dimensions.width .limitWidth) $dimensions.width) }}
   {{- $srcImage := 0 -}}
@@ -26,19 +25,13 @@
       {{- end -}}
       {{- $srcsets = $srcsets | append (printf "%s %dw" $resizedImage.RelPermalink .) -}}
       {{- $lastSize = printf "%dpx" . }}
-      {{- $sizeNumbers = $sizeNumbers | append (printf "(max-width: %dpx) %dpx" . .) -}}
     {{- end -}}
   {{- end -}}
   {{- $thumbImageSrcset := "" -}}
   {{- if eq 1 (len $srcsets) }}
     {{- $srcsets = slice -}}
-    {{- $sizeNumbers = slice -}}
-  {{- end -}}
-  {{- if len $sizeNumbers }}
-    {{- $sizeNumbers = (first (sub (len $sizeNumbers) 1) $sizeNumbers) | append $lastSize -}}
   {{- end -}}
   {{- $srcset := delimit $srcsets ", " -}}
-  {{- $sizes := delimit $sizeNumbers ", " -}}
   {{- if not $srcImage }}
     {{- $srcImage = partial "img_towebp.html" . -}}
   {{- end -}}
@@ -52,7 +45,7 @@
     "class" .class
     "style" .style
     "srcset" $srcset
-    "sizes" (default $sizes .sizes)
+    "sizes" (default "(max-width: 575px) 100vw, (max-width: 767px) 540px, (max-width: 991px) 720px, (max-width: 1199px) 960px, (max-width: 1399px) 1100px, 1140px" .sizes)
     "forceAspectRatio" .forceAspectRatio)
   }}
 {{- end }}

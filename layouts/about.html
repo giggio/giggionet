@@ -88,8 +88,8 @@
             {{ partial "img.html" (dict
               "image" (resources.Get site.Params.contactFeatureImage)
               "alt" .Params.featureImageAlt
-              "class" "site-about-header-image"
-              "limitWidth" 540)
+              "sizes" "(max-width: 767px) 100vw, min(40vw, 513px)"
+              "class" "site-about-header-image")
             }}
           </div>
         </div>
