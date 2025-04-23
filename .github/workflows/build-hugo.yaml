@@ -9,6 +9,8 @@ on:
     paths-ignore:
       - ".github/**"
       - .*
+      - flake.lock
+      - "*.nix"
   workflow_dispatch:
 
 permissions:
