@@ -34,7 +34,7 @@ into the technical details of the update itself. During the process, I realized 
 so I decided to work on them as well.
 
 If you want to check out the update, the commit is
-[here](https://github.com/giggio/giggionet/commit/484dd97a07340bfcda0d77bd5e7ccc899b3e1bad).
+[on Github](https://github.com/giggio/giggionet/commit/484dd97a07340bfcda0d77bd5e7ccc899b3e1bad).
 
 ### EcmaScript modules
 

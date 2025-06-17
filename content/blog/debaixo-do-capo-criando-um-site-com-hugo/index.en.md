@@ -157,7 +157,7 @@ other hand, can do a series of things. Just look at what happens on my site:
 
 I also perform critical CSS analysis with the [critical](https://github.com/addyosmani/critical) tool, which is run for
 each individual page. I also generate search with [pagefind](http://pagefind.app/) (you can try it
-[here](https://giggio.net/en/search/) – and I admit I spent little time on it, but it’s working).
+[at /search](https://giggio.net/en/search/) – and I admit I spent little time on it, but it’s working).
 
 This happens locally, if I want to test, and also using the
 [workflow](https://github.com/giggio/giggionet/blob/main/.github/workflows/build-hugo.yaml) from GitHub Actions, which
@@ -171,7 +171,7 @@ also performs linting and spell checking (with [cspell](https://cspell.org/)).
   [the source code](https://github.com/giggio/giggionet/blob/b7be46d67eeb539459c4d51d5a16f15468f086d9/layouts/blog/single.html#L37)).
 - You can use external resources that can be downloaded, such as an image, or a CSS file, or JSON, and then process them
   and generate content from them. That’s how I’m generating my [robots.txt](http://giggio.net/robots.txt) file (see the
-  source [here](https://github.com/giggio/giggionet/blob/b7be46d67eeb539459c4d51d5a16f15468f086d9/layouts/robots.txt)),
+  source [on Github](https://github.com/giggio/giggionet/blob/b7be46d67eeb539459c4d51d5a16f15468f086d9/layouts/robots.txt)),
   like this:
 
   ```go-html-template
