@@ -422,8 +422,8 @@ function translations() {
     exit 0
   }
   function showmissingterms() {
-    delta <(yq -r '([paths|(map(".\(.)")|join(""))]|unique).[]' i18n/pt-BR.yaml ) \
-      <(yq -r '([paths|(map(".\(.)")|join(""))]|unique).[]' i18n/en.yaml) || true
+    delta <(yq -r '([(.. | [path]).[] | join(".")] | sort | unique | filter(. != "")).[]' i18n/pt-BR.yaml) \
+      <(yq -r '([(.. | [path]).[] | join(".")] | sort | unique | filter(. != "")).[]' i18n/en.yaml) || true
     exit 0
   }
   case "$SUBCOMMAND" in

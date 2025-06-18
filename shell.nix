@@ -26,7 +26,7 @@ pkgs.mkShell {
     pagefind
     dart-sass
     nodePackages_latest.nodejs
-    yq
+    yq-go
   ];
   shellHook = ''
     if ! [ -d node_modules ]; then
