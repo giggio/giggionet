@@ -290,6 +290,25 @@
         & * {
           scroll-margin-top: 85px;
         }
+        .footnotes {
+          ol {
+            @include mixins.tablet {
+              columns: 1;
+              margin-right: initial;
+            }
+            columns: 2;
+            li {
+              margin-right: 20px;
+            }
+          }
+          font-size: 0.8em;
+          * {
+            font-size: 1em;
+          }
+          hr {
+            display: none;
+          }
+        }
       }
     }
 
