@@ -309,6 +309,19 @@
             display: none;
           }
         }
+        .footnote-popover {
+          .popover-body {
+            * {
+              /*! purgecss ignore current */
+              display: inline;
+              font-size: 1em;
+            }
+          }
+          .footnote-backref {
+            /*! purgecss ignore current */
+            display: none;
+          }
+        }
       }
     }
 

@@ -19,6 +19,7 @@ words:
   - allstyles
   - anchorize
   - atrule
+  - backref
   - bluesky
   - braincast
   - BUILDSTATS

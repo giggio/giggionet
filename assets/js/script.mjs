@@ -8,6 +8,21 @@ document.addEventListener("DOMContentLoaded", function () {
   popoverTriggerList.forEach(function (popoverTriggerEl) {
     new Popover(popoverTriggerEl);
   });
+  const footnoteRefs = [].slice.call(document.querySelectorAll('.footnote-ref'));
+  footnoteRefs.forEach(function (footnotePopoverTriggerEl) {
+    footnotePopoverTriggerEl.onclick = function() { return false; };
+    footnotePopoverTriggerEl.setAttribute('tabindex', '0');
+    const href = footnotePopoverTriggerEl.getAttribute('href');
+    const id = href.split(':')[1];
+    const targetElement = document.querySelector(`.footnotes > ol > li${href.replace(':', '\\:')}`);
+    new Popover(footnotePopoverTriggerEl, {
+      content: `[${id}] ${targetElement.innerHTML}`,
+      customClass: 'footnote-popover',
+      container: '.site-blog-details-content',
+      html: true,
+      trigger: "focus"
+    });
+  });
 
   const shareModal = document.getElementById('shareModal');
   if (shareModal) {
