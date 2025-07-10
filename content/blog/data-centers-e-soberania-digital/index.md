@@ -170,7 +170,7 @@ boa parte do processamento já direcionada ao Brasil e à América do Sul.
 
 Mas temos ainda outras empresas de data center por aqui. Os números variam, mas fica em torno de 175 em oferta pública e
 mais uns 100 privados [^brazil-data-center-portfolio] [^data-centers-in-brazil] [^brazil-data-center-market-growth]. O
-MDIC calcula 163 data centers no Brasil [^Neofeed-entrevista]. O número varia porque a metologia usada para contar um
+MDIC calcula 163 data centers no Brasil [^Neofeed-entrevista]. O número varia porque a metodologia usada para contar um
 data center também varia (privado, público, tamanho etc).
 
 Esse mercado já é um mercado maduro. Novos data centers que operassem aqui, na escala proposta, teriam quase todo o seu
