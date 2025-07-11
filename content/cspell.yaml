@@ -16,12 +16,15 @@ words:
   - CPFL
   - debugando
   - devs
+  - Elemar
   - embedar
   - Estrella
   - EUSEW
+  - Evilázaro
   - Fabrizio
   - FNDIT
   - FUST
+  - Haack
   - Haddad
   - headshot
   - heterarchy
@@ -36,14 +39,18 @@ words:
   - Magalu
   - MDIC
   - MDICS
+  - metaprogramação
+  - metaprogramming
   - microgerência
   - Nakashima
   - Neofeed
+  - Nogare
   - OLED
   - Panzini
   - patrimonialism
   - Pogcast
   - pretrained
+  - Quaiato
   - Raymon
   - Redata
   - senioridade
@@ -57,7 +64,11 @@ words:
   - tudoeacessibilidade
   - uncategorized
   - Unplugged
+  - Vinicius
+  - Wennder
+  - Álves
 ignoreRegExpList:
   - /comment_term.*/
   - /featureImage.*/
   - /\{\{</.*/
+  - /src=".*?"/
