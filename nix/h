@@ -377,7 +377,7 @@ function newcontent() {
   local file_created
   file_created=$(echo "$created_message" | grep -oP --color=never '(?<=Content ").*(?=".*)')
   mv "$file_created" "$slugified_file"
-  code "$slugified_file"
+  nvim "$slugified_file"
   exit 0
 }
 
