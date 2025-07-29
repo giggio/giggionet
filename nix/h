@@ -46,6 +46,14 @@ Usage:
   `readlink -f "$0"` deploy github
 EOF
       ;;
+    cloudflare)
+      cat <<EOF
+Deploys to Cloudflare Functions
+
+Usage:
+  `readlink -f "$0"` deploy Cloudflare
+EOF
+      ;;
     dev)
       cat <<EOF
 Runs hugo dev server in development mode
@@ -195,6 +203,7 @@ Usage:
 Commands:
   azure                     Deploys to Azure Static Web Apps
   github                    Deploys to Github Pages
+  cloudflare                Deploys to Cloudflare Workers
 EOF
       ;;
     fontawesome)
@@ -455,12 +464,24 @@ function deploy() {
     echo "Not possible, you need to use Github actions."
     exit 0
   }
+  function cloudflare() {
+    rm -rf build
+    mkdir build
+    mv public build/public
+    cp wrangler.jsonc build/
+    cd build
+    wrangler deploy
+    exit 0
+  }
   case "$SUBCOMMAND" in
     azure)
       azure "$@"
       ;;
     github)
       github "$@"
+      ;;
+    cloudflare)
+      cloudflare "$@"
       ;;
     *)
       ;;
@@ -605,7 +626,7 @@ _hugo_local_completions() {
           COMPREPLY=($(compgen -W "showmissing createmissing showmissingterms $common_options" -- "${COMP_WORDS[2]}"))
           ;;
         deploy)
-          COMPREPLY=($(compgen -W "azure github $common_options" -- "${COMP_WORDS[2]}"))
+          COMPREPLY=($(compgen -W "azure github cloudflare $common_options" -- "${COMP_WORDS[2]}"))
           ;;
         server)
           # forward to hugo server completions:

@@ -27,6 +27,7 @@ pkgs.mkShell {
     dart-sass
     nodePackages_latest.nodejs
     yq-go
+    wrangler
   ];
   shellHook = ''
     if ! [ -d node_modules ]; then

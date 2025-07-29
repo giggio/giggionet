@@ -54,7 +54,9 @@ critical.
 ```bash
 h build && h deploy azure
 # or
-h build && h deploy github
+h build && h deploy cloudflare
+# or
+h build && h deploy github # will not actually deploy, you need to use Github actions
 ```
 
 You will need to adapt the files used for deploying.
@@ -62,9 +64,15 @@ You will need to adapt the files used for deploying.
 See [.env.example](./.env.example) for environment variables (create a
 `.env` file using it as an example).
 
+### Cloudflare
+
+This uses Cloudflare Workers. You need to install Wrangler CLI or use the Nix tools.
+See [wrangler.jsonc](./wrangler.jsonc) for the configuration.
+You will need to change the worker name in that file.
+
 ### Azure
 
-This can use Azure Static Web Apps.
+This uses Azure Static Web Apps. You need to install SWA CLI or use the Nix tools.
 See [swa-cli.config.json](./swa-cli.config.json) for the configuration.
 You will need to change some keys in that file.
 
